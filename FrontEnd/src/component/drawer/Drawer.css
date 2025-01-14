@@ -1,0 +1,80 @@
+:root {
+  --font-size: 2.4rem;
+  --text: #ffffff;
+  --drawer-wrap-background: linear-gradient(135deg, #7b5334, #3f2618);
+  --list-gap: 2rem;
+  --padding-top: 5rem;
+  --padding-left: 4rem;
+}
+
+.drawer-wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: var(--text);
+  background: var(--drawer-wrap-background);
+  padding-top: var(--padding-top);
+  padding-left: var(--padding-left);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.drawer-wrap.true {
+  opacity: 1;
+  visibility: visible;
+  overflow: hidden !important;
+  -ms-overflow-style: none;
+}
+.drawer-wrap.true::-webkit-scrollbar {
+  display: none;
+}
+.drawer-wrap ul {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size);
+  font-weight: bold;
+  gap: var(--list-gap);
+}
+
+.drawer-btn-wrap span {
+  transition: transform 0.3s ease-in-out;
+}
+
+.drawer-btn-wrap.true span {
+  transform: rotate(45deg);
+}
+
+.drawer-wrap button {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: start;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.drawer-wrap button ::first-letter {
+  font-size: 2.1rem;
+}
+
+/* 버튼 아래의 애니메이션 라인 */
+.drawer-wrap button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-brand-white);
+  transition: width 1s ease;
+}
+
+/* 버튼을 hover했을 때 아래 라인 애니메이션 */
+.drawer-wrap button:hover::after {
+  width: 100%;
+}
