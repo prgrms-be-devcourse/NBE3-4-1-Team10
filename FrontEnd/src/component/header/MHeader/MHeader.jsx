@@ -55,7 +55,7 @@ export default function MHeader() {
 const MenuButton = ({ isOpen, onClick }) => {
   return (
     <button
-      className={`drawer-btn ${isOpen}`}
+      className={`drawer-btn ${isOpen} hide-tablet hide-pc`}
       onClick={onClick}
       aria-current={isOpen}>
       <figure className={`drawer-btn-wrap ${isOpen}`}>
