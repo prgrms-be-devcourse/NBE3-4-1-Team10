@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../logo/Logo";
 import Drawer from "../../drawer/Drawer";
-import { CartLogo, PlusIcon } from "../../../constant/Icon";
-import "./MHeader.css";
-import Modal from "../../modal/Modal";
 import OrderModal from "../../orderModal/OrderModal";
+import { CartLogo, PlusIcon } from "../../../constant/Icon";
+
+import "./MHeader.css";
 
 const COLOR = "#FFFFFF";
 const LOGO_SIZE = "35";
