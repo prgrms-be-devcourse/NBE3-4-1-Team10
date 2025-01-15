@@ -1,0 +1,83 @@
+:root {
+  --header-height: 15rem;
+  --drawer-btn-radius: 8px;
+  --drawer-btn-padding: 8px;
+  --drawer-background: rgba(0, 0, 0, 0.2);
+  --drawer-btn-size: 1rem;
+  --drawer-btn-border: #ffffff;
+  --drawer-btn-background: #18181b;
+  --drawer-btn-background-open: #01242d;
+  --z-index: 100;
+}
+
+.mobile-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  visibility: visible;
+  padding: 1rem;
+}
+.mobile-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.drawer-btn {
+  border: none;
+  background-color: var(--drawer-background);
+  border-radius: var(--drawer-btn-radius);
+  padding: var(--drawer-btn-radius);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  z-index: calc(var(--z-index) + 5);
+}
+.drawer-btn.true {
+  background-color: transparent;
+}
+
+.drawer-btn-wrap {
+  width: var(--drawer-btn-size);
+  height: var(--drawer-btn-size);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--drawer-btn-border);
+  border-color: var(--drawer-btn-border);
+  border-radius: var(--drawer-btn-radius);
+
+  color: var(--drawer-btn-border);
+  background-color: rgba(var(--drawer-btn-background), 0);
+  box-shadow: 0 4px 6px rgba(var(--drawer-btn-background), 0.1);
+
+  padding: var(--drawer-btn-padding);
+  text-decoration: none;
+  overflow: hidden;
+  outline: none;
+}
+
+.drawer-btn-wrap.true {
+  background-color: var(--drawer-btn-background-open);
+  border: 1px solid var(--drawer-btn-background-open);
+}
+
+.drawer-btn-wrap svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+.drawer-btn-wrap.true svg {
+  transform: rotate(45deg);
+}
+
+.cart-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cart-button:hover svg {
+  fill: black;
+}
