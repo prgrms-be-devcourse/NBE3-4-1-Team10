@@ -1,0 +1,38 @@
+export const PRODUCTS = [
+  {
+    id: 0,
+    type: "커피콩",
+    name: "Columbia Nariñó",
+    src: "https://i.imgur.com/HKOFQYa.jpeg",
+    alt: "product1",
+    content: "커피콩 Columbia Nariñó의 예시 설명글입니다.",
+    price: 5000,
+  },
+  {
+    id: 1,
+    type: "커피콩",
+    name: "Brazil Serra Do Caparaó",
+    src: "https://i.imgur.com/HKOFQYa.jpeg",
+    content: "커피콩 Brazil Serra Do Caparaó의 예시 설명글입니다.",
+    alt: "product2",
+    price: 6000,
+  },
+  {
+    id: 2,
+    type: "커피콩",
+    name: "Columbia Quindio",
+    src: "https://i.imgur.com/HKOFQYa.jpeg",
+    content: "커피콩 Columbia Quindio의 예시 설명글입니다.",
+    alt: "product3",
+    price: 7000,
+  },
+  {
+    id: 3,
+    type: "커피콩",
+    name: "Ethiopia Sidamo",
+    src: "https://i.imgur.com/HKOFQYa.jpeg",
+    content: "커피콩 Ethiopia Sidamo의 예시 설명글입니다.",
+    alt: "product4",
+    price: 8000,
+  },
+];

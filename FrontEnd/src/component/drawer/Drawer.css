@@ -1,0 +1,94 @@
+:root {
+  --text: #e8e8ed;
+  --drawer-wrap-background: #01242d;
+  --list-gap: 2rem;
+  --padding: 4rem 0 0 4rem;
+}
+
+.drawer-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: var(--text);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.drawer-wrap.isOpen {
+  width: 100%;
+  height: 100%;
+  background: var(--drawer-wrap-background);
+  padding: 4rem 0 0 4rem;
+  opacity: 1;
+  visibility: visible;
+  overflow: hidden !important;
+  -ms-overflow-style: none;
+}
+
+.drawer-wrap ul {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size);
+
+  gap: var(--list-gap);
+}
+
+.drawer-btn-wrap span {
+  transition: transform 0.3s ease-in-out;
+}
+
+.drawer-btn-wrap.true span {
+  transform: rotate(45deg);
+}
+
+.drawer-wrap button {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: start;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.drawer-wrap button ::first-letter {
+  font-size: 2.1rem;
+}
+.drawer-wrap button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-brand-white);
+  transition: width 1s ease;
+}
+
+.drawer-wrap button:hover::after {
+  width: 100%;
+}
+
+.no-login-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 5rem;
+  font-size: 1.3rem;
+}
+
+.no-login-msg {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.nav-login-btn {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+  color: #4eebe5;
+  font-weight: bold;
+  text-decoration: underline;
+}
