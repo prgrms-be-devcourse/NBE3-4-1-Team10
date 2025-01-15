@@ -1,40 +1,36 @@
 :root {
-  --font-size: 2.4rem;
-  --text: #ffffff;
-  --drawer-wrap-background: linear-gradient(135deg, #7b5334, #3f2618);
+  --text: #e8e8ed;
+  --drawer-wrap-background: #01242d;
   --list-gap: 2rem;
-  --padding-top: 5rem;
-  --padding-left: 4rem;
+  --padding: 4rem 0 0 4rem;
 }
 
 .drawer-wrap {
-  width: 100%;
-  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
   color: var(--text);
-  background: var(--drawer-wrap-background);
-  padding-top: var(--padding-top);
-  padding-left: var(--padding-left);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
-.drawer-wrap.true {
+
+.drawer-wrap.isOpen {
+  width: 100%;
+  height: 100%;
+  background: var(--drawer-wrap-background);
+  padding: 4rem 0 0 4rem;
   opacity: 1;
   visibility: visible;
   overflow: hidden !important;
   -ms-overflow-style: none;
 }
-.drawer-wrap.true::-webkit-scrollbar {
-  display: none;
-}
+
 .drawer-wrap ul {
   display: flex;
   flex-direction: column;
   font-size: var(--font-size);
-  font-weight: bold;
+
   gap: var(--list-gap);
 }
 
@@ -61,8 +57,6 @@
 .drawer-wrap button ::first-letter {
   font-size: 2.1rem;
 }
-
-/* 버튼 아래의 애니메이션 라인 */
 .drawer-wrap button::after {
   content: "";
   position: absolute;
@@ -74,7 +68,27 @@
   transition: width 1s ease;
 }
 
-/* 버튼을 hover했을 때 아래 라인 애니메이션 */
 .drawer-wrap button:hover::after {
   width: 100%;
+}
+
+.no-login-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 5rem;
+  font-size: 1.3rem;
+}
+
+.no-login-msg {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.nav-login-btn {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+  color: #4eebe5;
+  font-weight: bold;
+  text-decoration: underline;
 }
