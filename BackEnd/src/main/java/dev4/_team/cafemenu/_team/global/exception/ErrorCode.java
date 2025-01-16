@@ -1,4 +1,4 @@
-package dev4._team.cafemenu._team.error;
+package dev4._team.cafemenu._team.global.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
