@@ -30,12 +30,11 @@ public class Product extends BaseTimeEntity {
     private String type;
 
     @Column(columnDefinition = "TEXT")
-    private String contents;
+    private String content;
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true )
-    private List<Order> orderList;
-
-
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @Builder.Default
+    private List<Order> orderList = new ArrayList<>();
 
 
 }
