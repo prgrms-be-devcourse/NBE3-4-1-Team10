@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,12 +31,11 @@ public class Product extends BaseTimeEntity {
     private String type;
 
     @Column(columnDefinition = "TEXT")
-    private String contents;
+    private String content;
 
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true )
-    private List<Order> orderList;
-
-
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @Builder.Default
+    private List<Order> orderList = new ArrayList<>();
 
 
 }
