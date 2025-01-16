@@ -3,12 +3,13 @@ package dev4._team.cafemenu._team.order.service;
 
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
+import dev4._team.cafemenu._team.order.dto.OrderDto;
 import dev4._team.cafemenu._team.order.entity.Order;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,13 +18,12 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public Order createOrder(Order order) {
+    public Order createOrder(OrderDto orderDto) {
         Order newOrder = Order.builder()
-                .product(order.getProduct())
-                .user(order.getUser())
-                .address(order.getAddress())
-                .post(order.getPost())
-                .time(order.getTime())
+                .user(orderDto.getUser())
+                .address(orderDto.getAddress())
+                .post(orderDto.getPost())
+                .time(LocalDateTime.now())
                 .status("주문 대기")
                 .build();
 
