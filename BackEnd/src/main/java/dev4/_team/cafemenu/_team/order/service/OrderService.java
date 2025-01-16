@@ -6,10 +6,15 @@ import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.dto.OrderDto;
 import dev4._team.cafemenu._team.order.entity.Order;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
+import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
+import dev4._team.cafemenu._team.user.entity.User;
+import dev4._team.cafemenu._team.user.repository.UserRepository;
+import dev4._team.cafemenu._team.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,13 +22,16 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public Order createOrder(OrderDto orderDto) {
+    public Order createOrder(Order order) {
         Order newOrder = Order.builder()
-                .user(orderDto.getUser())
-                .address(orderDto.getAddress())
-                .post(orderDto.getPost())
-                .time(LocalDateTime.now())
+                .product(order.getProduct())
+                .user(order.getUser())
+                .address(order.getAddress())
+                .post(order.getPost())
+                .time(order.getTime())
                 .status("주문 대기")
                 .build();
 
@@ -32,21 +40,21 @@ public class OrderService {
         return newOrder;
     }
 
-    public Order getOrder(Long id) {
-        Optional<Order> order = orderRepository.findById(id);
-        if (order.isEmpty()) {
+    public User getOrder(Long id) {
+        Optional<User> userOrder = userRepository.findOrderListById(id);
+        if (userOrder.isEmpty()) {
             throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "order not found");
         } else {
-            return order.get();
+            return userOrder.get();
         }
     }
 
-    public void delete(Order order) {
-        Optional<Order> deleteorder = (orderRepository.findOrderById(order.getId()));
-        if (deleteorder.isEmpty()) {
-            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "order not found");
-        } else {
-            orderRepository.delete(deleteorder.get());
-        }
-    }
+//    public void delete(Order order) {
+//        Optional<Order> deleteorder = (orderRepository.finduserBy(order.getId()));
+//        if (deleteorder.isEmpty()) {
+//            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "order not found");
+//        } else {
+//            orderRepository.delete(deleteorder.get());
+//        }
+//    }
 }
