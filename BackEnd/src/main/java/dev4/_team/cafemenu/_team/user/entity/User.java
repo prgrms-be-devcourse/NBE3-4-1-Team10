@@ -27,7 +27,8 @@ public class User extends BaseTimeEntity {
 
     private String password;
 
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Order> orderList;
