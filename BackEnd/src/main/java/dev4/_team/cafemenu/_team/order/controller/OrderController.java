@@ -26,9 +26,11 @@ public class OrderController {
         Order createdOrder = orderService.createOrder(orderDto);
         return ResponseEntity.ok(createdOrder);
     }
-    @DeleteMapping
-    public void deleteOrder(@RequestBody Order order) {
-        orderService.delete(order);
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteOrder(@RequestParam Long orderId) {
+        orderService.delete(orderId);
+        return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
 //    @GetMapping

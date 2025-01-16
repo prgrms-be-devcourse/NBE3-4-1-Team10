@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +26,13 @@ public class OrderService {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    public Order createOrder(Order order) {
+    public Order createOrder(OrderDto orderDto) {
         Order newOrder = Order.builder()
-                .product(order.getProduct())
-                .user(order.getUser())
-                .address(order.getAddress())
-                .post(order.getPost())
-                .time(order.getTime())
+                .product(orderDto.getProduct())
+                .user(orderDto.getUser())
+                .address(orderDto.getAddress())
+                .post(orderDto.getPost())
+                .time(LocalDateTime.now())
                 .status("주문 대기")
                 .build();
 
@@ -49,12 +50,9 @@ public class OrderService {
         }
     }
 
-//    public void delete(Order order) {
-//        Optional<Order> deleteorder = (orderRepository.finduserBy(order.getId()));
-//        if (deleteorder.isEmpty()) {
-//            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR, "order not found");
-//        } else {
-//            orderRepository.delete(deleteorder.get());
-//        }
-//    }
+    public void delete(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
+        orderRepository.delete(order);
+    }
 }
