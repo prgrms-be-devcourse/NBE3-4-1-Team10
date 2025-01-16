@@ -1,8 +1,8 @@
 package dev4._team.cafemenu._team.order.service;
 
 
-import dev4._team.cafemenu._team.error.BusinessException;
-import dev4._team.cafemenu._team.error.ErrorCode;
+import dev4._team.cafemenu._team.global.exception.BusinessException;
+import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.entity.Order;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
