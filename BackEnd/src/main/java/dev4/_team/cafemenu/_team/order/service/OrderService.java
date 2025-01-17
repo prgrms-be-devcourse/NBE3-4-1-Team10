@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -28,9 +29,8 @@ public class OrderService {
         return orderRepository.save(orders);
     }
 
-
     public List<OrderDto> getOrdersByUserId(Long userId) {
-        List<Orders> orders = orderRepository.findByUserId(userId);
+        List<Orders> orders = getByUserId(userId);
 
         if (orders.isEmpty()) {
             throw new BusinessException(ErrorCode.ORDER_NOT_FOUND);
@@ -40,8 +40,16 @@ public class OrderService {
     }
 
     public void delete(Long orderId) {
-        Orders orders = orderRepository.findById(orderId)
+        Orders orders = getById(orderId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
         orderRepository.delete(orders);
+    }
+
+    private List<Orders> getByUserId(Long userId) {
+        return orderRepository.findByUserId(userId);
+    }
+
+    private Optional<Orders> getById(Long orderId) {
+        return orderRepository.findById(orderId);
     }
 }
