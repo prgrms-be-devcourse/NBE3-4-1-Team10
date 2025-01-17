@@ -38,12 +38,10 @@ public class Order extends BaseTimeEntity {
 
     private String post;
 
-    @CreatedDate
     private LocalDateTime time;
 
     private String status;
 
     @OneToMany
     private List<OrderProduct> orderProduct;
-
 }
