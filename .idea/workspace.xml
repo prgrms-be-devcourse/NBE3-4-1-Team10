@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="feat:회원가입 기능">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Dummy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/Icon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/gnb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/fetch/Fetch.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/admin/Admin.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/reportWebVitals.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/BackEnd">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/BackEnd">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="10team" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="10team" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="10team" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jho951&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/prgrms-be-devcourse/NBE3-4-1-Team10.git&quot;,
+    &quot;accountId&quot;: &quot;0cc108c8-0cbf-4393-a919-3642e8abfd22&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2rc2TH6BbzCfXKdFyncLB2bGFN5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build BackEnd.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.Application.executor": "Run",
+    "git-widget-placeholder": "jhlee",
+    "last_opened_file_path": "/Users/leejangho/Desktop/NBE3-4-1-Team10",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="10team.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dev4._team.cafemenu._team.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="" />
+      <created>1736844050300</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736844050300</updated>
+      <workItem from="1736844052381" duration="12000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat:생성자 생성">
+      <option name="closed" value="true" />
+      <created>1737079757004</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079757004</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat:회원가입 controller 생성">
+      <option name="closed" value="true" />
+      <created>1737079799941</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079799941</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat:BCryptPasswordEncoder를 통한 비밀번호 인코딩 적용">
+      <option name="closed" value="true" />
+      <created>1737079836119</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079836119</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat:이메일 중복여부">
+      <option name="closed" value="true" />
+      <created>1737079873275</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079873276</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat:회원가입 기능">
+      <option name="closed" value="true" />
+      <created>1737079886562</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079886562</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat:회원가입 기능">
+      <option name="closed" value="true" />
+      <created>1737079894145</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079894145</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat:생성자 생성" />
+    <MESSAGE value="feat:회원가입 controller 생성" />
+    <MESSAGE value="feat:BCryptPasswordEncoder를 통한 비밀번호 인코딩 적용" />
+    <MESSAGE value="feat:이메일 중복여부" />
+    <MESSAGE value="feat:회원가입 기능" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:회원가입 기능" />
+  </component>
+</project>
