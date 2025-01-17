@@ -1,5 +1,7 @@
 package dev4._team.cafemenu._team.order.service;
 
+import dev4._team.cafemenu._team.delivery.entity.Delivery;
+import dev4._team.cafemenu._team.delivery.entity.DeliveryDto;
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.dto.OrderDto;
@@ -11,6 +13,7 @@ import dev4._team.cafemenu._team.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,12 @@ public class OrderService {
     public Orders createOrder(OrderDto orderDto) {
         User user = userRepository.findById(orderDto.getUserId())
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+
+        LocalDateTime now = LocalDateTime.now();
+        DeliveryDto dto = new DeliveryDto();
+
+        dto.setDelivery(now.getHour() < 14);
+
 
         Orders orders = OrderMapper.toEntity(orderDto, user);
         return orderRepository.save(orders);
@@ -44,6 +53,7 @@ public class OrderService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
         orderRepository.delete(orders);
     }
+
 
     private List<Orders> getByUserId(Long userId) {
         return orderRepository.findByUserId(userId);
