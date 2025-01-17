@@ -2,6 +2,7 @@ package dev4._team.cafemenu._team.orderProduct.entity;
 
 import dev4._team.cafemenu._team.global.BaseTimeEntity;
 import dev4._team.cafemenu._team.order.entity.Orders;
+import dev4._team.cafemenu._team.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,14 +17,18 @@ import lombok.NoArgsConstructor;
 public class OrderProduct extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false) // 외래 키 설정
+    private Product product;
 
     private int count;
 
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_product")
+    @JoinColumn(name = "orders_id", nullable = false)
     private Orders orders;
 }
