@@ -23,6 +23,7 @@ public class ProductForm {
     @NotBlank(message = "설명은 필수항목입니다.")
     private String content;
 
+    // productform -> product로 받은 데이터를 엔티티 객체로 새로 만들기
     public Product toProductEntity() {
         return Product.builder()
                 .price(price)

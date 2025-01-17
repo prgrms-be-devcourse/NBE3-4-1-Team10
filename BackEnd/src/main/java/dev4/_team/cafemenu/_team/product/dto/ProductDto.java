@@ -20,6 +20,7 @@ public class ProductDto {
 
     private String content; //이것도 가져와야되나??
 
+    // product -> dto로 만들기위한 메소드
     public static ProductDto of(Product product) {
         return  ProductDto.builder()
                 .price(product.getPrice())

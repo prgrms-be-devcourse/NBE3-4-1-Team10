@@ -32,6 +32,7 @@ public class ProductService {
                 .stream()
                 .map(ProductDto::of)
                 .toList();
+
         log.info("상품DTO리스트를 조회했습니다.");
 
         return dtoProducts;
@@ -44,6 +45,15 @@ public class ProductService {
         return products;
     }
 
+    public ProductDto findDtoById(Long id) {
+        Product product = findById(id);
+
+        ProductDto productDto = ProductDto.of(product);
+        log.info("상품DTO를 조회했습니다.");
+
+        return productDto;
+    }
+
     private Product findById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new BusinessException(ErrorCode.NOT_FOUND_PRODUCT)
@@ -53,14 +63,14 @@ public class ProductService {
         return product;
     }
 
+    public ProductDto modify(Long id, ProductForm productForm) {
+        Product product = findById(id).modifyProduct(productForm);
+        log.info("상품이 수정되었습니다.");
 
-    public ProductDto findDtoById(Long id) {
-        Product product = findById(id);
-
-        ProductDto productDto = ProductDto.of(product);
-        log.info("상품DTO를 조회했습니다.");
-
-        return productDto;
+        return ProductDto.of(product);
     }
+
+
+
 
 }

@@ -43,8 +43,7 @@ public class ProductController {
     @PostMapping
     public RsData<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
-            ) {
-
+    ) {
         productService.create(productForm);
 
         return new RsData<>(
@@ -52,6 +51,24 @@ public class ProductController {
                 "상품이 생성되었습니다."
         );
     }
+
+    @PutMapping("/{id}")
+    public RsData<ProductDto> updateProduct(
+            @PathVariable("id") Long id,
+            @RequestBody ProductForm productForm
+    ) {
+
+        return new RsData<>(
+                "200",
+                "상품이 수정되었습니다.",
+                productService.modify(id, productForm)
+        );
+
+
+
+
+    }
+
 
 
 
