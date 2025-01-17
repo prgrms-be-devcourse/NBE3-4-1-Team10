@@ -8,12 +8,12 @@ import "./Layout.css";
 
 export default function Layout() {
   return (
-    <main id='main'>
+    <div className='layout'>
       <Header />
-      <main id='main'>
+      <main>
         <Outlet />
       </main>
       <Footer />
-    </main>
+    </div>
   );
 }

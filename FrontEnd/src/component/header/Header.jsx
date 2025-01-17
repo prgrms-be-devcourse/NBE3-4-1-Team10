@@ -7,9 +7,7 @@ import "./Header.css";
 export default function Header() {
   return (
     <header id='header'>
-      <div>
-        <MHeader />
-      </div>
+      <MHeader />
     </header>
   );
 }

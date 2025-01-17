@@ -1,61 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { Guest } from "./guest/Guest";
+import { User } from "./user/User";
+import OrderModal from "../orderModal/OrderModal";
 import "./Drawer.css";
 
 const Drawer = ({ isOpen, close }) => {
-  const handleClick = (id) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const router = useNavigate();
+
+  const openModal = () => {
     close();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const goToPage = (id) => {
+    close();
+    router(id);
   };
 
   return (
     <nav className={`drawer-wrap ${isOpen && "isOpen"}`}>
-      <ul>
-        <NonLogin />
-      </ul>
+      {isLoggedIn ? <User open={openModal} /> : <Guest onClick={goToPage} />}
+      <OrderModal open={isModalOpen} close={closeModal} />
     </nav>
   );
 };
 
 export default Drawer;
-
-const NonLogin = () => {
-  return (
-    <nav>
-      <section className='no-login-wrap'>
-        <h2 className='no-login-msg'>Your Bag is empty</h2>
-        <span>
-          <Link className='nav-login-btn'>sign in</Link>to buy if you want any
-          items
-        </span>
-      </section>
-      <section className='profile-wrap'>
-        <h3>My Profile</h3>
-        <ul>
-          <li>orders</li>
-          <li>Sign in</li>
-          <li>Join</li>
-        </ul>
-      </section>
-    </nav>
-  );
-};
-
-//  {
-//    PRODUCTS &&
-//      PRODUCTS.map((i) => (
-//        <li key={i.id}>
-//          <button
-//            onClick={() => {
-//              handleClick(i.id);
-//            }}
-//            aria-label={`go to ${i.name}`}>
-//            <h2>{i.name}</h2>
-//          </button>
-//        </li>
-//      ));
-//  }

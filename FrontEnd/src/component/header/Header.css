@@ -1,22 +1,23 @@
 :root {
-  --padding: 5%;
+  --header-height: 6rem;
+  --header-border-radius: 0 0 8px 8px;
+  --header-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 #header {
   width: 100%;
+  height: var(--header-height);
   position: fixed;
-  inset: 0% 0% auto;
-  background-color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  box-shadow: var(--header-box-shadow);
   z-index: calc(var(--z-index) + 10);
+  border-radius: var(--header-border-radius);
 }
 
-.header-wrap {
-  max-width: calc(100vw - var(--padding));
-  margin: 0 auto;
-}
-
-/* pc */
 @media all and (min-width: 1025px) {
   #header {
     position: relative;

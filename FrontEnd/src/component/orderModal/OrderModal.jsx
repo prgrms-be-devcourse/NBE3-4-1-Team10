@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PRODUCTS } from "../product/Dummy";
 import Modal from "../modal/Modal";
 import "./OrderModal.css";
 
 const OrderModal = ({ open, close }) => {
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [open]);
-
   return (
     <Modal
       type='order'
@@ -94,8 +82,6 @@ const OrderContents = () => {
     const fullEmail = `${emailId}@${
       selectedDomain === "custom" ? customDomain : selectedDomain
     }`;
-    console.log("총 가격:", totalPrice);
-    console.log("이메일:", fullEmail);
   };
 
   return (

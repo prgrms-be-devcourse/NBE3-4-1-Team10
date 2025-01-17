@@ -2,10 +2,12 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  z-index: 104;
-  background-color: #ffffff;
-  padding-top: 5rem;
+  background-color: var(--background-primary);
+  padding-top: var(--header-height);
   gap: 1rem;
+  z-index: calc(var(--z-index) + 4);
+  position: relative;
+  overflow: hidden;
 }
 
 @media all and (min-width: 660px) {
@@ -17,7 +19,7 @@
 @media all and (min-width: 1025px) {
   .home-wrap {
     grid-template-columns: repeat(4, 1fr);
+    padding-top: 0;
     gap: 0;
-    padding: 5rem 0;
   }
 }

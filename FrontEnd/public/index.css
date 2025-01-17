@@ -4,15 +4,15 @@
   --de-black: #000000;
   --de-white: #ffffff;
 
-  --color-brand-white: #e8e8ed;
-  --color-brand-black: #01242d;
+  --color-brand-white: rgb(255, 255, 255);
+  --color-brand-black: rgb(1, 36, 45);
+  --color-brand-gray: rgb(232, 232, 237);
   --color-brand-brown: #5c3923;
   --color-brand-beige: #bfa98a;
   --color-brand-blue: #2d62ff;
-  --color-brand-pink: #dd23bb;
-  --color-brand-green: #a5d25a;
+  --color-brand-green: rgb(165, 210, 90);
   --color-brand-yellow: #f2b900;
-  --color-brand-red: #9a1218;
+  --color-brand-red: rgb(154, 18, 24);
 
   --color-brand-neutral: #666;
   --color-brand-neutral-light: #aaa;
@@ -22,37 +22,36 @@
   --color-brand-neutral-darker: #222;
   --color-brand-neutral-darkest: #111;
 
-  --background-primary: var(--color-brand-brown);
-  --background-secondary: var(--color-brand-beige);
-  --background-tertiary: var(--color-brand-red);
-  --background-success: var(--color-brand-green);
-  --background-warning: var(--color-brand-yellow);
-  --background-alternate: var(--color-brand-white);
-  --background-error: var(--color-brand-red);
+  --background-primary: var(--color-brand-white);
+  --background-secondary: var(--color-brand-black);
 
-  --text-primary: var(--de-black);
-  --text-secondary: var(--color-brand-neutral-darker);
-  --text-warning: var(--color-brand-neutral-yellow);
-  --text-success: var(--color-brand-neutral-green);
-  --text-alternate: var(--color-brand-white);
-  --text-error: var(--color-brand-neutral-red);
+  --text-primary: var(--color-brand-black);
+  --text-secondary: var(--color-brand-gray);
+  --text-success: var(--color-brand-blue);
+  --text-warning: var(--color-brand-yellow);
+  --text-error: var(--color-brand-red);
 
-  --link-primary: var(--color-brand-neutral-brown);
-  --link-secondary: var(--color-brand-black);
-  --link-alternate: var(--color-brand-white);
+  --link-primary: var(--color-brand-green);
+  --link-secondary: var(--color-brand-brown);
 
-  --border-primary: var(--color-brand-neutral-lightest);
-  --border-secondary: var(--color-brand-blue);
+  --border-primary: var(--color-brand-gray);
+  --border-secondary: var(--color-brand-neutral-light);
   --border-alternate: var(--color-brand-neutral-darker);
 
-  --line-height: 1.8;
-  --padding: 5%;
-  --space: 2rem;
+  --spacing: 2rem;
   --font-size: 1.6rem;
+  --line-height: 1.8;
+  --z-index: 100;
+  --padding: 5%;
 }
 
 html {
   font-size: 10px;
+  overflow: scroll;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 html,
@@ -72,23 +71,27 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   font-smooth: antialiased;
-  color: #01242d;
+  color: var(--color-brand-black);
 }
 a {
-  color: inherit;
+  display: inline-block;
+  width: auto;
+  height: auto;
   text-decoration: none;
+  color: inherit;
 }
 
 ol,
 ul,
 li {
+  color: inherit;
   text-decoration: none;
 }
 
 #space {
   clear: both;
   width: 100%;
-  height: var(--space);
+  height: var(--spacing);
 }
 
 .hide {
@@ -100,6 +103,23 @@ li {
   clear: both;
   width: 100%;
 }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid var(--border-secondary);
+  width: 100%;
+  margin: 0;
+}
 
 /* Mobile */
 @media all and (min-width: 375px) {
@@ -108,7 +128,7 @@ li {
     visibility: hidden;
   }
   #space {
-    height: calc(var(--space) + 1rem);
+    height: calc(var(--spacing) + 1rem);
   }
 }
 
@@ -123,7 +143,7 @@ li {
     visibility: visible;
   }
   #space {
-    height: calc(var(--space) + 3rem);
+    height: calc(var(--spacing) + 3rem);
   }
 }
 /* pc */
@@ -137,6 +157,6 @@ li {
     visibility: hidden;
   }
   #space {
-    height: calc(var(--space) + 5rem);
+    height: calc(var(--spacing) + 5rem);
   }
 }

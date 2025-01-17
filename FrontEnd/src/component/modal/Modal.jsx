@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./Modal.css";
 
 const Modal = ({ isOpen, title, contents, onClose, external, type }) => {
@@ -10,7 +11,7 @@ const Modal = ({ isOpen, title, contents, onClose, external, type }) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div className='modal-overlay' onClick={handleOverlayClick}>
       <div className={`modal ${type && type}`}>
         <div className='modal-header'>
@@ -23,7 +24,8 @@ const Modal = ({ isOpen, title, contents, onClose, external, type }) => {
           <p>{contents}</p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("modal-root")
   );
 };
 

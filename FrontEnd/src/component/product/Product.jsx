@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./Product.css";
 import Modal from "../modal/Modal";
 
-const Product = ({ item }) => {
-  // 모달의 상태와 선택된 아이템 상태를 관리
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import "./Product.css";
 
-  // 모달 열기
+const Product = ({ item }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
 
-  // 모달 닫기
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -28,13 +27,21 @@ const Product = ({ item }) => {
     };
   }, [isModalOpen]);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [isLoading]);
+
   return (
     <>
       <section className='product-wrap' onClick={openModal}>
-        <figure className='product-img-wrap' id={item.id} key={item.id}>
-          <span className='product-type'>{item.type}</span>
-          <img className='product-img' src={item.src} alt={item.alt} />
-        </figure>
+        {!isLoading ? (
+          <figure className='product-img-wrap' id={item.id} key={item.id}>
+            <span className='product-type'>{item.type}</span>
+            <img className='product-img' src={item.src} alt={item.alt} />
+          </figure>
+        ) : (
+          <div className='skeleton-loader' />
+        )}
         <figcaption className='product-content'>
           <p className='product-info'>
             <span className='product-name'>{item.name}</span>
