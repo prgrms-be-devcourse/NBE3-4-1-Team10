@@ -30,7 +30,7 @@ public class OrderController {
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<List<OrderDto>> getOrders(@PathVariable Long userId) {
         List<OrderDto> orders = orderService.getOrdersByUserId(userId);
         return ResponseEntity.ok(orders);

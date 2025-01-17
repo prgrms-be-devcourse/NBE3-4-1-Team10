@@ -21,7 +21,6 @@ public class OrderMapper {
 
     public static OrderDto toDto(Orders orders) {
         return OrderDto.builder()
-                .orderId(orders.getId())
                 .userId(orders.getUser().getId())
                 .address(orders.getAddress())
                 .post(orders.getPost())
