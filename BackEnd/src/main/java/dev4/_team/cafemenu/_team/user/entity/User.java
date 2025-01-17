@@ -33,4 +33,11 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Order> orderList;
 
+    // 이메일, 닉네임, 비밀번호를 받아서 객체를 생성하는 생성자 추가
+    public User(String email, String nickname, String password) {
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+    }
+
 }
