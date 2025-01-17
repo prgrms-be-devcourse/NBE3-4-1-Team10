@@ -4,15 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="feat:회원가입 기능">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Dummy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/Icon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/gnb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/fetch/Fetch.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/admin/Admin.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/reportWebVitals.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,9 +169,66 @@
       <updated>1736844050300</updated>
       <workItem from="1736844052381" duration="12000" />
     </task>
+    <task id="LOCAL-00001" summary="feat:생성자 생성">
+      <option name="closed" value="true" />
+      <created>1737079757004</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079757004</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat:회원가입 controller 생성">
+      <option name="closed" value="true" />
+      <created>1737079799941</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079799941</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat:BCryptPasswordEncoder를 통한 비밀번호 인코딩 적용">
+      <option name="closed" value="true" />
+      <created>1737079836119</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079836119</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat:이메일 중복여부">
+      <option name="closed" value="true" />
+      <created>1737079873275</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079873276</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat:회원가입 기능">
+      <option name="closed" value="true" />
+      <created>1737079886562</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079886562</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat:회원가입 기능">
+      <option name="closed" value="true" />
+      <created>1737079894145</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737079894145</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat:생성자 생성" />
+    <MESSAGE value="feat:회원가입 controller 생성" />
+    <MESSAGE value="feat:BCryptPasswordEncoder를 통한 비밀번호 인코딩 적용" />
+    <MESSAGE value="feat:이메일 중복여부" />
+    <MESSAGE value="feat:회원가입 기능" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:회원가입 기능" />
   </component>
 </project>

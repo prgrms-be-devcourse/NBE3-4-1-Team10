@@ -39,7 +39,6 @@ dependencies {
 	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
 	implementation 'org.glassfish:jakarta.el:3.0.0'
 	implementation 'io.swagger.core.v3:swagger-core:2.1.12'
-
 }
 
 
