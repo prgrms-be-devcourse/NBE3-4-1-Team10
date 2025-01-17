@@ -11,7 +11,9 @@ import dev4._team.cafemenu._team.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -24,13 +26,21 @@ public class OrderService {
         User user = userRepository.findById(orderDto.getUserId())
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
+        LocalDateTime now = LocalDateTime.now();
+
+        if (now.getHour() >= 14) {
+            orderDto.setStatus("내일 배송");
+        } else {
+            orderDto.setStatus("오늘 배송");
+
+        }
+
         Orders orders = OrderMapper.toEntity(orderDto, user);
         return orderRepository.save(orders);
     }
 
-
     public List<OrderDto> getOrdersByUserId(Long userId) {
-        List<Orders> orders = orderRepository.findByUserId(userId);
+        List<Orders> orders = getByUserId(userId);
 
         if (orders.isEmpty()) {
             throw new BusinessException(ErrorCode.ORDER_NOT_FOUND);
@@ -40,8 +50,17 @@ public class OrderService {
     }
 
     public void delete(Long orderId) {
-        Orders orders = orderRepository.findById(orderId)
+        Orders orders = getById(orderId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
         orderRepository.delete(orders);
+    }
+
+
+    private List<Orders> getByUserId(Long userId) {
+        return orderRepository.findByUserId(userId);
+    }
+
+    private Optional<Orders> getById(Long orderId) {
+        return orderRepository.findById(orderId);
     }
 }

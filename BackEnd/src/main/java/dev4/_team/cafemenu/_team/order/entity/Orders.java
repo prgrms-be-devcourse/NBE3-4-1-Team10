@@ -32,6 +32,9 @@ public class Orders extends BaseTimeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderProduct> orderProduct;
+
     private String address;
 
     private String post;
@@ -40,6 +43,4 @@ public class Orders extends BaseTimeEntity {
 
     private String status;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderProduct> orderProduct;
 }

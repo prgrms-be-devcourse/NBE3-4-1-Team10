@@ -15,9 +15,6 @@ import lombok.NoArgsConstructor;
 public class OrderDto {
 
     @NotNull
-    private Long orderId;
-
-    @NotNull
     private Long userId;
 
     @NotBlank
@@ -27,6 +24,10 @@ public class OrderDto {
     @NotBlank
     @Size(max = 10, message = "우편번호는 10자를 초과할 수 없습니다.")
     private String post;
+
+    @NotBlank
+    private String status;
+
 
 
 }
