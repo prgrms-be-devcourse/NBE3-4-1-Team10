@@ -4,55 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="feat:회원가입 기능">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dev4/_team/cafemenu/_team/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/reset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/drawer/Drawer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/footer/Footer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/Header.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/header/MHeader/MHeader.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/logo/Logo.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/modal/Modal.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/orderModal/OrderModal.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Dummy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/component/product/Product.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/Icon.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/constant/gnb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/fetch/Fetch.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/admin/Admin.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/home/Home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/join/Join.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/layout/Layout.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/page/login/Login.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/reportWebVitals.js" beforeDir="false" />
-    </list>
+    <list default="true" id="9a0b4ab2-6b45-4ed5-9586-454f6c181c09" name="Changes" comment="feat:회원가입 기능" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +83,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.Application.executor": "Run",
-    "git-widget-placeholder": "jhlee",
+    "git-widget-placeholder": "user",
     "last_opened_file_path": "/Users/leejangho/Desktop/NBE3-4-1-Team10",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
