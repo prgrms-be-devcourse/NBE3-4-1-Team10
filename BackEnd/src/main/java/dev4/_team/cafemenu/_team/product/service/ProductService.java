@@ -65,6 +65,7 @@ public class ProductService {
 
     public ProductDto modify(Long id, ProductForm productForm) {
         Product product = findById(id).modifyProduct(productForm);
+        productRepository.save(product);
         log.info("상품이 수정되었습니다.");
 
         return ProductDto.of(product);
