@@ -1,5 +1,6 @@
 package dev4._team.cafemenu._team.order.dto;
 
+import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
 import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import dev4._team.cafemenu._team.product.entity.Product;
 import dev4._team.cafemenu._team.user.entity.User;
@@ -11,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -19,11 +21,14 @@ import java.util.List;
 @Data
 public class OrderDto {
 
-    @NotNull
-    private Product product;
+    @NotEmpty
+    private Long orderId;
+
+    @NotEmpty
+    private Long userId;
 
     @NotNull
-    private User user;
+    private List<OrderProductDto> orderProducts;
 
     @NotBlank
     private String address;
@@ -32,6 +37,6 @@ public class OrderDto {
     @NotBlank
     private String post;
 
-    @NotNull
-    private List<OrderProduct> orderProducts;
+    @NotEmpty
+    private LocalDateTime time;
 }

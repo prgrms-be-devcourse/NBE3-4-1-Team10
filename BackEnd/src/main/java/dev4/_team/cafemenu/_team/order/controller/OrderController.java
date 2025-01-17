@@ -21,11 +21,11 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderDto orderDto) {
-        Order createdOrder = orderService.createOrder(orderDto);
-        return ResponseEntity.ok(createdOrder);
-    }
+//    @PostMapping
+//    public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderDto orderDto) {
+//        Order createdOrder = orderService.createOrder(orderDto);
+//        return ResponseEntity.ok(createdOrder);
+//    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteOrder(@RequestParam Long orderId) {
@@ -33,9 +33,10 @@ public class OrderController {
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
-//    @GetMapping
-//    public List<Order> getOrders(Long id) {
-//        return orderService.getOrder(id);
-//    }
+    @GetMapping("/orders/{userId}")
+    public ResponseEntity<List<OrderDto>> getOrders(@PathVariable Long userId) {
+        List<OrderDto> orders = orderService.getOrdersByUserId(userId);
+        return ResponseEntity.ok(orders);
+    }
 
 }
