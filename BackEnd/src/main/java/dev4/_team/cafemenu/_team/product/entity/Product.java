@@ -37,5 +37,14 @@ public class Product extends BaseTimeEntity {
     @Builder.Default
     private List<Orders> ordersList = new ArrayList<>();
 
+    public Product modifyProduct(ProductForm productForm) {
+        this.price = productForm.getPrice();
+        this.name = productForm.getName();
+        this.imageUrl = productForm.getImageUrl();
+        this.type = productForm.getType();
+        this.content = productForm.getContent();
+        return this;
+    }
+
 
 }
