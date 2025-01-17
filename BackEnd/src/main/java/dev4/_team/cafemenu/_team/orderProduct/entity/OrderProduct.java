@@ -1,7 +1,7 @@
 package dev4._team.cafemenu._team.orderProduct.entity;
 
 import dev4._team.cafemenu._team.global.BaseTimeEntity;
-import dev4._team.cafemenu._team.order.entity.Order;
+import dev4._team.cafemenu._team.order.entity.Orders;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,5 +25,5 @@ public class OrderProduct extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_product")
-    private Order order;
+    private Orders orders;
 }
