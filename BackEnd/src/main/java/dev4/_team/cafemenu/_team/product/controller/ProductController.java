@@ -58,14 +58,26 @@ public class ProductController {
             @RequestBody ProductForm productForm
     ) {
 
+        ProductDto productDto = productService.modify(id, productForm);
+
         return new RsData<>(
                 "200",
                 "상품이 수정되었습니다.",
-                productService.modify(id, productForm)
+                productDto
         );
+    }
 
+    @DeleteMapping("/{id}")
+    public RsData<Void> deleteProduct(
+            @PathVariable("id") Long id
+    ) {
 
+        productService.delete(id);
 
+        return new RsData<>(
+                "200",
+                "상품이 삭제되었습니다."
+        );
 
     }
 

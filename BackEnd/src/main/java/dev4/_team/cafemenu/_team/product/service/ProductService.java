@@ -70,6 +70,13 @@ public class ProductService {
         return ProductDto.of(product);
     }
 
+    public void delete(Long id) {
+        Product product = findById(id);
+
+        productRepository.delete(product);
+        log.info("상품이 삭제되었습니다.");
+    }
+
 
 
 
