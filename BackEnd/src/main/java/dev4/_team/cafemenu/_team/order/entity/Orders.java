@@ -18,7 +18,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
 public class Orders extends BaseTimeEntity {
 
     @Id
@@ -26,11 +25,11 @@ public class Orders extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     private String address;
@@ -41,6 +40,6 @@ public class Orders extends BaseTimeEntity {
 
     private String status;
 
-    @OneToMany
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> orderProduct;
 }
