@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### .yml ###
+src/main/resources/application.yml
+
+# macOS 시스템 파일 방지
+.DS_Store
