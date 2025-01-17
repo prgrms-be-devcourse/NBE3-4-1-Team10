@@ -1,6 +1,5 @@
 package dev4._team.cafemenu._team.order.dto;
 
-import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,9 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -24,10 +20,6 @@ public class OrderDto {
     @NotNull
     private Long userId;
 
-    @NotNull
-    @Size(min = 1, message = "주문에는 한가지 이상 상품이 포함되어야 합니다.")
-    private List<OrderProductDto> orderProducts;
-
     @NotBlank
     @Size(max = 100, message = "주소는 100자를 초과할 수 없습니다.")
     private String address;
@@ -36,6 +28,5 @@ public class OrderDto {
     @Size(max = 10, message = "우편번호는 10자를 초과할 수 없습니다.")
     private String post;
 
-    @NotNull
-    private LocalDateTime time;
+
 }

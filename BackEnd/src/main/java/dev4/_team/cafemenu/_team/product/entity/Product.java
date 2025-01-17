@@ -1,7 +1,7 @@
 package dev4._team.cafemenu._team.product.entity;
 
 import dev4._team.cafemenu._team.global.BaseTimeEntity;
-import dev4._team.cafemenu._team.order.entity.Order;
+import dev4._team.cafemenu._team.order.entity.Orders;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +35,7 @@ public class Product extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @Builder.Default
-    private List<Order> orderList = new ArrayList<>();
+    private List<Orders> ordersList = new ArrayList<>();
 
 
 }

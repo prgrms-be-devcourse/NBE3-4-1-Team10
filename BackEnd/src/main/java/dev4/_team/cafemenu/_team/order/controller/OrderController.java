@@ -1,7 +1,8 @@
 package dev4._team.cafemenu._team.order.controller;
 
 import dev4._team.cafemenu._team.order.dto.OrderDto;
-import dev4._team.cafemenu._team.order.entity.Order;
+import dev4._team.cafemenu._team.order.entity.Orders;
+import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,21 +19,20 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody @Valid OrderDto orderDto) {
-        Order createdOrder = orderService.createOrder(orderDto);
-        return ResponseEntity.ok(createdOrder);
+    public ResponseEntity<OrderDto> createOrder(@RequestBody @Valid OrderDto orderDto) {
+        Orders createdOrder = orderService.createOrder(orderDto);
+        return ResponseEntity.status(201).body(OrderMapper.toDto(createdOrder));
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteOrder(@RequestParam Long orderId) {
+    @DeleteMapping("/{orderId}")
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
         orderService.delete(orderId);
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
-    @GetMapping("/orders/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<OrderDto>> getOrders(@PathVariable Long userId) {
         List<OrderDto> orders = orderService.getOrdersByUserId(userId);
         return ResponseEntity.ok(orders);
     }
-
 }
