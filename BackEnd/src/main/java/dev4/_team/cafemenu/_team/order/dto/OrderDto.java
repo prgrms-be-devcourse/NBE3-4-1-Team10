@@ -25,5 +25,9 @@ public class OrderDto {
     @Size(max = 10, message = "우편번호는 10자를 초과할 수 없습니다.")
     private String post;
 
+    @NotBlank
+    private String status;
+
+
 
 }

@@ -1,7 +1,5 @@
 package dev4._team.cafemenu._team.order.service;
 
-import dev4._team.cafemenu._team.delivery.entity.Delivery;
-import dev4._team.cafemenu._team.delivery.entity.DeliveryDto;
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.dto.OrderDto;
@@ -29,10 +27,13 @@ public class OrderService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         LocalDateTime now = LocalDateTime.now();
-        DeliveryDto dto = new DeliveryDto();
 
-        dto.setDelivery(now.getHour() < 14);
+        if (now.getHour() >= 14) {
+            orderDto.setStatus("내일 배송");
+        } else {
+            orderDto.setStatus("오늘 배송");
 
+        }
 
         Orders orders = OrderMapper.toEntity(orderDto, user);
         return orderRepository.save(orders);
