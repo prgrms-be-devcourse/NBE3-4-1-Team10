@@ -1,6 +1,7 @@
 package dev4._team.cafemenu._team.order.mapper;
 
 import dev4._team.cafemenu._team.order.dto.OrderDto;
+import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
@@ -20,15 +21,15 @@ public class OrderMapper {
                 .build();
     }
 
-    public static OrderDto toDto(Orders orders) {
-        return OrderDto.builder()
+    public static OrderResponseDto toDto(Orders orders) {
+        return OrderResponseDto.builder()
                 .userId(orders.getUser().getId())
                 .address(orders.getAddress())
                 .post(orders.getPost())
                 .build();
     }
 
-    public static List<OrderDto> toDtoList(List<Orders> ordersList) {
+    public static List<OrderResponseDto> toDtoList(List<Orders> ordersList) {
         return ordersList.stream()
                 .map(OrderMapper::toDto)
                 .toList();
