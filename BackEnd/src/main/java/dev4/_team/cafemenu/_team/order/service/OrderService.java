@@ -9,6 +9,7 @@ import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +64,14 @@ public class OrderService {
 
     private Optional<Orders> getById(Long orderId) {
         return orderRepository.findById(orderId);
+    }
+
+    public Orders updateOrder(Long orderId, OrderDto orderDto) {
+        Orders existingOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
+
+        Orders updatedOrder = OrderMapper.updateEntity(existingOrder, orderDto);
+
+        return orderRepository.save(updatedOrder);
     }
 }
