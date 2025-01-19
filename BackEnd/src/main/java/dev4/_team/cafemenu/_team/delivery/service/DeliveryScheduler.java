@@ -2,7 +2,7 @@ package dev4._team.cafemenu._team.delivery.service;
 
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
-import dev4._team.cafemenu._team.order.dto.OrderDto;
+import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
@@ -23,8 +23,8 @@ public class DeliveryScheduler {
 
     @Scheduled(cron = "0 0 0 * * *") // 매일 자정에 실행
     public void updateOrderStatus() {
-        List<OrderDto> orderDtos = OrderMapper.toDtoList(orderRepository.findByStatus("내일 배송"));
-        for (OrderDto orderDto : orderDtos) {
+        List<OrderResponseDto> orderDtos = OrderMapper.toDtoList(orderRepository.findByStatus("내일 배송"));
+        for (OrderResponseDto orderDto : orderDtos) {
             User user = userRepository.findById(orderDto.getUserId())
                     .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
             orderDto.setStatus("오늘 배송");

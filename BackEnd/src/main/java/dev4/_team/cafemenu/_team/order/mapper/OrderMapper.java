@@ -4,12 +4,21 @@ import dev4._team.cafemenu._team.order.dto.OrderDto;
 import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.user.entity.User;
-import dev4._team.cafemenu._team.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderMapper {
+
+    public static Orders toEntity(OrderResponseDto dto, User user) {
+        return Orders.builder()
+                .user(user)
+                .address(dto.getAddress())
+                .post(dto.getPost())
+                .time(LocalDateTime.now())
+                .status(dto.getStatus())
+                .build();
+    }
 
     public static Orders toEntity(OrderDto dto, User user) {
         return Orders.builder()
