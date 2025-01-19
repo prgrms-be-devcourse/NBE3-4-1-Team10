@@ -3,6 +3,7 @@ package dev4._team.cafemenu._team.order.service;
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.dto.OrderDto;
+import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
@@ -39,7 +40,7 @@ public class OrderService {
         return orderRepository.save(orders);
     }
 
-    public List<OrderDto> getOrdersByUserId(Long userId) {
+    public List<OrderResponseDto> getOrdersByUserId(Long userId) {
         List<Orders> orders = getByUserId(userId);
 
         if (orders.isEmpty()) {

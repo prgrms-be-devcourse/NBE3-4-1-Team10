@@ -14,6 +14,8 @@ public enum ErrorCode {
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED,"12","비밀번호가 틀렸습니다."),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"13","인증이 필요합니다.");
 
+
+
     private final HttpStatus httpStatus;
     private final String errorCode;
     private final String message;
