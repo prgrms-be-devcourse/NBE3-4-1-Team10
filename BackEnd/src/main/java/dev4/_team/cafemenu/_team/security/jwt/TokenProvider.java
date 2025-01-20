@@ -6,6 +6,7 @@ import dev4._team.cafemenu._team.security.redis.RedisUtil;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.entity.UserRole;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -77,21 +78,25 @@ public class TokenProvider {
 
     //검증해서 값 넘겨주는 매서드
     public CustomUserDetails verify(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(secretKey) // 서명 검증
-                .build()
-                .parseSignedClaims(token) // 토큰 파싱
-                .getPayload();
-        Long id = claims.get("id", Long.class);
-        String role = claims.get("role", String.class);
-        String email = claims.getSubject();
-        log.info("id :{},role :{}, email:{}", id, role, email);
-        User user = User.builder()
-                .id(id)
-                .email(email)
-                .role(UserRole.valueOf(role))
-                .build();
-        return new CustomUserDetails(user);
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(secretKey) // 서명 검증
+                    .build()
+                    .parseSignedClaims(token) // 토큰 파싱
+                    .getPayload();
+            Long id = claims.get("id", Long.class);
+            String role = claims.get("role", String.class);
+            String email = claims.getSubject();
+            log.info("id :{},role :{}, email:{}", id, role, email);
+            User user = User.builder()
+                    .id(id)
+                    .email(email)
+                    .role(UserRole.valueOf(role))
+                    .build();
+            return new CustomUserDetails(user);
+        } catch (JwtException e) {
+            throw new IllegalArgumentException("유효하지 않은 토큰입니다.");
+        }
     }
 
     //남은 시간 return하는 메서드
