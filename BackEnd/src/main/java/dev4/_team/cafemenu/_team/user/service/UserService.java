@@ -16,8 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import dev4._team.cafemenu._team.user.dto.SignupDto;
 import dev4._team.cafemenu._team.user.entity.User;
-import dev4._team.cafemenu._team.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -77,14 +75,11 @@ public class UserService {
 
     // 회원가입 처리
     public void signup(SignupDto signupDto) {
-        String encodedPassword = passwordEncoder.encode(signupDto.getPassword());
-
-        User user = new User(signupDto.getEmail(), signupDto.getNickname(), encodedPassword);
-
+        User user = signupDto.toUserEntity(passwordEncoder);
         // 이메일 중복 체크
-//        if (userRepository.findUserByEmail(signupDto.getEmail())) {
-//            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
-//        }
+        if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
+            throw new BusinessException(ErrorCode.EXIST_USER);
+        }
         userRepository.save(user);
     }
 }
