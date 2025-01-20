@@ -63,6 +63,9 @@ public class SwaggerConfig {
                 .post(new Operation().security(new ArrayList<>()));
         paths.addPathItem("/api/user/signup", signupPathItem);
 
+        // /api/product 경로의 GET 요청에 대해 인증 제거
+        paths.addPathItem("/api/product",
+                new PathItem().get(new Operation().security(new ArrayList<>())));
         return paths;
     }
 
