@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,10 +28,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
@@ -55,16 +52,10 @@ public class SecurityConfig {
                 .build();
     }
 
-    /**
-     * Security Filter Chain 설정
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
 
-        // HTTP 보안 설정
-
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager, redisUtil, customUserDetailsService, passwordEncoder, tokenProvider);
-
         http.addFilterBefore(authenticationFilter, BasicAuthenticationFilter.class);
 
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
@@ -74,31 +65,32 @@ public class SecurityConfig {
         http.formLogin(AbstractHttpConfigurer::disable);
         http.httpBasic(AbstractHttpConfigurer::disable);
 
-        // JwtAuthorizationFilter 추가
         AuthorizationFilter jwtAuthorizationFilter = new AuthorizationFilter(authenticationManager, tokenProvider, redisUtil);
         http.addFilterAfter(jwtAuthorizationFilter, AuthenticationFilter.class);
 
-        // 인증 및 권한 에러 처리 핸들러
         http.exceptionHandling(exceptionHandling -> {
             exceptionHandling
-                    .authenticationEntryPoint(customAuthenticationEntryPoint) // 인증 실패 처리
-                    .accessDeniedHandler(customAccessDeniedHandler); // 권한 실패 처리
+                    .authenticationEntryPoint(customAuthenticationEntryPoint)
+                    .accessDeniedHandler(customAccessDeniedHandler);
         });
 
         // 경로 권한 설정
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/admin/**").hasRole(UserRole.ADMIN.name()) // 관리자 권한
-                .anyRequest().permitAll() // 나머지 요청 허용
+                .requestMatchers(HttpMethod.GET, "/api/product").permitAll()
+                .requestMatchers("/swagger-ui/**", "api-docs/**", "/v3/api-docs/**", "/api/user/signup", "/api/user/login").permitAll() // 회원가입 및 로그인 허용
+                .requestMatchers("/api/admin/**").hasRole(UserRole.ADMIN.name()) // 관리자 권한 필요
+                .anyRequest().authenticated() // 나머지 요청은 인증 필요
         );
 
         return http.build();
     }
 
+
     /**
      * CORS 설정
      */
     public CorsConfigurationSource configurationSource() {
-        log.debug("디버그 : configurationSource cors 설정이 SecurityFilterChain에 등록됨");
+        log.debug("CORS 설정 등록 중");
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
