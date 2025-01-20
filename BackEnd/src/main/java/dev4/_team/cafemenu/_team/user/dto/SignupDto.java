@@ -33,5 +33,4 @@ public class SignupDto {
     @Size(min = 2, max = 20, message = "이름은 1자 이상 20자 이하입니다.")
     @Schema(description = "이름 아무거나 사용 가능", example = "강정수커피")
     private String nickname;
-
 }
