@@ -8,10 +8,10 @@ public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "1", "서버내부 에러가 발생했습니다."),
     NOT_FOUND_USER(HttpStatus.NOT_FOUND, "11", "유저를 찾을수 없습니다."),
-    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED,"12","비밀번호가 틀렸습니다."),
-    UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"13","인증이 필요합니다.");
-
-
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "12", "비밀번호가 틀렸습니다."),
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "13", "인증이 필요합니다."),
+    NOT_FOUND_TOKEN(HttpStatus.NOT_FOUND, "14", "토큰이 존재하지 않습니다."),
+    FAIL_LOGOUT(HttpStatus.INTERNAL_SERVER_ERROR, "15", "로그아웃에 실패했습니다.");
 
     private final HttpStatus httpStatus;
     private final String errorCode;
