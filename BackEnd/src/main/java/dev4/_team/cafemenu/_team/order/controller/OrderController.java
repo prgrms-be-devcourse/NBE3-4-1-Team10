@@ -26,21 +26,21 @@ public class OrderController {
         return ResponseEntity.status(201).body(null);
     }
 
-    @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId, Long userId) {
+    @DeleteMapping("/{userId}/{orderId}")
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId, @PathVariable(name = "userId") Long userId) {
         orderService.delete(orderId, userId);
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<OrderResponseDto>> getOrders(@PathVariable Long userId) {
+    public ResponseEntity<List<OrderResponseDto>> getOrders(@PathVariable(name = "userId") Long userId) {
         List<OrderResponseDto> orders = orderService.getOrdersByUserId(userId);
         return ResponseEntity.ok(orders);
     }
 
-    @PutMapping("/{orderId}")
+    @PutMapping("/{userId}/{orderId}")
     public ResponseEntity<OrderResponseDto> updateOrder(
-            @PathVariable Long orderId, Long userId,
+            @PathVariable Long orderId, @PathVariable(name = "userId") Long userId,
             @RequestBody @Valid OrderDto orderDto) {
         Orders updatedOrder = orderService.updateOrder(orderId, orderDto, userId);
         return ResponseEntity.ok(OrderMapper.toDto(updatedOrder));
