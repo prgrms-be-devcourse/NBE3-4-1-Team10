@@ -50,7 +50,7 @@ public class OrderService {
         if (now.getHour() >= 14) {
             orderDto.setStatus("내일 배송");
         } else {
-            orderDto.setStatus("오늘 배송");
+            orderDto.setStatus("배송 중");
         }
 
 
@@ -110,5 +110,10 @@ public class OrderService {
         Orders updatedOrder = OrderMapper.updateEntity(findOrder, orderDto);
 
         return orderRepository.save(updatedOrder);
+    }
+
+    public List<OrderResponseDto> getOrdersByStatus(String status) {
+        List<Orders> orders = orderRepository.findByStatus(status);
+        return OrderMapper.toDtoList(orders);
     }
 }
