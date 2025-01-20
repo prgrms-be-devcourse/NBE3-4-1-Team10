@@ -46,4 +46,15 @@ public class OrderController {
         return ResponseEntity.ok(OrderMapper.toDto(updatedOrder));
     }
 
+    @GetMapping("/today-delivery")
+    public ResponseEntity<List<OrderResponseDto>> getTodayDeliveryOrders() {
+        List<OrderResponseDto> todayDeliveryOrders = orderService.getOrdersByStatus("오늘 배송");
+        return ResponseEntity.ok(todayDeliveryOrders);
+    }
+
+    @GetMapping("/tomorrow-delivery")
+    public ResponseEntity<List<OrderResponseDto>> getTomorrowDeliveryOrders() {
+        List<OrderResponseDto> tomorrowDeliveryOrders = orderService.getOrdersByStatus("내일 배송");
+        return ResponseEntity.ok(tomorrowDeliveryOrders);
+    }
 }
