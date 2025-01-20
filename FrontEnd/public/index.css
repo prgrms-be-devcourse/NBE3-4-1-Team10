@@ -160,3 +160,48 @@ hr {
     height: calc(var(--spacing) + 5rem);
   }
 }
+
+.input {
+  width: 100%;
+  max-width: 100%;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 0;
+  background-color: #e8e8e8;
+  text-indent: 1rem;
+  outline: none;
+}
+
+.input:focus {
+  border: 2px solid var(--text-success);
+  box-shadow: 0 0 8px var(--background-primary);
+}
+
+.input.warn:focus {
+  border: 1px solid var(--text-error);
+  box-shadow: 0 0 5px rgba(154, 18, 24, 0.6);
+}
+
+.button {
+  width: 100%;
+  font-size: 1.2rem;
+  color: var(--background-primary);
+  font-weight: bold;
+  border: none;
+  background-color: var(--text-primary);
+  border-radius: 10px;
+  padding: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-5px);
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

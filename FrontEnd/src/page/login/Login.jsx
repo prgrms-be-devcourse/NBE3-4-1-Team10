@@ -4,6 +4,24 @@ import "./Login.css";
 const Login = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
+  const loginFormFields = [
+    {
+      id: "email",
+      label: "아이디",
+      name: "email",
+      type: "text",
+      placeholder: "아이디를 입력하세요",
+      ref: emailRef,
+    },
+    {
+      id: "pwd",
+      label: "비밀번호",
+      name: "pwd",
+      type: "password",
+      placeholder: "비밀번호를 입력하세요",
+      ref: pwdRef,
+    },
+  ];
   const [body, setBody] = useState({ email: "", pwd: "" });
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -43,39 +61,28 @@ const Login = () => {
       <section className='login-wrap'>
         <form className='login-form' onSubmit={handleLogin}>
           <h2 className='login-title'>Login</h2>
-          <div className='login-form-group'>
-            <label className='login-label' htmlFor='email'>
-              아이디
-            </label>
-            <input
-              id='email'
-              name='email'
-              type='text'
-              value={body?.email}
-              onChange={(e) => onChangeInput("email", e.target.value)}
-              placeholder='아이디를 입력하세요'
-              disabled={isLoading}
-              ref={emailRef}
-            />
-          </div>
-          <div className='login-form-group'>
-            <label className='login-label' htmlFor='pwd'>
-              비밀번호
-            </label>
-            <input
-              id='pwd'
-              name='pwd'
-              type='password'
-              value={body?.pwd}
-              onChange={(e) => onChangeInput("pwd", e.target.value)}
-              placeholder='비밀번호를 입력하세요'
-              disabled={isLoading}
-              ref={pwdRef}
-            />
-          </div>
-
+          {loginFormFields.map(
+            ({ id, label, name, type, placeholder, ref }) => (
+              <div className='login-form-group' key={id}>
+                <label className='label' htmlFor={id}>
+                  {label}
+                </label>
+                <input
+                  id={id}
+                  className='input'
+                  name={name}
+                  type={type}
+                  value={body?.[name]}
+                  onChange={(e) => onChangeInput(name, e.target.value)}
+                  placeholder={placeholder}
+                  disabled={isLoading}
+                  ref={ref}
+                />
+              </div>
+            )
+          )}
           {message && <p className='error-message'>{message}</p>}
-          <button className='login-btn' type='submit'>
+          <button className='button' type='submit'>
             로그인
           </button>
         </form>

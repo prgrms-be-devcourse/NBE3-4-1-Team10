@@ -31,32 +31,6 @@
   font-weight: bold;
   text-align: center;
 }
-.join-form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.join-form-group input {
-  width: 100%;
-  max-width: 100%;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1.2rem 0;
-  background-color: #e8e8e8;
-  text-indent: 1rem;
-  outline: none;
-}
-.join-form-group input:focus {
-  border: 2px solid var(--border-primary); /* 테두리를 주고 색을 변경 */
-  box-shadow: 0 0 8px rgba(165, 210, 90, 0.7); /* 포커스된 테두리에 그림자 효과 */
-}
-
-.join-form-group input.warn:focus {
-  border: 2px solid var(--text-error); /* 빨간색 테두리 */
-  box-shadow: 0 0 5px rgba(154, 18, 24, 0.6); /* 빨간색 그림자 */
-}
 
 .error-message {
   color: var(--text-error);
@@ -79,22 +53,6 @@
   }
 }
 
-.join-btn {
-  width: 100%;
-  font-size: 1.2rem;
-  color: var(--background-primary);
-  font-weight: bold;
-  border: none;
-  background-color: var(--link-primary);
-  border-radius: 10px;
-  padding: 1.3rem;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.join-btn:hover {
-  transform: translateY(-5px);
-}
 @media all and (min-width: 660px) {
   .join-wrap {
     max-width: 660px;

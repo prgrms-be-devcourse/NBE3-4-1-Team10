@@ -18,7 +18,6 @@ root.render(
           <Route path='/login' element={<Login />} />
           <Route path='/join' element={<Join />} />
         </Route>
-
         <Route path='/admin' element={<Admin />} />
       </Routes>
     </BrowserRouter>
