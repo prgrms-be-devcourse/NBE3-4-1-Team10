@@ -26,7 +26,6 @@ public class OrderService {
     private final UserRepository userRepository;
 
     public Orders createOrder(OrderDto orderDto, Long userId) {
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
@@ -39,7 +38,6 @@ public class OrderService {
             orderDto.setStatus("내일 배송");
         } else {
             orderDto.setStatus("오늘 배송");
-
         }
 
         return orderRepository.save(orders);
