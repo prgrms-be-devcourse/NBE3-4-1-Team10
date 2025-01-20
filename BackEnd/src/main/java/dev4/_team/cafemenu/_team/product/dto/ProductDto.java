@@ -28,7 +28,6 @@ public class ProductDto {
                 .type(product.getType())
                 .content(product.getContent())
                 .build();
-
     }
 
 }
