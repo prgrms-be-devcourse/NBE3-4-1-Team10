@@ -1,7 +1,6 @@
 package dev4._team.cafemenu._team.product.entity;
 
 import dev4._team.cafemenu._team.global.BaseTimeEntity;
-import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import dev4._team.cafemenu._team.product.form.ProductForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
