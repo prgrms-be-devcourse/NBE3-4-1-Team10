@@ -113,6 +113,7 @@ const Join = () => {
         const res = await UserService.signup({
           email: body.email,
           password: body.pwd,
+          nickname: body.nickname,
         });
         if (res?.status === 200) {
           alert("회원 가입 완료");

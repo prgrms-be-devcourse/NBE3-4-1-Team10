@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
     Pragma: "no-cache",
     CacheControl: "no-cache",
     Expires: "0",
-    usertype: "",
     Authorization: TOKEN,
   },
 });

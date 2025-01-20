@@ -1,6 +1,6 @@
 import { getCookie, removeCookie, setCookie } from "./cookie";
 
-export const API_URL = "https://localhost:8080/api";
+export const API_URL = "http://localhost:8080/api";
 export const APP_Name = "cafe&";
 export const IMG_PATH = "/img";
 export const S3_BUCKET = process.env.PUBLIC__USER_S3;
