@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import java.io.IOException;
 
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
+
 
 @Slf4j
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -33,6 +35,12 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+
+        // Swagger 경로는 필터 제외
+        if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         if (!isHeaderVerify(request)) {
             log.warn("Authorization 헤더가 유효하지 않습니다.");
