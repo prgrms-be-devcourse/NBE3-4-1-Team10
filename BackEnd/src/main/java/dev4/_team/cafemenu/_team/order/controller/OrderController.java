@@ -27,8 +27,8 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
-        orderService.delete(orderId);
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId, Long userId) {
+        orderService.delete(orderId, userId);
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
@@ -40,9 +40,9 @@ public class OrderController {
 
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> updateOrder(
-            @PathVariable Long orderId,
+            @PathVariable Long orderId, Long userId,
             @RequestBody @Valid OrderDto orderDto) {
-        Orders updatedOrder = orderService.updateOrder(orderId, orderDto);
+        Orders updatedOrder = orderService.updateOrder(orderId, orderDto, userId);
         return ResponseEntity.ok(OrderMapper.toDto(updatedOrder));
     }
 
