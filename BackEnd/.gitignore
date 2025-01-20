@@ -36,14 +36,11 @@ out/
 ### VS Code ###
 .vscode/
 
-<<<<<<< HEAD
 ### Custon ###
 .idea/
 application.yml
-=======
 ### .yml ###
 src/main/resources/application.yml
 
 # macOS 시스템 파일 방지
 .DS_Store
->>>>>>> 331244703e44c0236100a424155ef868ff54bbb0
