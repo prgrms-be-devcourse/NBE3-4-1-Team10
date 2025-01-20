@@ -1,5 +1,6 @@
 import React from "react";
-import { USER_LIST } from "../../../constant/user";
+import { USER_LIST } from "../../../constant/constantLists";
+
 import "./Guest.css";
 
 export const Guest = ({ onClick }) => {

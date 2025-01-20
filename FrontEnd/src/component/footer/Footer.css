@@ -1,61 +1,36 @@
 :root {
-  --footer-height: 15rem;
+  --footer-height: 18rem;
   --footer-text: var(--text-secondary);
   --footer-bacground-color: var(--background-secondary);
-  --footer-icon-size: 6rem;
   --footer-font-size: 1rem;
 }
 
 #footer {
   width: 100%;
-  height: 100%;
-  min-height: var(--footer-height);
-  position: sticky;
-  bottom: 0;
-
+  height: var(--footer-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
   color: var(--footer-text);
   background-color: var(--footer-bacground-color);
-
+  padding: var(--padding);
   z-index: var(--z-index);
 }
 
-.footer-wrap {
-  width: 100%;
-  max-width: calc(100vw - var(--padding));
-  height: 100%;
-
+.footer-icon-wrap {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  margin: 0 auto;
+  align-items: center;
+  gap: 3rem;
 }
-
 .footer-info {
-  display: flex;
-
-  font-size: calc(var(--footer-font-size) + 0.5rem);
+  font-size: calc(var(--footer-font-size) + 0.6rem);
   font-weight: bold;
-
-  padding: 2rem 0 1rem 0;
-  gap: 0.5rem;
-}
-
-.footer-icon {
-  width: var(--footer-icon-size);
-  height: var(--footer-icon-size);
-  padding: 1rem 0;
 }
 
 .copyright {
   width: 100%;
   text-align: end;
+  padding-top: 2rem;
   font-size: var(--footer-font-size);
-}
-
-/* PC */
-@media all and (min-width: 1025px) {
-  #footer {
-    position: relative;
-  }
 }

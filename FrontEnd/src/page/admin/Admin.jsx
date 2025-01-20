@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Admin.css";
 import { DeleteIcon, EditIcon } from "../../constant/Icon";
+import { ProductService } from "../../service/ProductService";
+
+import "./Admin.css";
 
 const AdminPage = () => {
   const [customerList, setCustomerList] = useState([]);
@@ -11,6 +13,20 @@ const AdminPage = () => {
     email: "",
     purchaseTime: "",
   });
+
+  const addProduct = async () => {
+    try {
+      await ProductService.postProductLists({
+        type: "커피콩",
+        name: "Columbia Nariñó",
+        imageUrl: "https://i.imgur.com/HKOFQYa.jpeg",
+        content: "커피콩 Columbia Nariñó의 예시 설명글입니다.",
+        price: 5000,
+      });
+    } catch (error) {
+      console.error("상품 추가 오류:", error);
+    }
+  };
 
   useEffect(() => {
     const customers = [
@@ -86,7 +102,16 @@ const AdminPage = () => {
 
   return (
     <main className='admin-wrap'>
-      <h2>Admin</h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2rem",
+        }}>
+        <h2>Admin</h2>
+        <button onClick={addProduct}>상품생성 </button>
+      </div>
       <h3>오후 2시 이후 구매한 고객 리스트</h3>
 
       <div className='table-container'>
@@ -169,6 +194,7 @@ const AdminPage = () => {
           </form>
         </div>
       )}
+      <h3>오후 2시 이전 구매한 고객 리스트</h3>
     </main>
   );
 };

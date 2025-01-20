@@ -1,3 +1,11 @@
+:root {
+  --drawer-btn-padding: 8px;
+  --drawer-background: rgba(0, 0, 0, 0.1);
+  --drawer-btn-size: 1rem;
+  --drawer-btn-border: var(--background-primary);
+  --drawer-btn-background: var(--text-primary);
+}
+
 .drawer-btn-wrap {
   border: none;
   background-color: var(--drawer-background);

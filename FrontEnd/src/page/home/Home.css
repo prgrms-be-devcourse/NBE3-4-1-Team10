@@ -2,26 +2,11 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  background-color: var(--background-primary);
+  position: relative;
   padding-top: var(--header-height);
   gap: 1rem;
-  z-index: calc(var(--z-index) + 4);
-  position: relative;
   overflow: hidden;
-}
-
-@media all and (min-width: 660px) {
-  .home-wrap {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media all and (min-width: 1025px) {
-  .home-wrap {
-    grid-template-columns: repeat(4, 1fr);
-    padding-top: 0;
-    gap: 0;
-  }
+  z-index: calc(var(--z-index) + 4);
 }
 
 .skeleton-loader {

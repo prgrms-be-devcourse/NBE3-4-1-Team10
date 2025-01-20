@@ -7,7 +7,7 @@ export default function Product({ item }) {
     <>
       <figure className='product-img-wrap' id={item.id} key={item.id}>
         <span className='product-type'>{item.type}</span>
-        <img className='product-img' src={item.src} alt={item.alt} />
+        <img className='product-img' src={item.imageUrl} alt='product-img' />
       </figure>
       <figcaption className='product-content'>
         <p className='product-info'>

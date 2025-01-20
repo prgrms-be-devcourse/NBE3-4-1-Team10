@@ -17,7 +17,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const TOKEN = getJwt();
-
     const configClone = config;
     configClone.headers.Authorization = TOKEN;
     configClone.headers.usertype = "user";

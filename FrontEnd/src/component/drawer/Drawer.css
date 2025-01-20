@@ -1,27 +1,27 @@
 :root {
-  --text: #e8e8ed;
+  --drawer-text-color: #e8e8ed;
   --drawer-wrap-background: #01242d;
   --drawer-padding: 4rem;
 }
-
 .drawer-wrap {
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  position: absolute; /* 부모 레이아웃 내부에서 절대 위치 */
   top: 0;
   left: 0;
-  color: var(--text);
+  color: var(--drawer-text-color);
+
+  background: var(--drawer-wrap-background);
+  padding: var(--drawer-padding);
+  overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease, visibility 0.6s ease;
+  -ms-overflow-style: none;
 }
 
 .drawer-wrap.isOpen {
-  width: 100%;
-  height: 100%;
-  background: var(--drawer-wrap-background);
-  padding-top: var(--drawer-padding);
-  padding-left: var(--drawer-padding);
   opacity: 1;
   visibility: visible;
-  overflow: hidden !important;
-  -ms-overflow-style: none;
 }

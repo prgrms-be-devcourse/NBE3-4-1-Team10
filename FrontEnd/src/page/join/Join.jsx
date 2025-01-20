@@ -1,12 +1,25 @@
 import React, { useRef, useState } from "react";
-import "./Join.css";
 import { UserService } from "../../service/UserService";
+import { FORM_FIELD } from "../../constant/formFields";
+
+import "./Join.css";
 
 const Join = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
   const pwdCheckRef = useRef(null);
   const nicknameRef = useRef(null);
+
+  const [body, setBody] = useState({
+    email: "",
+    pwd: "",
+    pwdCheck: "",
+    nickname: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const joinFormFields = [
     {
       id: "email",
@@ -29,7 +42,7 @@ const Join = () => {
       label: "비밀번호 확인",
       name: "pwdCheck",
       type: "password",
-      placeholder: "비밀번호를 입력하세요",
+      placeholder: "비밀번호를 확인하세요",
       ref: pwdCheckRef,
     },
     {
@@ -41,127 +54,107 @@ const Join = () => {
       ref: nicknameRef,
     },
   ];
-  const [body, setBody] = useState({ email: "", pwd: "", pwdCheck: "" });
-  const [message, setMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeInput = (name, e) => {
     setBody((prev) => ({ ...prev, [name]: e }));
   };
 
-  const handleJoin = async (e) => {
-    setIsLoading(true);
-    e.preventDefault();
+  const handleWarn = (ref, timeout = 2000) => {
+    ref.current.classList.add("warn");
+    setTimeout(() => ref.current.classList.remove("warn"), timeout);
+  };
 
-    if (!body?.email) {
+  const validateFields = () => {
+    if (!body.email) {
       setMessage("아이디를 입력해 주세요.");
-      setIsLoading(false);
-      emailRef.current.classList.add("warn");
-      setTimeout(() => emailRef.current.classList.remove("warn"), 2000);
-      emailRef.current.focus();
-      return false; // 실패시 false 반환
+      handleWarn(emailRef);
+      return false;
     }
 
     if (!body.pwd) {
       setMessage("비밀번호를 입력해 주세요.");
-      pwdRef.current.classList.add("warn");
-      setTimeout(() => pwdRef.current.classList.remove("warn"), 2000);
-      setIsLoading(false);
-      pwdRef.current.focus();
-      return false; // 실패시 false 반환
+      handleWarn(pwdRef);
+      return false;
     }
 
     if (!body.pwdCheck) {
       setMessage("비밀번호 확인을 입력해 주세요.");
-      pwdCheckRef.current.classList.add("warn");
-      setTimeout(() => pwdCheckRef.current.classList.remove("warn"), 2000);
-      setIsLoading(false);
-      pwdCheckRef.current.focus();
-      return false; // 실패시 false 반환
+      handleWarn(pwdCheckRef);
+      return false;
     }
 
     if (body.pwd !== body.pwdCheck) {
       setMessage("비밀번호가 서로 일치하지 않습니다.");
-      pwdRef.current.classList.add("warn");
-      pwdCheckRef.current.classList.add("warn");
-      setTimeout(() => pwdRef.current.classList.remove("warn"), 2000);
-      setTimeout(() => pwdCheckRef.current.classList.remove("warn"), 2000);
-      setIsLoading(false);
-      pwdRef.current.focus();
-      return false; // 실패시 false 반환
+      handleWarn(pwdRef);
+      handleWarn(pwdCheckRef, 3000);
+      return false;
     }
 
     if (!body.nickname) {
       setMessage("닉네임을 입력해 주세요.");
-      nicknameRef.current.classList.add("warn");
-      setTimeout(() => nicknameRef.current.classList.remove("warn"), 2000);
-      setIsLoading(false);
-      nicknameRef.current.focus();
-      return false; // 실패시 false 반환
+      handleWarn(nicknameRef, 3000);
+      return false;
     }
 
-    // 모든 validation이 통과하면 true 반환
     return true;
   };
 
   const onClickJoin = async (e) => {
-    // handleJoin에서 true 반환이 오지 않으면 가입을 진행하지 않음
-    if (await handleJoin(e)) {
-      setIsLoading(true);
+    e.preventDefault();
+    setIsLoading(true);
 
-      try {
-        const res = await UserService.signup({
-          email: body.email,
-          password: body.pwd,
-          nickname: body.nickname,
-        });
-        if (res?.status === 200) {
-          alert("회원 가입 완료");
-        }
-      } catch (error) {
-        alert(
-          "회원가입 중 오류가 발생하였습니다. <br /> 잠시 후 다시 시도해주세요."
-        );
-      } finally {
-        setIsLoading(false);
+    // 유효성 검사 후 처리
+    if (!validateFields()) {
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const res = await UserService.signUp({
+        email: body.email,
+        password: body.pwd,
+        nickname: body.nickname,
+      });
+      if (res?.status === 200) {
+        alert("회원 가입 완료");
       }
+    } catch (error) {
+      alert(
+        "회원가입 중 오류가 발생하였습니다. <br /> 잠시 후 다시 시도해주세요."
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  console.log(body);
-
   return (
-    <div className='join-container'>
-      <section className='join-wrap'>
-        <form className='join-form' onSubmit={onClickJoin}>
-          <h2 className='join-title'>Join</h2>
+    <section className='join-wrap'>
+      <form className='join-form' onSubmit={onClickJoin}>
+        <h2 className='join-title'>Join</h2>
 
-          {joinFormFields.map(({ id, label, name, type, placeholder, ref }) => (
-            <div className='join-form-group' key={id}>
-              <label className='label' htmlFor={id}>
-                {label}
-              </label>
-              <input
-                id={id}
-                className='input'
-                name={name}
-                type={type}
-                value={body?.[name]}
-                onChange={(e) => onChangeInput(name, e.target.value)}
-                placeholder={placeholder}
-                disabled={isLoading}
-                ref={ref}
-              />
-            </div>
-          ))}
+        {joinFormFields.map(({ id, label, name, type, placeholder, ref }) => (
+          <div className='join-form-group'>
+            <FORM_FIELD
+              key={id}
+              id={id}
+              label={label}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              value={body[name]}
+              onChange={onChangeInput}
+              ref={ref}
+              isLoading={isLoading}
+            />
+          </div>
+        ))}
 
-          {message && <p className='error-message'>{message}</p>}
-          <button className='button' type='submit'>
-            회원가입
-          </button>
-        </form>
-      </section>
-    </div>
+        {message && <p className='error-message'>{message}</p>}
+        <button className='button' type='submit' disabled={isLoading}>
+          {isLoading ? "가입 중..." : "회원가입"}
+        </button>
+      </form>
+    </section>
   );
 };
 

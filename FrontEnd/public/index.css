@@ -41,8 +41,8 @@
   --spacing: 2rem;
   --font-size: 1.6rem;
   --line-height: 1.8;
+  --padding: 0 1rem;
   --z-index: 100;
-  --padding: 5%;
 }
 
 html {
@@ -52,6 +52,11 @@ html {
 
 html::-webkit-scrollbar {
   display: none;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 html,
@@ -73,6 +78,10 @@ body {
   font-smooth: antialiased;
   color: var(--color-brand-black);
 }
+#root {
+  background-color: var(--color-brand-neutral-lightest);
+}
+
 a {
   display: inline-block;
   width: auto;
@@ -121,46 +130,6 @@ hr {
   margin: 0;
 }
 
-/* Mobile */
-@media all and (min-width: 375px) {
-  .hide-mobile {
-    display: none !important;
-    visibility: hidden;
-  }
-  #space {
-    height: calc(var(--spacing) + 1rem);
-  }
-}
-
-/* Tablet */
-@media all and (min-width: 660px) {
-  .hide-tablet {
-    display: none !important;
-    visibility: hidden;
-  }
-  .hide-mobile {
-    display: block !important;
-    visibility: visible;
-  }
-  #space {
-    height: calc(var(--spacing) + 3rem);
-  }
-}
-/* pc */
-@media all and (min-width: 1025px) {
-  .hide-tablet {
-    display: block !important;
-    visibility: visible;
-  }
-  .hide-pc {
-    display: none !important;
-    visibility: hidden;
-  }
-  #space {
-    height: calc(var(--spacing) + 5rem);
-  }
-}
-
 .input {
   width: 100%;
   max-width: 100%;
@@ -182,6 +151,10 @@ hr {
   border: 1px solid var(--text-error);
   box-shadow: 0 0 5px rgba(154, 18, 24, 0.6);
 }
+.input.warn {
+  border: 1px solid var(--text-error);
+  box-shadow: 0 0 5px rgba(154, 18, 24, 0.6);
+}
 
 .button {
   width: 100%;
@@ -194,6 +167,7 @@ hr {
   padding: 1.3rem;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
+  margin: 1rem 0;
 }
 
 .button:hover {

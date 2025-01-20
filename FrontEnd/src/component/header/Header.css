@@ -7,7 +7,11 @@
 
 #header {
   width: 100%;
+  max-width: 660px;
   height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,58 +20,18 @@
   box-shadow: var(--header-box-shadow);
   z-index: calc(var(--z-index) + 10);
   border-radius: var(--header-border-radius);
-}
-
-@media all and (min-width: 1025px) {
-  #header {
-    position: relative;
-  }
-}
-
-:root {
-  --drawer-btn-padding: 8px;
-  --drawer-background: rgba(0, 0, 0, 0.1);
-  --drawer-btn-size: 1rem;
-  --drawer-btn-border: var(--background-primary);
-  --drawer-btn-background: var(--text-primary);
-}
-
-.header-wrap {
-  width: 100%;
-  height: 100%;
-  max-width: calc(100vw - var(--padding));
-  position: relative;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  visibility: visible;
-
   margin: 0 auto;
+  padding: var(--padding);
 }
-.header-wrap::after {
+
+#header::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
   backdrop-filter: blur(10px);
   z-index: -1;
-}
-.pc-login {
-  display: flex;
-  align-items: center;
-
-  gap: 1rem;
-}
-.pc-login button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-.pc-login button:hover {
-  font-weight: bold;
+  border-radius: var(--header-border-radius);
 }
