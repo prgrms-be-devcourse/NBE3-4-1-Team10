@@ -1,6 +1,6 @@
 package dev4._team.cafemenu._team.product.entity;
 
-import dev4._team.cafemenu._team.BaseTimeEntity;
+import dev4._team.cafemenu._team.global.exception.BaseTimeEntity;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.product.form.ProductForm;
 

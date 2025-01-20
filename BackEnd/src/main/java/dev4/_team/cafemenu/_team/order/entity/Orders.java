@@ -1,6 +1,6 @@
 package dev4._team.cafemenu._team.order.entity;
 
-import dev4._team.cafemenu._team.BaseTimeEntity;
+import dev4._team.cafemenu._team.global.exception.BaseTimeEntity;
 import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import dev4._team.cafemenu._team.product.entity.Product;
 import dev4._team.cafemenu._team.user.entity.User;
