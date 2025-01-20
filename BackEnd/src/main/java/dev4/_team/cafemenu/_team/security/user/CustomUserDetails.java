@@ -1,4 +1,4 @@
-package dev4._team.cafemenu._team.security;
+package dev4._team.cafemenu._team.security.user;
 
 import dev4._team.cafemenu._team.user.entity.User;
 import lombok.Getter;
