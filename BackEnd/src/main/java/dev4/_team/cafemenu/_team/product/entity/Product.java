@@ -31,9 +31,6 @@ public class Product extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false) // 외래 키 설정
-    private OrderProduct orderProduct;
 
 
     public Product modifyProduct(ProductForm productForm) {

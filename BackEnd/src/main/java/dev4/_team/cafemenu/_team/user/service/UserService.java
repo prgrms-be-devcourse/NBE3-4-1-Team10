@@ -19,6 +19,7 @@ import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
