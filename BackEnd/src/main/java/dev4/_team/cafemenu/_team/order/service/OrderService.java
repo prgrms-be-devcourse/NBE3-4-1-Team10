@@ -7,6 +7,7 @@ import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
+import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -24,11 +25,15 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
-    public Orders createOrder(OrderDto orderDto) {
-        User user = userRepository.findById(orderDto.getUserId())
+    public Orders createOrder(OrderDto orderDto, Long userId) {
+
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
+        Orders orders = OrderMapper.toEntity(orderDto, user);
+        List<OrderProductDto> orderProductDtoList = OrderMapper.toOrderProductDto(orders);
         LocalDateTime now = LocalDateTime.now();
+
 
         if (now.getHour() >= 14) {
             orderDto.setStatus("내일 배송");
@@ -37,7 +42,6 @@ public class OrderService {
 
         }
 
-        Orders orders = OrderMapper.toEntity(orderDto, user);
         return orderRepository.save(orders);
     }
 

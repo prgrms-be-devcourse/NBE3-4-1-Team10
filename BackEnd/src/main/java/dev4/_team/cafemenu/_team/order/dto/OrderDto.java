@@ -1,5 +1,7 @@
 package dev4._team.cafemenu._team.order.dto;
 
+import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
+import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -27,6 +31,9 @@ public class OrderDto {
 
     @NotBlank
     private String status;
+
+    @NotBlank
+    private List<OrderProductDto> orderProductDto;
 
 
 

@@ -18,7 +18,4 @@ public class OrderProductDto {
     @NotEmpty
     private int count;
 
-    @NotEmpty
-    private int price;
-
 }

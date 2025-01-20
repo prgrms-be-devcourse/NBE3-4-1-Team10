@@ -1,6 +1,7 @@
 package dev4._team.cafemenu._team.order.dto;
 
 import dev4._team.cafemenu._team.orderProduct.dto.OrderProductResponseDto;
+import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -26,5 +27,6 @@ public class OrderResponseDto {
 
     private String status;
 
+    private List<OrderProduct> orderProduct;
 
 }
