@@ -34,6 +34,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
@@ -107,19 +108,5 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(cors -> cors.configurationSource(request -> {
-            CorsConfiguration config = new CorsConfiguration();
-            config.addAllowedOrigin("*"); // 허용할 도메인 설정 (*은 모든 도메인 허용)
-            config.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
-            config.addAllowedHeader("*"); // 모든 헤더 허용
-            return config;
-        }));
-        http.csrf(AbstractHttpConfigurer::disable);
-
-        return http.build();
     }
 }
