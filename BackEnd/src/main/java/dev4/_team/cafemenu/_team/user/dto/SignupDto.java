@@ -1,5 +1,7 @@
 package dev4._team.cafemenu._team.user.dto;
 
+import dev4._team.cafemenu._team.user.entity.User;
+import dev4._team.cafemenu._team.user.entity.UserRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Builder
 @AllArgsConstructor
@@ -34,4 +37,12 @@ public class SignupDto {
     @Schema(description = "이름 아무거나 사용 가능", example = "강정수커피")
     private String nickname;
 
+    public User toUserEntity(PasswordEncoder passwordEncoder){
+        return User.builder()
+                .email(email)
+                .nickname(nickname)
+                .password(passwordEncoder.encode(password))
+                .role(UserRole.USER)
+                .build();
+    }
 }
