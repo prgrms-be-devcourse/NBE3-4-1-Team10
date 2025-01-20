@@ -8,6 +8,9 @@ import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
 import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
+import dev4._team.cafemenu._team.orderProduct.repository.OrderProductRepository;
+import dev4._team.cafemenu._team.product.entity.Product;
+import dev4._team.cafemenu._team.product.repository.ProductRepository;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -24,13 +27,16 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final OrderProductRepository orderProductRepository;
+
 
     public Orders createOrder(OrderDto orderDto, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         Orders orders = OrderMapper.toEntity(orderDto, user);
-        List<OrderProductDto> orderProductDtoList = OrderMapper.toOrderProductDto(orders);
+        saveOrderProduct(orderDto, orders);
         LocalDateTime now = LocalDateTime.now();
 
 
@@ -41,6 +47,16 @@ public class OrderService {
         }
 
         return orderRepository.save(orders);
+    }
+
+    private void saveOrderProduct(OrderDto orderDto, Orders orders) {
+        orderDto.getOrderProductDto().stream()
+                .map(orderProductDto -> {
+                    Product product = productRepository.findById(orderProductDto.getProductId())
+                            .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_PRODUCT));
+                    return orderProductDto.toOrderProductEntity(orders, product);
+                })
+                .forEach(orderProductRepository::save);
     }
 
     public List<OrderResponseDto> getOrdersByUserId(Long userId) {
