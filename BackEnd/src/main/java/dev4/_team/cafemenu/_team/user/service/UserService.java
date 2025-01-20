@@ -14,7 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
+import dev4._team.cafemenu._team.user.dto.SignupDto;
+import dev4._team.cafemenu._team.user.entity.User;
+import dev4._team.cafemenu._team.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +29,7 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final RedisUtil redisUtil;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public LoginResponseDto login(LoginDto loginDto) {
         // 사용자 인증
@@ -69,5 +74,16 @@ public class UserService {
         }
     }
 
+    // 회원가입 처리
+    public void signup(SignupDto signupDto) {
+        String encodedPassword = passwordEncoder.encode(signupDto.getPassword());
 
+        User user = new User(signupDto.getEmail(), signupDto.getNickname(), encodedPassword);
+
+        // 이메일 중복 체크
+//        if (userRepository.findUserByEmail(signupDto.getEmail())) {
+//            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+//        }
+        userRepository.save(user);
+    }
 }

@@ -29,8 +29,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Slf4j
 @Configuration
-@EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;

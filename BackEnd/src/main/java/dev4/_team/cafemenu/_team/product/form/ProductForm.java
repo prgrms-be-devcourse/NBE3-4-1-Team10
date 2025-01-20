@@ -1,5 +1,6 @@
 package dev4._team.cafemenu._team.product.form;
 
+import dev4._team.cafemenu._team.product.entity.Product;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,15 @@ public class ProductForm {
 
     @NotBlank(message = "설명은 필수항목입니다.")
     private String content;
+
+    public Product toProductEntity() {
+        return Product.builder()
+                .price(price)
+                .name(name)
+                .imageUrl(imageUrl)
+                .type(type)
+                .content(content)
+                .build();
+    }
 
 }
