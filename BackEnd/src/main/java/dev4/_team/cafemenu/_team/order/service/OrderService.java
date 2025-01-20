@@ -15,8 +15,10 @@ import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -32,14 +35,17 @@ public class OrderService {
     private final OrderProductRepository orderProductRepository;
 
 
-    public Orders createOrder(OrderDto orderDto, Long userId) {
+    @Transactional
+    public void createOrder(OrderDto orderDto, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
-
+        log.info("회원 조회");
         Orders orders = OrderMapper.toEntity(orderDto, user);
+        orderRepository.save(orders);
+        log.info("주문 저장");
         saveOrderProduct(orderDto, orders);
+        log.info("주문상품 저장");
         LocalDateTime now = LocalDateTime.now();
-
 
         if (now.getHour() >= 14) {
             orderDto.setStatus("내일 배송");
@@ -47,7 +53,7 @@ public class OrderService {
             orderDto.setStatus("오늘 배송");
         }
 
-        return orderRepository.save(orders);
+
     }
 
     private void saveOrderProduct(OrderDto orderDto, Orders orders) {

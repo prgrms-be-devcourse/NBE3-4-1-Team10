@@ -20,10 +20,10 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody @Valid OrderDto orderDto, Long userId) {
-        Orders createdOrder = orderService.createOrder(orderDto, userId);
-        return ResponseEntity.status(201).body(OrderMapper.toDto(createdOrder));
+    @PostMapping("/{userId}")
+    public ResponseEntity<?> createOrder(@RequestBody @Valid OrderDto orderDto, @PathVariable(name = "userId") Long userId) {
+        orderService.createOrder(orderDto, userId);
+        return ResponseEntity.status(201).body(null);
     }
 
     @DeleteMapping("/{orderId}")
