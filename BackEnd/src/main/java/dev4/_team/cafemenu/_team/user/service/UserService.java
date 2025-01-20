@@ -3,9 +3,12 @@ package dev4._team.cafemenu._team.user.service;
 import dev4._team.cafemenu._team.user.dto.SignupDto;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
+import dev4._team.cafemenu._team.config.PasswordEncoderConfig;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +24,9 @@ public class UserService {
         User user = new User(signupDto.getEmail(), signupDto.getNickname(), encodedPassword);
 
         // 이메일 중복 체크
-//        if (userRepository.findUserByEmail(signupDto.getEmail())) {
-//            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
-//        }
+        //  if (userRepository.findUserByEmail(signupDto.getEmail())) {
+        //  throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+        // }
         userRepository.save(user);
     }
 }
