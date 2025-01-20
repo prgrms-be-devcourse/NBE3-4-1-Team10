@@ -1,14 +1,12 @@
 import { getCookie, removeCookie, setCookie } from "./cookie";
 
-export const API_URL = "https://api/";
+export const API_URL = "https://localhost:8080/api";
 export const APP_Name = "cafe&";
 export const IMG_PATH = "/img";
 export const S3_BUCKET = process.env.PUBLIC__USER_S3;
 export const BASE_IMG_URL = `https://s3.ap-northeast-2.amazonaws.com/${S3_BUCKET}/`;
 
-export const DOMAIN = process.env.PUBLIC_DOMAIN_IP
-  ? process.env.PUBLIC_DOMAIN_IP
-  : ".127.0.0.1";
+export const DOMAIN = "localhost:3000";
 
 /**
  * 로그인 쿠키 아이디

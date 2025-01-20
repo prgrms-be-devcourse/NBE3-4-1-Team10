@@ -1,11 +1,10 @@
 import { API_URL } from "../constant/auth";
 import axiosInstance from "./axiosInstance";
 
-const signup = (body) => {
+const getProductLists = (body) => {
   return new Promise((resolve) => {
-    axiosInstance.post(`${API_URL}/user/signup`, body).then((response) => {
+    axiosInstance.get(`${API_URL}/product`, body).then((response) => {
       const res = response?.data?.value;
-
       if (res) {
         resolve(res);
       } else {
@@ -15,8 +14,8 @@ const signup = (body) => {
   });
 };
 
-const UserService = {
-  signup,
+const ProductService = {
+  getProductLists,
 };
 
-export { UserService };
+export { ProductService };

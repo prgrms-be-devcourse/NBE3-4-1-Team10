@@ -6,6 +6,7 @@ const Join = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
   const pwdCheckRef = useRef(null);
+  const nicknameRef = useRef(null);
   const joinFormFields = [
     {
       id: "email",
@@ -30,6 +31,14 @@ const Join = () => {
       type: "password",
       placeholder: "비밀번호를 입력하세요",
       ref: pwdCheckRef,
+    },
+    {
+      id: "nickname",
+      label: "닉네임",
+      name: "nickname",
+      type: "text",
+      placeholder: "닉네임을 입력하세요",
+      ref: nicknameRef,
     },
   ];
   const [body, setBody] = useState({ email: "", pwd: "", pwdCheck: "" });
@@ -82,6 +91,15 @@ const Join = () => {
       return false; // 실패시 false 반환
     }
 
+    if (!body.nickname) {
+      setMessage("닉네임을 입력해 주세요.");
+      nicknameRef.current.classList.add("warn");
+      setTimeout(() => nicknameRef.current.classList.remove("warn"), 2000);
+      setIsLoading(false);
+      nicknameRef.current.focus();
+      return false; // 실패시 false 반환
+    }
+
     // 모든 validation이 통과하면 true 반환
     return true;
   };
@@ -91,18 +109,11 @@ const Join = () => {
     if (await handleJoin(e)) {
       setIsLoading(true);
 
-      const param = { ...body };
-
-      // company type일 경우 추가 파일 처리 로직
-      // if (param.type === 'company') {
-      //   // TODO FileUpload
-      //   // param?.businessLicense
-      //   // param?.proof
-      //   // param?.etcFile
-      // }
-
       try {
-        const res = await UserService.signup(param);
+        const res = await UserService.signup({
+          email: body.email,
+          password: body.pwd,
+        });
         if (res?.status === 200) {
           alert("회원 가입 완료");
         }
