@@ -15,11 +15,13 @@ const USER_LIST = [
 
 const FOOTER_ICONS = [
   {
+    id: 0,
     href: "https://github.com/prgrms-be-devcourse/NBE3-4-1-Team10",
     label: "Team 10's GitHub Repository",
     IconComponent: GitHubIcon,
   },
   {
+    id: 1,
     href: "https://www.notion.so/10-6db32119e0ae48409434378435f69fca?pvs=32",
     label: "Team 10's Notion Repository",
     IconComponent: NotionIcon,

@@ -1,11 +1,19 @@
 import React, { useRef, useState } from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+
+import Msg from "../../component/msg/Msg";
+import Alert from "../../component/alert/Alert";
+
 import { FORM_FIELD } from "../../constant/formFields";
 import { UserService } from "../../service/UserService";
+
 import "./Login.css";
 
 const Login = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
+  const router = useNavigate();
 
   const loginFormFields = [
     {
@@ -13,7 +21,7 @@ const Login = () => {
       label: "이메일",
       name: "email",
       type: "text",
-      placeholder: "이메일을 입력하세요. (example@example.com)",
+      placeholder: "example@example.com",
       ref: emailRef,
     },
     {
@@ -21,7 +29,8 @@ const Login = () => {
       label: "비밀번호",
       name: "pwd",
       type: "password",
-      placeholder: "비밀번호를 입력하세요.",
+      placeholder:
+        "비밀번호, 대문자+소문자 조합, 특수문자 + 숫자 조합, 연속된 문자 3개이상 금지",
       ref: pwdRef,
     },
   ];
@@ -52,29 +61,36 @@ const Login = () => {
     }
     return true;
   };
+  const handleKeyDown = (e) => {
+    const keyCode = e?.keyCode;
+    const Enter = 13;
 
-  // 로그인 처리
+    if (keyCode === Enter) {
+      onClickLogin();
+    }
+  };
+
   const onClickLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // 유효성 검사 후 처리
     if (!validateFields()) {
       setIsLoading(false);
       return;
     }
-
     try {
       const res = await UserService.signIn({
         username: body.email,
         password: body.pwd,
       });
-      if (res?.status === 200) {
-        alert("로그인 완료");
+      if (!res) {
+        Alert("아이디와 비밀번호를 \n 정확히 입력해 주세요.", "", "", () =>
+          setIsLoading(false)
+        );
+      } else {
+        router("/");
       }
     } catch (error) {
-      alert(
-        "회원가입 중 오류가 발생하였습니다. <br /> 잠시 후 다시 시도해주세요."
-      );
+      Alert("로그인에 실패했습니다.", "", "", () => setIsLoading(false));
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +99,7 @@ const Login = () => {
   return (
     <section className='login-wrap'>
       <form className='login-form' onSubmit={onClickLogin}>
-        <h2 className='login-title'>Sign In</h2>
+        <Msg type='title' text='Sign In' />
 
         {loginFormFields.map(({ id, label, name, type, placeholder, ref }) => (
           <FORM_FIELD
@@ -94,17 +110,22 @@ const Login = () => {
             type={type}
             placeholder={placeholder}
             value={body[name]}
+            onKeyDown={handleKeyDown}
             onChange={onChangeInput}
             ref={ref}
             isLoading={isLoading}
           />
         ))}
 
-        {message && <p className='error-message'>{message}</p>}
+        <Msg text={message} type='error' />
         <button className='button' type='submit' disabled={isLoading}>
           {isLoading ? "로그인 중..." : "로그인"}
         </button>
       </form>
+
+      <Link to='/join'>
+        <span>회원가입</span>
+      </Link>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { DeleteIcon, EditIcon } from "../../constant/Icon";
 import { ProductService } from "../../service/ProductService";
 
@@ -18,10 +19,10 @@ const AdminPage = () => {
     try {
       await ProductService.postProductLists({
         type: "커피콩",
-        name: "Columbia Nariñó",
+        name: "Columbia Quindio",
         imageUrl: "https://i.imgur.com/HKOFQYa.jpeg",
-        content: "커피콩 Columbia Nariñó의 예시 설명글입니다.",
-        price: 5000,
+        content: "커피콩 Columbia Quindio의 예시 설명글입니다.",
+        price: 7000,
       });
     } catch (error) {
       console.error("상품 추가 오류:", error);
@@ -84,16 +85,14 @@ const AdminPage = () => {
         : customer
     );
     setCustomerList(updatedCustomerList);
-    setEditingCustomer(null); // 수정 모드 종료
+    setEditingCustomer(null);
   };
 
-  // 고객 삭제
   const handleDelete = (id) => {
     const updatedCustomerList = customerList.filter(
       (customer) => customer.id !== id
     );
     setCustomerList(updatedCustomerList);
-    // 삭제된 고객은 필터링된 리스트에서도 제외
     const updatedFilteredList = filteredCustomerList.filter(
       (customer) => customer.id !== id
     );
@@ -102,6 +101,7 @@ const AdminPage = () => {
 
   return (
     <main className='admin-wrap'>
+      <head></head>
       <div
         style={{
           display: "flex",

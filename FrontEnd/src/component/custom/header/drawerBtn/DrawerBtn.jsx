@@ -4,9 +4,6 @@ import { PlusIcon } from "../../../../constant/Icon";
 
 import "./DrawerBtn.css";
 
-const COLOR = "#FFFFFF";
-const LOGO_SIZE = "14";
-
 const DrawerBtn = ({ isOpen, onClick }) => {
   useEffect(() => {
     if (isOpen) {
@@ -25,7 +22,7 @@ const DrawerBtn = ({ isOpen, onClick }) => {
       onClick={onClick}
       aria-current={isOpen}>
       <figure className={`drawer-btn ${isOpen && "isOpen"}`}>
-        <PlusIcon color={COLOR} size={LOGO_SIZE} />
+        <PlusIcon />
       </figure>
     </button>
   );

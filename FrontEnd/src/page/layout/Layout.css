@@ -6,21 +6,27 @@
   flex-direction: column;
   position: relative;
   margin: 0 auto;
+
+  z-index: var(--z-index);
 }
 
-.header {
+header {
   flex: 0 1 auto;
+  z-index: calc(var(--z-index) + 10);
 }
 
-.footer {
+footer {
   flex: 0 1 auto;
   margin-top: auto;
+  z-index: var(--z-index);
 }
 
-.main {
+main {
   flex: 1 0 auto;
   background-color: var(--background-primary);
+  border-radius: 20px;
+  z-index: calc(var(--z-index) + 1);
 }
-.main > * {
+main > * {
   width: 100%;
 }

@@ -1,6 +1,7 @@
 :root {
   --footer-height: 18rem;
   --footer-text: var(--text-secondary);
+  --footer-border-radius: 0 0 20px 20px;
   --footer-bacground-color: var(--background-secondary);
   --footer-font-size: 1rem;
 }
@@ -14,8 +15,8 @@
   gap: 1.5rem;
   color: var(--footer-text);
   background-color: var(--footer-bacground-color);
+  border-radius: var(--footer-border-radius);
   padding: var(--padding);
-  z-index: var(--z-index);
 }
 
 .footer-icon-wrap {

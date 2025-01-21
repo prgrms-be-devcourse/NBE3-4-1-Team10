@@ -1,6 +1,6 @@
 :root {
   --drawer-btn-padding: 8px;
-  --drawer-background: rgba(0, 0, 0, 0.1);
+  --drawer-background: rgba(0, 0, 0, 0.2);
   --drawer-btn-size: 1rem;
   --drawer-btn-border: var(--background-primary);
   --drawer-btn-background: var(--text-primary);
@@ -10,12 +10,13 @@
   border: none;
   background-color: var(--drawer-background);
   border-radius: var(--drawer-btn-padding);
-
+  box-sizing: content-box;
   padding: var(--drawer-btn-padding);
 
   transition: background-color 0.3s ease;
-  z-index: calc(var(--z-index) + 5);
+
   cursor: pointer;
+  z-index: calc(var(--z-index) + 51);
 }
 
 .drawer-btn-wrap.isOpen {

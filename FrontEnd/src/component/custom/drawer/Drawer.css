@@ -24,4 +24,5 @@
 .drawer-wrap.isOpen {
   opacity: 1;
   visibility: visible;
+  z-index: calc(var(--z-index) + 50);
 }

@@ -4,15 +4,15 @@
   --de-black: #000000;
   --de-white: #ffffff;
 
-  --color-brand-white: rgb(255, 255, 255);
-  --color-brand-black: rgb(1, 36, 45);
-  --color-brand-gray: rgb(232, 232, 237);
+  --color-brand-white: #ffffff;
+  --color-brand-black: #01242d;
+  --color-brand-gray: #e8e8ed;
   --color-brand-brown: #5c3923;
   --color-brand-beige: #bfa98a;
   --color-brand-blue: #2d62ff;
-  --color-brand-green: rgb(165, 210, 90);
+  --color-brand-green: #a5d25a;
   --color-brand-yellow: #f2b900;
-  --color-brand-red: rgb(154, 18, 24);
+  --color-brand-red: #9a1218;
 
   --color-brand-neutral: #666;
   --color-brand-neutral-light: #aaa;
@@ -39,7 +39,7 @@
   --border-alternate: var(--color-brand-neutral-darker);
 
   --spacing: 2rem;
-  --font-size: 1.6rem;
+  --font-size: 1.5rem;
   --line-height: 1.8;
   --padding: 0 1rem;
   --z-index: 100;
@@ -158,13 +158,13 @@ hr {
 
 .button {
   width: 100%;
-  font-size: 1.2rem;
+  font-size: calc(var(--font-size) - 0.2rem);
   color: var(--background-primary);
   font-weight: bold;
   border: none;
   background-color: var(--text-primary);
   border-radius: 10px;
-  padding: 1.3rem;
+  padding: 1rem;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
   margin: 1rem 0;
@@ -177,5 +177,4 @@ hr {
 .label {
   display: block;
   font-weight: bold;
-  margin-bottom: 1rem;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { USER_LIST } from "../../../constant/constantLists";
+import { USER_LIST } from "../../../../constant/constantLists";
 
 import "./Guest.css";
 

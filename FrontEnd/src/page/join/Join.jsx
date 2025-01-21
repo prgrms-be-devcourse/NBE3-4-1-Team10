@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
-import { UserService } from "../../service/UserService";
+
+import Msg from "../../component/msg/Msg";
 import { FORM_FIELD } from "../../constant/formFields";
+import { UserService } from "../../service/UserService";
 
 import "./Join.css";
 
@@ -26,7 +28,7 @@ const Join = () => {
       label: "아이디",
       name: "email",
       type: "text",
-      placeholder: "아이디를 입력하세요",
+      placeholder: "example@example.com",
       ref: emailRef,
     },
     {
@@ -34,7 +36,8 @@ const Join = () => {
       label: "비밀번호",
       name: "pwd",
       type: "password",
-      placeholder: "비밀번호를 입력하세요",
+      placeholder:
+        "비밀번호, 대문자+소문자 조합, 특수문자 + 숫자 조합, 연속된 문자 3개이상 금지",
       ref: pwdRef,
     },
     {
@@ -59,6 +62,14 @@ const Join = () => {
     setBody((prev) => ({ ...prev, [name]: e }));
   };
 
+  const handleKeyDown = (e) => {
+    const keyCode = e?.keyCode;
+    const Enter = 13;
+
+    if (keyCode === Enter) {
+      onClickJoin();
+    }
+  };
   const handleWarn = (ref, timeout = 2000) => {
     ref.current.classList.add("warn");
     setTimeout(() => ref.current.classList.remove("warn"), timeout);
@@ -130,7 +141,7 @@ const Join = () => {
   return (
     <section className='join-wrap'>
       <form className='join-form' onSubmit={onClickJoin}>
-        <h2 className='join-title'>Join</h2>
+        <Msg type='title' text='Join' />
 
         {joinFormFields.map(({ id, label, name, type, placeholder, ref }) => (
           <div className='join-form-group'>
@@ -140,6 +151,7 @@ const Join = () => {
               label={label}
               name={name}
               type={type}
+              onKeyDown={handleKeyDown}
               placeholder={placeholder}
               value={body[name]}
               onChange={onChangeInput}
@@ -149,7 +161,7 @@ const Join = () => {
           </div>
         ))}
 
-        {message && <p className='error-message'>{message}</p>}
+        <Msg text={message} type='error' />
         <button className='button' type='submit' disabled={isLoading}>
           {isLoading ? "가입 중..." : "회원가입"}
         </button>

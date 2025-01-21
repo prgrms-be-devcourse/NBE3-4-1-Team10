@@ -1,22 +1,18 @@
 import React from "react";
 
-import { FOOTER_ICONS } from "../../constant/constantLists";
+import { FOOTER_ICONS } from "../../../constant/constantLists";
 
 import "./Footer.css";
 
 export default function Footer() {
   return (
-    <footer
-      id='footer'
-      aria-label='Footer with GitHub link, and copyright information'>
-      {/* 깃헙과 노션페이지 안내 */}
+    <footer id='footer' aria-label='Footer nav, and copyright information'>
       <h4 className='footer-info'>More Details about Team 10's project !</h4>
       <hr />
       <ul className='footer-icon-wrap'>
-        {FOOTER_ICONS.map(({ href, label, IconComponent }, index) => (
-          <li>
+        {FOOTER_ICONS.map(({ href, label, IconComponent, id }) => (
+          <li key={id}>
             <a
-              key={index}
               href={href}
               target='_blank'
               rel='noopener noreferrer'

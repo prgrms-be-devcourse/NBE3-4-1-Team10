@@ -3,25 +3,6 @@
   --user-elem-font-size: 1.3rem;
 }
 
-.user-wrap {
-  display: flex;
-  flex-direction: column;
-
-  font-size: var(--user-elem-font-size);
-
-  padding-bottom: calc(var(--user-elem-gap) + 3rem);
-  scroll-behavior: smooth;
-  gap: calc(var(--user-elem-gap) - 1rem);
-}
-
-.user-msg {
-  font-weight: bold;
-  font-size: calc(var(--user-elem-font-size) + 0.5rem);
-}
-.user-msg::first-letter {
-  font-size: calc(var(--user-elem-font-size) + 0.6rem);
-}
-
 .nav-login-btn {
   border: none;
   background-color: transparent;

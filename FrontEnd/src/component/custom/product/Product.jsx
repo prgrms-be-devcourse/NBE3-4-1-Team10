@@ -9,11 +9,9 @@ export default function Product({ item }) {
         <span className='product-type'>{item.type}</span>
         <img className='product-img' src={item.imageUrl} alt='product-img' />
       </figure>
-      <figcaption className='product-content'>
-        <p className='product-info'>
-          <span className='product-name'>{item.name}</span>
-          <span>{`₩ ${item.price}`}</span>
-        </p>
+      <figcaption className='product-info'>
+        <span className='product-name'>{item.name}</span>
+        <span>{`₩ ${item.price}`}</span>
       </figcaption>
     </>
   );

@@ -1,31 +1,61 @@
-import React, { useState } from "react";
-import { PRODUCTS } from "../product/Dummy";
+import React, { useEffect, useState } from "react";
+import { ProductService } from "../../service/ProductService";
 import Modal from "../modal/Modal";
 import "./OrderModal.css";
 
+// OrderModal 컴포넌트
 const OrderModal = ({ open, close }) => {
+  const [products, setProducts] = useState([]);
+
+  // 상품 목록 가져오기
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+      fetchProducts();
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [open]);
+
+  // 상품 목록 가져오기 함수
+  const fetchProducts = async () => {
+    try {
+      const productData = await ProductService.getProductLists();
+      setProducts(productData);
+    } catch (error) {
+      console.error("상품 목록 불러오기 오류:", error);
+    }
+  };
+
   return (
     <Modal
       type='order'
-      title='상품 종류 '
+      title='상품 종류'
       isOpen={open}
       onClose={close}
-      contents={<OrderContents />}
+      contents={<OrderContents data={products} />}
     />
   );
 };
 
 export default OrderModal;
 
-const OrderContents = () => {
-  const [quantities, setQuantities] = useState(
-    PRODUCTS.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
-  );
-
+// OrderContents 컴포넌트
+const OrderContents = ({ data }) => {
+  const [quantities, setQuantities] = useState(initializeQuantities(data));
   const [selectedItems, setSelectedItems] = useState({});
   const [emailId, setEmailId] = useState("");
   const [selectedDomain, setSelectedDomain] = useState("naver.com");
   const [customDomain, setCustomDomain] = useState("");
+
+  // 수량 초기화 함수
+  const initializeQuantities = (data) => {
+    return data.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {});
+  };
 
   // 수량 변경 함수
   const handleQuantityChange = (id, action) => {
@@ -40,6 +70,7 @@ const OrderContents = () => {
     });
   };
 
+  // 체크박스 변경 함수
   const handleCheckboxChange = (id) => {
     setSelectedItems((prevSelectedItems) => {
       if (prevSelectedItems[id]) {
@@ -51,24 +82,20 @@ const OrderContents = () => {
     });
   };
 
-  const handleEmailIdChange = (e) => {
-    setEmailId(e.target.value);
-  };
+  // 이메일 관련 상태 관리 함수
+  const handleEmailIdChange = (e) => setEmailId(e.target.value);
 
   const handleDomainChange = (e) => {
     const value = e.target.value;
     setSelectedDomain(value);
-    if (value !== "custom") {
-      setCustomDomain("");
-    }
+    if (value !== "custom") setCustomDomain("");
   };
 
-  const handleCustomDomainChange = (e) => {
-    setCustomDomain(e.target.value);
-  };
+  const handleCustomDomainChange = (e) => setCustomDomain(e.target.value);
 
+  // 총 가격 계산 함수
   const calculateTotalPrice = () => {
-    return PRODUCTS.reduce((total, item) => {
+    return data.reduce((total, item) => {
       if (selectedItems[item.id]) {
         return total + item.price * quantities[item.id];
       }
@@ -76,95 +103,37 @@ const OrderContents = () => {
     }, 0);
   };
 
+  // 폼 제출 함수
   const handleSubmit = (e) => {
     e.preventDefault();
     const totalPrice = calculateTotalPrice();
     const fullEmail = `${emailId}@${
       selectedDomain === "custom" ? customDomain : selectedDomain
     }`;
+    // 제출할 데이터 처리 로직 추가
   };
 
   return (
-    <form className='order-from-wrap' onSubmit={handleSubmit}>
-      {PRODUCTS.map((item) => (
-        <div key={item.id} className='order-item-container'>
-          <div className='order-item-wrap'>
-            <img src={item.src} alt={item.name} className='order-item-image' />
-            <label>
-              <input
-                type='checkbox'
-                name='order'
-                value={item.name}
-                checked={selectedItems[item.id] || false}
-                onChange={() => handleCheckboxChange(item.id)}
-              />
-
-              <span className='order-name'> {item.name}</span>
-              <span className='order-price'>
-                <i>{new Intl.NumberFormat().format(item.price)}원 </i>
-              </span>
-            </label>
-          </div>
-
-          <div
-            className={`quantity-container ${
-              !selectedItems[item.id] && "hide"
-            }`}>
-            <button
-              type='button'
-              onClick={() => handleQuantityChange(item.id, "decrease")}
-              className='quantity-button'>
-              -
-            </button>
-            <span>{quantities[item.id]}</span>
-            <button
-              type='button'
-              onClick={() => handleQuantityChange(item.id, "increase")}
-              className='quantity-button'>
-              +
-            </button>
-          </div>
-        </div>
+    <form className='order-form-wrap' onSubmit={handleSubmit}>
+      {data.map((item) => (
+        <OrderItem
+          key={item.id}
+          item={item}
+          quantity={quantities[item.id]}
+          selected={selectedItems[item.id] || false}
+          onQuantityChange={handleQuantityChange}
+          onCheckboxChange={handleCheckboxChange}
+        />
       ))}
 
-      {/* 이메일 */}
-      <div className='email-container'>
-        <label>
-          E-mail
-          <div className='email-wrap'>
-            <input
-              type='text'
-              value={emailId}
-              onChange={handleEmailIdChange}
-              className='email-input'
-              required
-              placeholder='이메일 아이디'
-            />
-            <span>@</span>
-            <input
-              type='text'
-              value={
-                selectedDomain !== "custom" ? selectedDomain : customDomain
-              }
-              onChange={handleCustomDomainChange}
-              className='custom-domain-input'
-              placeholder={selectedDomain !== "custom" ? selectedDomain : ""}
-              disabled={selectedDomain !== "custom"}
-              required
-            />
-            <select
-              value={selectedDomain}
-              onChange={handleDomainChange}
-              className='email-domain-select'
-              required>
-              <option value='naver.com'>naver.com</option>
-              <option value='gmail.com'>gmail.com</option>
-              <option value='kakao.com'>kakao.com</option>
-              <option value='custom'>직접 입력</option>
-            </select>
-          </div>
-        </label>
-      </div>
+      <EmailSection
+        emailId={emailId}
+        selectedDomain={selectedDomain}
+        customDomain={customDomain}
+        onEmailIdChange={handleEmailIdChange}
+        onDomainChange={handleDomainChange}
+        onCustomDomainChange={handleCustomDomainChange}
+      />
 
       <div className='total-price'>
         <p>
@@ -175,5 +144,101 @@ const OrderContents = () => {
         제출
       </button>
     </form>
+  );
+};
+
+// OrderItem 컴포넌트: 각 상품을 나타내는 컴포넌트
+const OrderItem = ({
+  item,
+  quantity,
+  selected,
+  onQuantityChange,
+  onCheckboxChange,
+}) => {
+  return (
+    <div className='order-item-container'>
+      <div className='order-item-wrap'>
+        <img src={item.imageUrl} alt={item.name} className='order-item-image' />
+        <label>
+          <input
+            type='checkbox'
+            name='order'
+            value={item.name}
+            checked={selected}
+            onChange={() => onCheckboxChange(item.id)}
+          />
+          <span className='order-name'>{item.name}</span>
+          <span className='order-price'>
+            <i>{new Intl.NumberFormat().format(item.price)}원</i>
+          </span>
+        </label>
+      </div>
+
+      {selected && (
+        <div className='quantity-container'>
+          <button
+            type='button'
+            onClick={() => onQuantityChange(item.id, "decrease")}
+            className='quantity-button'>
+            -
+          </button>
+          <span>{quantity}</span>
+          <button
+            type='button'
+            onClick={() => onQuantityChange(item.id, "increase")}
+            className='quantity-button'>
+            +
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// EmailSection 컴포넌트: 이메일 입력 관련 부분
+const EmailSection = ({
+  emailId,
+  selectedDomain,
+  customDomain,
+  onEmailIdChange,
+  onDomainChange,
+  onCustomDomainChange,
+}) => {
+  return (
+    <div className='email-container'>
+      <label>
+        E-mail
+        <div className='email-wrap'>
+          <input
+            type='text'
+            value={emailId}
+            onChange={onEmailIdChange}
+            className='email-input'
+            required
+            placeholder='이메일 아이디'
+          />
+          <span>@</span>
+          <input
+            type='text'
+            value={selectedDomain !== "custom" ? selectedDomain : customDomain}
+            onChange={onCustomDomainChange}
+            className='custom-domain-input'
+            placeholder={selectedDomain !== "custom" ? selectedDomain : ""}
+            disabled={selectedDomain !== "custom"}
+            required
+          />
+          <select
+            value={selectedDomain}
+            onChange={onDomainChange}
+            className='email-domain-select'
+            required>
+            <option value='naver.com'>naver.com</option>
+            <option value='gmail.com'>gmail.com</option>
+            <option value='kakao.com'>kakao.com</option>
+            <option value='custom'>직접 입력</option>
+          </select>
+        </div>
+      </label>
+    </div>
   );
 };

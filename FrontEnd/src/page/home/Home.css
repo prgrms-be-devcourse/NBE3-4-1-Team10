@@ -1,17 +1,16 @@
 .home-wrap {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  display: flex;
+  flex-direction: column;
   position: relative;
   padding-top: var(--header-height);
   gap: 1rem;
   overflow: hidden;
-  z-index: calc(var(--z-index) + 4);
 }
 
 .skeleton-loader {
-  width: calc(var(--product-height) - 1rem);
-  height: calc(var(--product-height) - 1rem);
+  width: 100%;
+  height: var(--product-height);
   border-radius: var(--product-border-radius);
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;

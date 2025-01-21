@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Admin from "./page/admin/Admin";
 import Login from "./page/login/Login";
 import Join from "./page/join/Join";
+import Order from "./page/order/Order";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/join' element={<Join />} />
+          <Route path='/order' element={<Order />} />
         </Route>
         <Route path='/admin' element={<Admin />} />
       </Routes>
