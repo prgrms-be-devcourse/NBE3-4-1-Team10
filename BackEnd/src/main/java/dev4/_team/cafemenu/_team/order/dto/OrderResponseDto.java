@@ -22,11 +22,15 @@ public class OrderResponseDto {
 
     private Long orderID;
 
+    private String email;
+
     private String address;
 
     private String post;
 
     private String status;
+
+    private int totalPrice;
 
     private List<OrderProductResponseDto> orderProduct;
 
