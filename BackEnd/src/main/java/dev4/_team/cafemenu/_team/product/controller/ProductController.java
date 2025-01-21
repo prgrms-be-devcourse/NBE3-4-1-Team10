@@ -12,12 +12,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/product")
+@RequestMapping("/api")
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping
+    @GetMapping("/product")
     public RsData<List<ProductDto>> showProducts() {
 
         return new RsData<>(
@@ -27,7 +27,7 @@ public class ProductController {
         );
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public RsData<ProductDto> showProduct(
             @PathVariable("id") Long id
     ) {
@@ -40,7 +40,7 @@ public class ProductController {
 
     }
 
-    @PostMapping
+    @PostMapping("/admin/product")
     public RsData<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
     ) {
@@ -52,7 +52,7 @@ public class ProductController {
         );
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/product/{id}")
     public RsData<ProductDto> updateProduct(
             @PathVariable("id") Long id,
             @RequestBody ProductForm productForm
@@ -67,7 +67,7 @@ public class ProductController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/product//{id}")
     public RsData<Void> deleteProduct(
             @PathVariable("id") Long id
     ) {
