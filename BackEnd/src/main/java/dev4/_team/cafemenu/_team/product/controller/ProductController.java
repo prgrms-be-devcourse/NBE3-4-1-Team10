@@ -1,6 +1,5 @@
 package dev4._team.cafemenu._team.product.controller;
 
-import dev4._team.cafemenu._team.global.rs.RsData;
 import dev4._team.cafemenu._team.product.dto.ProductDto;
 import dev4._team.cafemenu._team.product.form.ProductForm;
 import dev4._team.cafemenu._team.product.service.ProductService;
