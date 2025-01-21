@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { DeleteIcon, EditIcon } from "../../../constant/Icon";
-import OrderList from "../orderList/OrderList";
-import "./RenderOrder.css";
-import { OrderService } from "../../../service/OrderService";
+
 import Alert from "../../alert/Alert";
+import OrderList from "../orderList/OrderList";
+import { DeleteIcon, EditIcon } from "../../../constant/Icon";
+import { OrderService } from "../../../service/OrderService";
+
+import "./RenderOrder.css";
 
 const RenderOrder = ({ order, onUpdateOrder, type }) => {
   const [isEditing, setIsEditing] = useState(false);
