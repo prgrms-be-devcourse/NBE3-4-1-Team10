@@ -2,13 +2,12 @@ package dev4._team.cafemenu._team.order.controller;
 
 import dev4._team.cafemenu._team.order.dto.OrderDto;
 import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
-import dev4._team.cafemenu._team.order.entity.Orders;
-import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.service.OrderService;
-import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
+import dev4._team.cafemenu._team.security.user.CustomUserDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,29 +20,32 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody @Valid OrderDto orderDto, Long userId) {
-        Orders createdOrder = orderService.createOrder(orderDto, userId);
-        return ResponseEntity.status(201).body(OrderMapper.toDto(createdOrder));
+    public ResponseEntity<?> createOrder(@RequestBody @Valid OrderDto orderDto,
+                                         @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        orderService.createOrder(orderDto, customUserDetails.getUser().getId());
+        return ResponseEntity.status(201).body(null);
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId, Long userId) {
-        orderService.delete(orderId, userId);
+    public ResponseEntity<String> deleteOrder(@PathVariable(name = "orderId") Long orderId,
+                                              @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        orderService.delete(orderId, customUserDetails.getUser().getId());
         return ResponseEntity.ok("삭제에 성공했습니다!");
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<OrderResponseDto>> getOrders(@PathVariable Long userId) {
-        List<OrderResponseDto> orders = orderService.getOrdersByUserId(userId);
+    @GetMapping("")
+    public ResponseEntity<List<OrderResponseDto>> getOrders(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        List<OrderResponseDto> orders = orderService.getOrdersByUserId(customUserDetails.getUser().getId());
         return ResponseEntity.ok(orders);
     }
 
     @PutMapping("/{orderId}")
-    public ResponseEntity<OrderResponseDto> updateOrder(
-            @PathVariable Long orderId, Long userId,
+    public ResponseEntity<?> updateOrder(
+            @PathVariable(name = "orderId") Long orderId,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
             @RequestBody @Valid OrderDto orderDto) {
-        Orders updatedOrder = orderService.updateOrder(orderId, orderDto, userId);
-        return ResponseEntity.ok(OrderMapper.toDto(updatedOrder));
+        orderService.updateOrder(orderId, orderDto, customUserDetails.getUser().getId());
+        return ResponseEntity.status(201).body(null);
     }
 
     @GetMapping("/today-delivery")
