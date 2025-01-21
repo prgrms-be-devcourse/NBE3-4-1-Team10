@@ -17,12 +17,15 @@ public class Dummy {
 
     @PostConstruct
     public void init() {
-        User adminUser = User.builder()
-                .email("admin@naver.com")
-                .nickname("관리자")
-                .password(passwordEncoder.encode("Rhksflwk12!"))
-                .role(UserRole.ROLE_ADMIN)
-                .build();
-        userRepository.save(adminUser);
+        boolean adminExists = userRepository.findUserByEmail("admin@naver.com").isPresent();
+        if (!adminExists) {
+            User adminUser = User.builder()
+                    .email("admin@naver.com")
+                    .nickname("관리자")
+                    .password(passwordEncoder.encode("Rhksflwk12!"))
+                    .role(UserRole.ROLE_ADMIN)
+                    .build();
+            userRepository.save(adminUser);
+        }
     }
 }
