@@ -1,4 +1,4 @@
-package dev4._team.cafemenu._team.global;
+package dev4._team.cafemenu._team.global.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;

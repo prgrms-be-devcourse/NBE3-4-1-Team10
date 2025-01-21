@@ -22,6 +22,8 @@ public class OrderProductResponseDto {
 
     private int price; // 상품 가격
 
+    private Long productId;     // 상품 id
+
     public static OrderProductResponseDto of(OrderProduct orderProduct) {
         return OrderProductResponseDto.builder()
                 .orderProductId(orderProduct.getId())

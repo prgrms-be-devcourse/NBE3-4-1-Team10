@@ -1,0 +1,58 @@
+:root {
+  --drawer-btn-padding: 8px;
+  --drawer-background: rgba(0, 0, 0, 0.2);
+  --drawer-btn-size: 1rem;
+  --drawer-btn-border: var(--background-primary);
+  --drawer-btn-background: var(--text-primary);
+}
+
+.drawer-btn-wrap {
+  border: none;
+  background-color: var(--drawer-background);
+  border-radius: var(--drawer-btn-padding);
+  box-sizing: content-box;
+  padding: var(--drawer-btn-padding);
+
+  transition: background-color 0.3s ease;
+
+  cursor: pointer;
+  z-index: calc(var(--z-index) + 51);
+}
+
+.drawer-btn-wrap.isOpen {
+  background-color: transparent;
+}
+
+.drawer-btn {
+  width: var(--drawer-btn-size);
+  height: var(--drawer-btn-size);
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--drawer-btn-border);
+
+  border: 1px solid var(--drawer-btn-border);
+  border-color: var(--drawer-btn-border);
+  border-radius: var(--drawer-btn-padding);
+
+  padding: var(--drawer-btn-padding);
+  text-decoration: none;
+  overflow: hidden;
+  outline: none;
+}
+
+.drawer-btn.isOpen {
+  background-color: var(--drawer-btn-background);
+  border: none;
+}
+
+.drawer-btn svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+.drawer-btn.isOpen svg {
+  transform: rotate(45deg);
+}

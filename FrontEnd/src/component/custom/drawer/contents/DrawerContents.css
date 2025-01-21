@@ -1,0 +1,82 @@
+:root {
+  --guest-elem-gap: 2rem;
+  --guest-elem-font-size: 1.3rem;
+}
+
+.guest-wrap {
+  display: flex;
+  flex-direction: column;
+
+  font-size: var(--guest-elem-font-size);
+
+  padding-bottom: calc(var(--guest-elem-gap) + 3rem);
+  scroll-behavior: smooth;
+  gap: calc(var(--guest-elem-gap) - 1rem);
+}
+
+.guest-msg {
+  font-weight: bold;
+  font-size: calc(var(--guest-elem-font-size) + 0.5rem);
+}
+.guest-msg::first-letter {
+  font-size: calc(var(--guest-elem-font-size) + 0.6rem);
+}
+
+.nav-login-btn {
+  border: none;
+  background-color: transparent;
+  display: inline;
+  font-size: calc(var(--guest-elem-font-size) + 0.1rem);
+  color: var(--link-primary);
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: font-size 0.2s ease;
+}
+
+.profile-title {
+  font-size: calc(var(--guest-elem-font-size) + 0.2rem);
+  font-weight: bold;
+  padding-bottom: var(--guest-elem-gap);
+}
+.profile-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-btn button {
+  width: 100%;
+
+  position: relative;
+
+  color: var(--text-secondary);
+  font-size: calc(var(--guest-elem-font-size) + 0.2rem);
+  text-align: start;
+
+  border: none;
+  background-color: transparent;
+
+  padding-bottom: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-btn button::after {
+  width: 0;
+  height: 2px;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  content: "";
+
+  background-color: var(--color-brand-white);
+
+  transition: width 1s ease;
+}
+
+.profile-btn button:hover::after {
+  width: 100%;
+}
