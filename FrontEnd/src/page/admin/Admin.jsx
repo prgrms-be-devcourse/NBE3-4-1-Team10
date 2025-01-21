@@ -1,137 +1,110 @@
 import React, { useState, useEffect } from "react";
-import { DeleteIcon, EditIcon } from "../../constant/Icon";
-import { ProductService } from "../../service/ProductService";
+import RenderOrder from "../../component/admin/renderOrder/RenderOrder";
 import { OrderService } from "../../service/OrderService";
 
 import "./Admin.css";
-import Msg from "../../component/msg/Msg";
 
-const AdminPage = () => {
-  const [tommorowOrderList, setTommorowOrderList] = useState([]);
-  const [todayOrderList, setTodayOrderList] = useState([]);
+const Admin = () => {
+  const [orders, setOrders] = useState({ tomorrow: [], today: [] });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchProducts = async () => {
+  const fetchOrders = async () => {
     setIsLoading(true);
+    setError(null);
     try {
       const tomorrowOrderData = await OrderService.getTommorowOrderLists();
       const todayOrderData = await OrderService.getTodayOrderLists();
-      setTommorowOrderList(tomorrowOrderData);
-      setTodayOrderList(todayOrderData);
-      setIsLoading(false);
-    } catch {
+      setOrders({ tomorrow: tomorrowOrderData, today: todayOrderData });
+    } catch (err) {
+      setError("주문 데이터를 불러오는 중에 문제가 발생했습니다.");
+    } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchOrders();
   }, []);
 
-  // 그룹화된 주문 리스트 생성
-  const groupOrdersByAddressAndPost = (orderList) => {
-    const groupedOrders = {};
-
-    orderList.forEach((order) => {
-      const key = `${order.post}_${order.address}`;
-
-      if (!groupedOrders[key]) {
-        groupedOrders[key] = {
-          post: order.post,
-          address: order.address,
-          orderProduct: [],
-          totalPrice: 0,
-        };
-      }
-
-      // 제품 항목 합산 및 총 가격 계산
-      order.orderProduct.forEach((product) => {
-        groupedOrders[key].orderProduct.push(product);
-        groupedOrders[key].totalPrice += product.price * product.quantity;
+  const handleUpdateOrder = (orderID, updatedOrder) => {
+    setOrders((prevOrders) => {
+      const updatedOrders = { ...prevOrders };
+      ["today", "tomorrow"].forEach((key) => {
+        updatedOrders[key] = updatedOrders[key].map((order) => {
+          if (order.orderID === orderID) {
+            return { ...order, ...updatedOrder };
+          }
+          return order;
+        });
       });
+      return updatedOrders;
     });
-
-    return Object.values(groupedOrders);
   };
 
-  const groupedTomorrowOrders = groupOrdersByAddressAndPost(tommorowOrderList);
-  const groupedTodayOrders = groupOrdersByAddressAndPost(todayOrderList);
+  const handleUpdateProduct = (orderProductId, updatedProduct) => {
+    setOrders((prevOrders) => {
+      const updatedOrders = { ...prevOrders };
+      ["today", "tomorrow"].forEach((key) => {
+        updatedOrders[key] = updatedOrders[key].map((order) => {
+          if (order.orderProduct) {
+            order.orderProduct = order.orderProduct.map((product) => {
+              if (product.orderProductId === orderProductId) {
+                return { ...product, ...updatedProduct };
+              }
+              return product;
+            });
+          }
+          return order;
+        });
+      });
+      return updatedOrders;
+    });
+  };
 
-  console.log(tommorowOrderList);
+  if (isLoading) {
+    return <div className='loading-message'>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div className='error-message'>{error}</div>;
+  }
 
   return (
-    <main className='admin-wrap'>
-      <header>
-        <Msg type='title' text='ADMIN' />
-      </header>
-
-      <h3>배송 전</h3>
-      <div className='order-table-container'>
-        <table>
-          <thead>
-            <tr>
-              <th>주문 번호</th>
-              <th>주소</th>
-              <th>주문내역</th>
-              <th>총 금액</th>
-              <th>상태</th>
-            </tr>
-          </thead>
-          <tbody>
-            {groupedTomorrowOrders.map((order, index) => (
-              <tr key={index}>
-                <td>{order.post}</td>
-                <td>{order.address}</td>
-                <td>
-                  {order.orderProduct.map((product, productIndex) => (
-                    <div key={productIndex}>
-                      {product.productName} (수량: {product.quantity}, 가격:{" "}
-                      {product.price.toLocaleString()} 원)
-                    </div>
-                  ))}
-                </td>
-                <td>{order.totalPrice.toLocaleString()} 원</td>
-                <td>{order.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className='container'>
+      <h2 className='section-title'>오늘의 주문</h2>
+      <div className='order-list'>
+        {orders.today.length > 0 ? (
+          orders.today.map((order) => (
+            <RenderOrder
+              key={order.orderID}
+              order={order}
+              onUpdateOrder={handleUpdateOrder}
+              onUpdateProduct={handleUpdateProduct}
+            />
+          ))
+        ) : (
+          <p className='empty-message'>오늘의 주문이 없습니다.</p>
+        )}
       </div>
 
-      <h3>배송 완료</h3>
-      <div className='order-table-container'>
-        <table>
-          <thead>
-            <tr>
-              <th>주문 번호</th>
-              <th>주소</th>
-              <th>주문내역</th>
-              <th>총 금액</th>
-              <th>상태</th>
-            </tr>
-          </thead>
-          <tbody>
-            {groupedTodayOrders.map((order, index) => (
-              <tr key={index}>
-                <td>{order.post}</td>
-                <td>{order.address}</td>
-                <td>
-                  {order.orderProduct.map((product, productIndex) => (
-                    <div key={productIndex}>
-                      {product.productName} (수량: {product.quantity}, 가격:{" "}
-                      {product.price.toLocaleString()} 원)
-                    </div>
-                  ))}
-                </td>
-                <td>{order.totalPrice.toLocaleString()} 원</td>
-                <td>{order.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <h2 className='section-title'>내일의 주문</h2>
+      <div className='order-list'>
+        {orders.tomorrow.length > 0 ? (
+          orders.tomorrow.map((order) => (
+            <RenderOrder
+              key={order.orderID}
+              order={order}
+              onUpdateOrder={handleUpdateOrder}
+              onUpdateProduct={handleUpdateProduct}
+            />
+          ))
+        ) : (
+          <p className='empty-message'>내일의 주문이 없습니다.</p>
+        )}
       </div>
-    </main>
+    </div>
   );
 };
 
-export default AdminPage;
+export default Admin;

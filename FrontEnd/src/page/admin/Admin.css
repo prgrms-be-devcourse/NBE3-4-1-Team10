@@ -1,74 +1,234 @@
 /* Admin.css */
-
-/* 기본적인 레이아웃 */
-.admin-wrap {
-  padding: 2rem;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-h3 {
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f4f4f4;
+  padding-bottom: 10px;
+}
+
+.order-header h3 {
   font-size: 1.5rem;
   color: #333;
 }
 
-/* 주문 테이블 컨테이너 */
-.order-table-container {
-  overflow-x: auto;
-  margin: 2rem 0;
+.order-header p {
+  color: #777;
+  font-size: 1rem;
 }
 
-/* 테이블 스타일 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center; /* 테이블 내용 가운데 정렬 */
+.empty-message {
+  font-size: 1.2rem;
+  color: #999;
+  text-align: center;
 }
 
-table th,
-table td {
-  padding: 12px;
-  text-align: center; /* 셀 내용 가운데 정렬 */
-  vertical-align: middle; /* 세로 가운데 정렬 */
-  border: 1px solid #ddd;
+.loading-message,
+.error-message {
+  font-size: 1.2rem;
+  color: #f44336;
+  text-align: center;
 }
 
-table th {
-  background-color: #f2f2f2;
+.error-message {
+  color: #f44336;
+}
+
+.order-edit-form,
+.order-info {
+  margin-top: 20px;
+}
+
+.order-info p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.order-info .label {
   font-weight: bold;
+  color: #555;
 }
 
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* OrderCard specific styles */
+.order-card .order-info {
+  margin-top: 10px;
 }
 
-table td {
+.order-card .order-info .label {
+  font-weight: bold;
+  color: #555;
+}
+
+.order-card .product-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order-card .product-item strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.order-card .product-item .quantity,
+.order-card .product-item .price {
   font-size: 1rem;
   color: #555;
 }
 
-/* 주문내역 */
-table td:nth-child(3) {
-  max-width: 300px;
-  word-wrap: break-word;
-  word-break: break-word;
+.order-edit-form {
+  display: flex;
+  flex-direction: column;
 }
 
-/* 가격 형식 */
-table td:nth-child(4) {
-  color: #d9534f;
-  font-weight: bold;
+.order-edit-form input {
+  margin-bottom: 8px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-/* 주문 상태 */
-table td:last-child {
-  color: #5bc0de;
-  font-weight: bold;
+.order-edit-actions button {
+  padding: 8px 16px;
+  margin-top: 8px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-table td:first-child {
-  color: #5bc0de;
+.order-edit-actions button:hover {
+  background-color: #218838;
+}
+
+.order-edit-actions button + button {
+  background-color: #dc3545;
+}
+
+.order-edit-actions button + button:hover {
+  background-color: #c82333;
+}
+
+/* RenderOrder specific styles */
+.render-order-container {
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  background-color: #f9f9f9;
+}
+
+.render-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.render-order-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.render-order-header p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.render-order-edit-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.render-order-edit-button:hover {
+  color: #0056b3;
+}
+
+/* Order product list */
+.order-products {
+  margin-top: 20px;
+}
+
+.order-products h4 {
+  font-size: 1.3rem;
   font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.product-item strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.product-item .quantity,
+.product-item .price {
+  font-size: 1rem;
+  color: #555;
+}
+
+.product-item .quantity {
+  color: #888;
+}
+
+/* Specific styles for order info section */
+.order-info .order-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.order-info .order-detail strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.order-info .order-detail .label {
+  color: #777;
 }
