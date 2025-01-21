@@ -1,10 +1,11 @@
 package dev4._team.cafemenu._team.user.controller;
 
-
-import dev4._team.cafemenu._team.user.dto.SignupDto;
-import dev4._team.cafemenu._team.user.service.UserService;
+import dev4._team.cafemenu._team.security.jwt.TokenKey;
+import dev4._team.cafemenu._team.security.jwt.TokenProvider;
+import dev4._team.cafemenu._team.security.redis.RedisUtil;
 import dev4._team.cafemenu._team.user.dto.LoginDto;
 import dev4._team.cafemenu._team.user.dto.LoginResponseDto;
+import dev4._team.cafemenu._team.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,16 +14,27 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
+import dev4._team.cafemenu._team.user.dto.SignupDto;
+import dev4._team.cafemenu._team.user.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
   
     @PostMapping("/login")
@@ -40,7 +52,6 @@ public class UserController {
         LoginResponseDto response = userService.login(loginDto);
         return ResponseEntity.ok().body(response);
     }
-
 
     @PostMapping("/logout")
     @Operation(
@@ -71,7 +82,7 @@ public class UserController {
         return ResponseEntity.ok("로그인 상태입니다. 사용자: " + authentication.getName());
     }
   
-
+    // 회원가입 API
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@Valid @RequestBody SignupDto signupDto) {
         userService.signup(signupDto);

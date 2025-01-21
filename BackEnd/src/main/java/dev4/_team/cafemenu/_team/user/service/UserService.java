@@ -1,9 +1,5 @@
 package dev4._team.cafemenu._team.user.service;
 
-import dev4._team.cafemenu._team.user.dto.SignupDto;
-import dev4._team.cafemenu._team.user.entity.User;
-import dev4._team.cafemenu._team.user.repository.UserRepository;
-
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.security.user.CustomUserDetails;
@@ -12,15 +8,16 @@ import dev4._team.cafemenu._team.security.jwt.TokenProvider;
 import dev4._team.cafemenu._team.security.redis.RedisUtil;
 import dev4._team.cafemenu._team.user.dto.LoginDto;
 import dev4._team.cafemenu._team.user.dto.LoginResponseDto;
+import dev4._team.cafemenu._team.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-
+import dev4._team.cafemenu._team.user.dto.SignupDto;
+import dev4._team.cafemenu._team.user.entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @RequiredArgsConstructor
@@ -78,10 +75,11 @@ public class UserService {
 
     // 회원가입 처리
     public void signup(SignupDto signupDto) {
-        String encodedPassword = passwordEncoder.encode(signupDto.getPassword());
-
-        User user = new User(signupDto.getEmail(), signupDto.getNickname(), encodedPassword);
-
+        User user = signupDto.toUserEntity(passwordEncoder);
+        // 이메일 중복 체크
+        if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
+            throw new BusinessException(ErrorCode.EXIST_USER);
+        }
         userRepository.save(user);
     }
 }
