@@ -1,8 +1,12 @@
 :root {
   --header-height: 6rem;
-  --header-border-radius: 20px;
+  --header-border-radius: 20px 20px 0 0;
   --header-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
     0 0 20px rgba(0, 0, 0, 0.2);
+  --header-transparent-shadow: 0 4px 10px rgba(0, 0, 0, 0.05),
+    0 0 10px rgba(0, 0, 0, 0.1);
+  --header-background-color: rgba(255, 255, 255, 0.8);
+  --header-background-color-scrolled: rgba(255, 255, 255, 0.9);
 }
 
 #header {
@@ -16,11 +20,12 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: transparent;
+  background-color: var(--header-background-color);
   box-shadow: var(--header-box-shadow);
   border-radius: var(--header-border-radius);
   margin: 0 auto;
   padding: var(--padding);
+  transition: background-color 1s ease, transform 1s ease, height 1s ease;
 }
 
 #header::after {
@@ -37,4 +42,11 @@
 
 #header a {
   z-index: var(--z-index);
+}
+
+#header.scrolled {
+  background-color: transparent;
+  box-shadow: var(--header-transparent-shadow);
+  transform: translateY(-10px);
+  height: calc(var(--header-height) - 0.3rem);
 }

@@ -5,12 +5,15 @@ import { FORM_FIELD } from "../../constant/formFields";
 import { UserService } from "../../service/UserService";
 
 import "./Join.css";
+import Alert from "../../component/alert/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
   const pwdCheckRef = useRef(null);
   const nicknameRef = useRef(null);
+  const router = useNavigate();
 
   const [body, setBody] = useState({
     email: "",
@@ -114,7 +117,6 @@ const Join = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // 유효성 검사 후 처리
     if (!validateFields()) {
       setIsLoading(false);
       return;
@@ -127,12 +129,16 @@ const Join = () => {
         nickname: body.nickname,
       });
       if (res?.status === 200) {
-        alert("회원 가입 완료");
+        Alert(
+          "회원가입 되셨습니다.",
+          "",
+          "",
+          () => router("/login"),
+          setIsLoading(false)
+        );
       }
     } catch (error) {
-      alert(
-        "회원가입 중 오류가 발생하였습니다. <br /> 잠시 후 다시 시도해주세요."
-      );
+      Alert("회원가입에 실패했습니다.", "", "", () => setIsLoading(false));
     } finally {
       setIsLoading(false);
     }

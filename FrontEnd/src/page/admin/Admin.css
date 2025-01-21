@@ -1,138 +1,74 @@
-/* 전체 관리자 페이지 스타일 */
+/* Admin.css */
+
+/* 기본적인 레이아웃 */
 .admin-wrap {
-  width: 100%;
   padding: 2rem;
-  background-color: var(--background-primary);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
-.admin-wrap h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.admin-wrap h3 {
+h3 {
   font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
   color: #333;
 }
 
-.table-container {
-  margin-top: 2rem;
+/* 주문 테이블 컨테이너 */
+.order-table-container {
   overflow-x: auto;
+  margin: 2rem 0;
 }
 
+/* 테이블 스타일 */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* 테이블 내용 가운데 정렬 */
 }
 
-th,
-td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+table th,
+table td {
+  padding: 12px;
+  text-align: center; /* 셀 내용 가운데 정렬 */
+  vertical-align: middle; /* 세로 가운데 정렬 */
+  border: 1px solid #ddd;
 }
 
-th {
-  background-color: #f4f4f4;
-  font-size: 1rem;
+table th {
+  background-color: #f2f2f2;
   font-weight: bold;
 }
 
-td {
-  font-size: 0.95rem;
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table td {
+  font-size: 1rem;
   color: #555;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* 주문내역 */
+table td:nth-child(3) {
+  max-width: 300px;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-.edit-btn,
-.delete-btn {
-  border: none;
-  background-color: transparent;
-
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-
-.edit-form-container {
-  margin-top: 2rem;
-  background-color: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.edit-form-group {
-  margin-bottom: 1.5rem;
-}
-
-.edit-form-group label {
+/* 가격 형식 */
+table td:nth-child(4) {
+  color: #d9534f;
   font-weight: bold;
 }
 
-.edit-form-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+/* 주문 상태 */
+table td:last-child {
+  color: #5bc0de;
+  font-weight: bold;
 }
 
-.save-btn,
-.cancel-btn {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  margin-right: 1rem;
-}
-
-.save-btn {
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
-}
-
-.save-btn:hover {
-  background-color: #218838;
-}
-
-.cancel-btn {
-  background-color: #dc3545;
-  color: white;
-  cursor: pointer;
-}
-
-.cancel-btn:hover {
-  background-color: #c82333;
-}
-
-@media all and (max-width: 768px) {
-  .admin-page {
-    padding: 1rem;
-  }
-
-  table {
-    font-size: 0.9rem;
-  }
-
-  th,
-  td {
-    padding: 0.8rem;
-  }
+table td:first-child {
+  color: #5bc0de;
+  font-weight: bold;
 }

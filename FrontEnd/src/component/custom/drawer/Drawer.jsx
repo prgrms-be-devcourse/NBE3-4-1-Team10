@@ -1,24 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-import { User } from "./user/User";
-import { Guest } from "./guest/Guest";
+import DrawerContents from "./contents/DrawerContents";
 import { getJwt } from "../../../constant/project";
+
 import "./Drawer.css";
 
 const Drawer = ({ isOpen, close }) => {
-  const isLogined = getJwt();
+  const isUser = getJwt();
 
   const router = useNavigate();
 
   const goToPage = (id) => {
+    if (id) {
+      router(id);
+    } else {
+    }
     close();
-    router(id);
   };
 
   return (
     <nav className={`drawer-wrap ${isOpen && "isOpen"}`}>
-      {isLogined ? <User onClick={goToPage} /> : <Guest onClick={goToPage} />}
+      <DrawerContents isUser={isUser} onClick={goToPage} />
     </nav>
   );
 };

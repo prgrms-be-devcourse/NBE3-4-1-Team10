@@ -2,9 +2,14 @@ import React from "react";
 import "./OrderList.css";
 
 const OrderList = ({ item, selected, quantity, onQuantityChange, onClick }) => {
+  const handleQuantityChange = (action, e) => {
+    e.stopPropagation();
+    onQuantityChange(item.productId, action);
+  };
+
   return (
     <div
-      className={`order-item-container ${selected && "isSeleceted"}`}
+      className={`order-item-container ${selected ? "isSeleceted" : ""}`}
       onClick={() => onClick(item.productId)}>
       <div className='order-item-wrap'>
         <img
@@ -25,35 +30,24 @@ const OrderList = ({ item, selected, quantity, onQuantityChange, onClick }) => {
         <span className='order-price'>
           <i>₩ {new Intl.NumberFormat().format(item.price)}</i>
         </span>
-      </div>
-
-      {selected && (
-        <div className='quantity-container'>
+        <div className={`quantity-container ${selected ? "show" : ""}`}>
           <button
+            className='quantity-button'
             type='button'
-            onClick={() => onQuantityChange(item.id, "decrease")}
-            className='quantity-button'>
-            -
+            onClick={(e) => handleQuantityChange("increase", e)}>
+            ^
           </button>
           <span>{quantity}</span>
           <button
+            className='quantity-button'
             type='button'
-            onClick={() => onQuantityChange(item.id, "increase")}
-            className='quantity-button'>
-            +
+            onClick={(e) => handleQuantityChange("decrease", e)}>
+            ^
           </button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export default OrderList;
-
-//  <input
-//    type='checkbox'
-//    name='order'
-//    value={item.name}
-//    checked={selected}
-//    onChange={() => onCheckboxChange(item.id)}
-//  />;

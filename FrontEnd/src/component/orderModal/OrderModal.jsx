@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProductService } from "../../service/ProductService";
 import Modal from "../modal/Modal";
 import "./OrderModal.css";
+import { PRODUCTS } from "../custom/product/Dummy";
 
 // OrderModal 컴포넌트
 const OrderModal = ({ open, close }) => {
@@ -24,7 +25,8 @@ const OrderModal = ({ open, close }) => {
   // 상품 목록 가져오기 함수
   const fetchProducts = async () => {
     try {
-      const productData = await ProductService.getProductLists();
+      //   const productData = await ProductService.getProductLists();
+      const productData = PRODUCTS;
       setProducts(productData);
     } catch (error) {
       console.error("상품 목록 불러오기 오류:", error);

@@ -1,6 +1,6 @@
 import { GitHubIcon, NotionIcon } from "./Icon";
 
-const USER_LIST = [
+const GUEST_LIST = [
   {
     id: 0,
     title: "Sign In",
@@ -9,6 +9,19 @@ const USER_LIST = [
   {
     id: 1,
     title: "Join",
+    href: "/join",
+  },
+];
+
+const USER_LIST = [
+  {
+    id: 0,
+    title: "Order",
+    href: "/order",
+  },
+  {
+    id: 1,
+    title: "Logout",
     href: "/join",
   },
 ];
@@ -28,4 +41,4 @@ const FOOTER_ICONS = [
   },
 ];
 
-export { FOOTER_ICONS, USER_LIST };
+export { FOOTER_ICONS, USER_LIST, GUEST_LIST };

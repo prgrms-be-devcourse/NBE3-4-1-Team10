@@ -1,91 +1,238 @@
-import React, { useEffect, useState } from "react";
-import OrderList from "../../component/orderList/OrderList";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Msg from "../../component/msg/Msg";
+import OrderList from "../../component/orderList/OrderList";
+import { PRODUCTS } from "../../component/custom/product/Dummy";
+import SkeletonList from "../../component/orderList/SkeletonList";
+import { FORM_FIELD } from "../../constant/formFields";
+
 import { ProductService } from "../../service/ProductService";
+
 import "./Order.css";
+import { OrderService } from "../../service/OrderService";
+import Alert from "../../component/alert/Alert";
+import { getJwt } from "../../constant/project";
 
 const Order = () => {
+  const [body, setBody] = useState({ address: "", post: "" });
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedItems, setSelectedItems] = useState([]); // 배열로 변경
+  const [selectedItems, setSelectedItems] = useState([]);
   const [quantities, setQuantities] = useState({});
+  const [message, setMessage] = useState("");
+  const addressRef = useRef(null);
+  const postRef = useRef(null);
+  const router = useNavigate();
 
-  // 상품 목록 가져오기
-  const fetchProducts = async () => {
-    try {
-      const productData = await ProductService.getProductLists();
-      setProducts(productData);
-      // 상품 수량 초기화
-      const initialQuantities = productData.reduce((acc, product) => {
-        acc[product.id] = 0;
-        return acc;
-      }, {});
-      setQuantities(initialQuantities);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
+  const TOKEN = getJwt();
+
+  const orderFormFields = [
+    {
+      id: "address",
+      label: "주소",
+      name: "address",
+      type: "text",
+      placeholder: "주소를 입력해주세요.",
+      ref: addressRef,
+    },
+    {
+      id: "post",
+      label: "우편번호",
+      name: "post",
+      type: "text",
+      placeholder: "우편번호를 입력해주세요.",
+      ref: postRef,
+    },
+  ];
+
+  const onChangeInput = (name, e) => {
+    setBody((prev) => ({ ...prev, [name]: e }));
   };
 
-  // 상품 목록 불러오기
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  // 수량 변경 함수
-  const handleQuantityChange = (id, action) => {
+  const handleQuantityChange = (productId, action) => {
     setQuantities((prevQuantities) => {
+      const currentQuantity = prevQuantities[productId]?.quantity || 0;
       const newQuantity =
         action === "increase"
-          ? prevQuantities[id] + 1
-          : prevQuantities[id] > 1
-          ? prevQuantities[id] - 1
+          ? currentQuantity + 1
+          : currentQuantity > 1
+          ? currentQuantity - 1
           : 1;
-      return { ...prevQuantities, [id]: newQuantity };
+
+      return {
+        ...prevQuantities,
+        [productId]: {
+          ...prevQuantities[productId],
+          quantity: newQuantity,
+        },
+      };
     });
   };
 
-  // 선택된 상품 관리 함수
-  const onClickOrder = (id) => {
+  const onClickSelectOrder = (productId) => {
     setSelectedItems((prevSelected) => {
-      if (prevSelected.includes(id)) {
-        // 이미 선택된 상품이라면 배열에서 제거
-        return prevSelected.filter((itemId) => itemId !== id);
-      } else {
-        // 선택되지 않은 상품이라면 배열에 추가
-        return [...prevSelected, id];
+      const newSelectedItems = prevSelected.includes(productId)
+        ? prevSelected.filter((id) => id !== productId)
+        : [...prevSelected, productId];
+
+      if (!newSelectedItems.includes(productId)) {
+        setQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [productId]: { ...prevQuantities[productId], quantity: 0 },
+        }));
       }
+
+      return newSelectedItems;
     });
   };
 
-  // 총 가격 계산 함수
   const calculateTotalPrice = () => {
-    return products.reduce((total, item) => {
-      if (selectedItems.includes(item.productId)) {
-        return total + item.price * quantities[item.id];
+    return products.reduce((total, product) => {
+      if (selectedItems.includes(product.productId)) {
+        const quantity = quantities[product.productId]?.quantity || 0;
+        const price = product.price;
+        return total + price * quantity;
       }
       return total;
     }, 0);
   };
 
+  const handleWarn = (ref, timeout = 3000) => {
+    ref.current.classList.add("warn");
+    setTimeout(() => ref.current.classList.remove("warn"), timeout);
+  };
+
+  const validateFields = () => {
+    if (calculateTotalPrice() === 0) {
+      setMessage("상품을 담아주세요.");
+      return false;
+    }
+    if (!body.address) {
+      setMessage("주소를 입력해 주세요.");
+      handleWarn(addressRef);
+      return false;
+    }
+    if (!body.post) {
+      setMessage("우편번호를 입력해 주세요.");
+      handleWarn(postRef);
+      return false;
+    }
+    return true;
+  };
+
+  const handleKeyDown = (e) => {
+    const keyCode = e?.keyCode;
+    const Enter = 13;
+
+    if (keyCode === Enter) {
+    }
+  };
+
+  const onClickOrder = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (!validateFields()) {
+      setIsLoading(false);
+      return;
+    }
+    const orderProductDto = Object.keys(quantities)
+      .filter((productId) => quantities[productId]?.quantity > 0)
+      .map((productId) => ({
+        productId: parseInt(productId),
+        count: quantities[productId]?.quantity || 0,
+      }));
+    try {
+      const totalPrice = calculateTotalPrice();
+      const res = await OrderService.postOrderLists({
+        address: body?.address,
+        post: body?.post,
+        totalPrice,
+        orderProductDto,
+      });
+
+      if (res.status === 401) {
+        Alert(
+          "로그인 후 \n 사용해주세요.",
+          "",
+          "",
+          () => setIsLoading(false),
+          router("/login")
+        );
+      } else if (res.data) {
+        Alert(
+          "주문이 \n 완료되었습니다.",
+          "",
+          "",
+          () => setIsLoading(false),
+          router("/")
+        );
+      }
+    } catch (error) {
+      Alert("주문이 실패했습니다.", "", "", () => setIsLoading(false));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const initialQuantities = {};
+      const productData = await ProductService.getProductLists();
+      setProducts(productData);
+      PRODUCTS.forEach((product) => {
+        initialQuantities[product.productId] = {
+          quantity: 0,
+          price: product.price,
+        };
+      });
+      setQuantities(initialQuantities);
+      setIsLoading(false);
+    } catch {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
-    <form className='order-wrap'>
+    <form className='order-wrap' onSubmit={onClickOrder}>
       <Msg text='Order' type='title' />
 
-      {isLoading ? (
-        <div>로딩 중...</div>
-      ) : (
-        products.map((item, index) => (
-          <OrderList
-            key={item.productId}
-            item={item}
-            quantity={quantities[item.id]}
-            selected={selectedItems.includes(item.productId)}
-            onQuantityChange={handleQuantityChange}
-            onClick={onClickOrder}
+      {isLoading
+        ? Array.from({ length: 4 }).map((_, index) => (
+            <SkeletonList key={index} />
+          ))
+        : products.map((item) => (
+            <OrderList
+              key={item.productId}
+              item={item}
+              quantity={quantities[item.productId]?.quantity || 0}
+              selected={selectedItems.includes(item.productId)}
+              onQuantityChange={handleQuantityChange}
+              onClick={onClickSelectOrder}
+            />
+          ))}
+      <section className='order-user-info-wrap'>
+        {orderFormFields.map(({ id, label, name, type, placeholder, ref }) => (
+          <FORM_FIELD
+            key={id}
+            id={id}
+            label={label}
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            value={body[name]}
+            onKeyDown={handleKeyDown}
+            onChange={onChangeInput}
+            ref={ref}
+            isLoading={isLoading}
           />
-        ))
-      )}
+        ))}
+        <Msg text={message} type='error' />
+      </section>
       <p className='total-price'>
         총 가격 : ₩ {new Intl.NumberFormat().format(calculateTotalPrice())}
       </p>

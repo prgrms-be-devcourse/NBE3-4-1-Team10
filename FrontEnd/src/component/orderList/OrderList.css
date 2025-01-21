@@ -1,3 +1,4 @@
+/* 상품 아이템 컨테이너 */
 .order-item-container {
   display: flex;
   flex-direction: column;
@@ -6,47 +7,43 @@
   transition: all 0.3s ease;
 }
 
-.order-item-container.isSeleceted {
-  background-color: #f0f8ff; /* 선택된 항목의 배경색을 변경 */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(4px); /* 눌리는 효과를 위해 아래로 더 많이 이동 */
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.3s ease; /* 부드러운 트랜지션 */
-}
-.order-item-container.isSeleceted:active {
-  transform: translateY(8px) scale(0.98); /* 눌렀을 때 아래로 더 많이 이동하고, 크기를 약간 줄여줌 */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 눌렀을 때 그림자 효과 강화 */
+.order-item-container:hover {
+  background-color: #f1f1f1;
 }
 
-/* 상품 항목 래퍼 (상품 이미지와 정보) */
+.order-item-container.isSeleceted {
+  background-color: #f1f1f1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(4px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.3s ease;
+}
+
+/* 상품 항목 래퍼 */
 .order-item-wrap {
   display: flex;
   align-items: center;
-  cursor: pointer; /* 클릭 가능한 영역을 만들기 위해 */
+  cursor: pointer;
   width: 100%;
   padding: 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   transition: all 0.3s ease;
 }
 
-.order-item-wrap:hover {
-  background-color: #f1f1f1; /* hover 시 배경색 변경 */
-}
-
-/* 상품 이미지 */
 .order-item-img {
   margin-right: 30px;
   border-radius: 4px;
   object-fit: cover;
 }
 
-/* 상품명 */
 .order-item-info {
   flex-grow: 1;
   font-size: 16px;
 }
+
 .order-item-info .type {
   font-size: 12px;
   margin-bottom: 10px;
@@ -56,39 +53,54 @@
   font-weight: bold;
 }
 
-/* 가격 */
 .order-price {
   font-size: 14px;
   color: #888;
+  padding: 0 1rem;
+  transition: margin-top 0.3s ease;
 }
 
-/* 수량 조절 버튼 컨테이너 (기본적으로 숨김) */
+/* 수량 버튼 컨테이너 (숨김 상태) */
 .quantity-container {
-  display: none; /* 기본적으로 숨김 */
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden; /* 기본적으로 숨김 상태 */
+  opacity: 0; /* 숨겨짐 상태에서 완전히 보이지 않게 */
+  transition: visibility 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.quantity-container.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.quantity-button {
+  width: 50px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-size: var(--font-size);
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 수량 버튼 (기본적인 스타일링) */
-.quantity-button {
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #fff;
-  transition: background-color 0.3s ease;
-}
-
 .quantity-button:hover {
-  background-color: #f0f0f0;
+  background-color: #ddd;
 }
 
-/* 수량 표시 */
+.quantity-button:first-child {
+  transform: rotate(0deg);
+}
+
+.quantity-button:last-child {
+  transform: rotate(180deg);
+}
+
 .quantity-container span {
-  margin: 0 10px;
-  font-size: 16px;
   font-weight: bold;
 }
