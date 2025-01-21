@@ -1,7 +1,8 @@
-package dev4._team.cafemenu._team.security;
+package dev4._team.cafemenu._team.security.filter;
 
 import dev4._team.cafemenu._team.global.exception.BusinessException;
 import dev4._team.cafemenu._team.global.exception.ErrorCode;
+import dev4._team.cafemenu._team.security.user.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

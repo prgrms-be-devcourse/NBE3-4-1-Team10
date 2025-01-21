@@ -1,7 +1,6 @@
 package dev4._team.cafemenu._team.user.dto;
 
 import dev4._team.cafemenu._team.user.entity.User;
-import dev4._team.cafemenu._team.user.entity.UserRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,17 +10,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class SignupDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginDto {
+
     @NotEmpty
     @Email(message = "이메일 형식에 맞지 않습니다.", regexp = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
     @Schema(description = "이메일, 이메일 형식 검사를 진행, 그이외는 오류", example = "testm@naver.com")
-    private String email;
+    private String username;
 
     @NotEmpty
     @Schema(description = "비밀번호, 대문자+소문자 조합, 특수문자 + 숫자 조합, 연속된 문자 검사를 진행, 그이외는 오류", example = "Rkdwjdtn12!")
@@ -32,17 +31,10 @@ public class SignupDto {
     @Size(min = 8, max = 19, message = "비밀번호는 8자 이상 20자 미만입니다.")
     private String password;
 
-    @NotEmpty
-    @Size(min = 2, max = 20, message = "이름은 1자 이상 20자 이하입니다.")
-    @Schema(description = "이름 아무거나 사용 가능", example = "강정수커피")
-    private String nickname;
-
-    public User toUserEntity(PasswordEncoder passwordEncoder){
-        return User.builder()
-                .email(email)
-                .nickname(nickname)
-                .password(passwordEncoder.encode(password))
-                .role(UserRole.USER)
+    public static LoginDto of(User user) {
+        return LoginDto.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
                 .build();
     }
 }
