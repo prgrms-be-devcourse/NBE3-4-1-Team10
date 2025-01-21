@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import { User } from "./user/User";
 import { Guest } from "./guest/Guest";
-import { getCookie } from "../../../constant/project";
+import { getJwt } from "../../../constant/project";
 import "./Drawer.css";
 
 const Drawer = ({ isOpen, close }) => {
-  const isLogined = getCookie("accessToken");
+  const isLogined = getJwt();
 
   const router = useNavigate();
 

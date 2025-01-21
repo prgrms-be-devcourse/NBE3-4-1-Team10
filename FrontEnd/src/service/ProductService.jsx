@@ -6,26 +6,25 @@ const getProductLists = async () => {
   try {
     const response = await axiosInstance.get(`${API_URL}/product`);
     if (response?.data) {
-      return response.data.data;
+      return response.data;
     }
-    return {};
   } catch (error) {
-    throw new Error("상품 리스트를 가져오는 중 오류가 발생했습니다.");
+    console.log(error);
   }
 };
 
 // 상품 추가
 const postProductLists = async () => {
   const body = {
-    type: "커피콩",
-    name: "Columbia Nariñó",
+    type: "딴거",
+    name: "테스트 글",
     imageUrl: "https://i.imgur.com/HKOFQYa.jpeg",
-    content: "커피콩 Columbia Nariñó의 예시 설명글입니다.",
+    content: "테스트글입니다..",
     price: 5000,
   };
 
   try {
-    const response = await axiosInstance.post(`${API_URL}/product`, body);
+    const response = await axiosInstance.post(`${API_URL}/admin/product`, body);
     const res = response?.data?.value;
     if (res) {
       return res;

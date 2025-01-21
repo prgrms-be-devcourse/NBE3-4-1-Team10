@@ -1,15 +1,11 @@
 import React from "react";
 import "./OrderList.css";
 
-const OrderList = ({
-  item,
-  selected,
-  quantity,
-  onQuantityChange,
-  onCheckboxChange,
-}) => {
+const OrderList = ({ item, selected, quantity, onQuantityChange, onClick }) => {
   return (
-    <div className='order-item-container'>
+    <div
+      className={`order-item-container ${selected && "isSeleceted"}`}
+      onClick={() => onClick(item.productId)}>
       <div className='order-item-wrap'>
         <img
           className='order-item-img'
@@ -18,7 +14,14 @@ const OrderList = ({
           width={60}
           height={60}
         />
-        <span className='order-name'>{item.name}</span>
+        <ul className='order-item-info'>
+          <li className='type'>
+            <span>{item.type}</span>
+          </li>
+          <li className='name'>
+            <span>{item.name}</span>
+          </li>
+        </ul>
         <span className='order-price'>
           <i>₩ {new Intl.NumberFormat().format(item.price)}</i>
         </span>

@@ -1,10 +1,21 @@
-/* 상품 아이템 컨테이너 */
 .order-item-container {
-  display: flex; /* 가로로 나열 */
-  flex-direction: column; /* 수량 버튼은 세로로 배치될 수 있도록 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 1rem;
-  transition: all 0.3s ease; /* 수량 버튼이 나타날 때 부드럽게 전환 */
+  transition: all 0.3s ease;
+}
+
+.order-item-container.isSeleceted {
+  background-color: #f0f8ff; /* 선택된 항목의 배경색을 변경 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(4px); /* 눌리는 효과를 위해 아래로 더 많이 이동 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.3s ease; /* 부드러운 트랜지션 */
+}
+.order-item-container.isSeleceted:active {
+  transform: translateY(8px) scale(0.98); /* 눌렀을 때 아래로 더 많이 이동하고, 크기를 약간 줄여줌 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 눌렀을 때 그림자 효과 강화 */
 }
 
 /* 상품 항목 래퍼 (상품 이미지와 정보) */
@@ -26,15 +37,22 @@
 
 /* 상품 이미지 */
 .order-item-img {
-  margin-right: 15px;
+  margin-right: 30px;
   border-radius: 4px;
   object-fit: cover;
 }
 
 /* 상품명 */
-.order-name {
+.order-item-info {
   flex-grow: 1;
   font-size: 16px;
+}
+.order-item-info .type {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.order-item-info .name {
   font-weight: bold;
 }
 
@@ -73,15 +91,4 @@
   margin: 0 10px;
   font-size: 16px;
   font-weight: bold;
-}
-
-/* '선택됨' 상태일 때만 수량 조절 버튼 표시 */
-.order-item-container.selected .quantity-container {
-  display: flex; /* 'selected' 상태에서만 수량 조절 버튼 표시 */
-}
-
-/* 선택된 상품의 스타일 */
-.order-item-wrap.selected {
-  background-color: #eef5ff; /* 선택된 상품의 배경색 */
-  border-color: #4d90fe; /* 선택된 상품의 테두리 색 */
 }

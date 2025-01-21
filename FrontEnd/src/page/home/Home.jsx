@@ -21,14 +21,6 @@ export default function Home() {
     setCurrentProduct(null);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isModalOpen]);
-
   const fetchProducts = async () => {
     try {
       const productData = await ProductService.getProductLists();
@@ -44,6 +36,14 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   if (isLoading) {
     return (
       <div className='home-wrap'>
@@ -56,13 +56,13 @@ export default function Home() {
 
   return (
     <div className='home-wrap'>
-      {products.map((item) => (
-        <React.Fragment key={item.id}>
+      {products?.map((item) => (
+        <React.Fragment key={item.productId}>
           <section className='product-wrap' onClick={() => openModal(item)}>
             <Product item={item} />
           </section>
 
-          {currentProduct && currentProduct.id === item.id && (
+          {currentProduct && currentProduct.productId === item.productId && (
             <Modal
               title={currentProduct.name}
               isOpen={isModalOpen}

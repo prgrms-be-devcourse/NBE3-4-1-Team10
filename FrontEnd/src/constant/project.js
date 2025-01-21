@@ -2,7 +2,7 @@ import { Cookies } from "react-cookie";
 
 const API_URL = "http://localhost:8080/api";
 const PROJECT_ID = "Cafe&";
-const TOKEN = `ID_${PROJECT_ID}_JWT`;
+const TOKEN = `accessToken`;
 const USER_SESSION = `ID_${PROJECT_ID}_SES`;
 const DOMAIN = "localhost:3000";
 
