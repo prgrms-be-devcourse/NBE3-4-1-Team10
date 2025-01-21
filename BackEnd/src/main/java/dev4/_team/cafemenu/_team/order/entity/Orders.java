@@ -49,7 +49,7 @@ public class Orders extends BaseTimeEntity {
         this.address = address;
         this.post = post;
         this.totalPrice = totalPrice;
-        this.status = LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "배송 중";
+        this.status = LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "오늘 배송";
     }
 
     public void updateDelivery() {

@@ -19,7 +19,7 @@ public class OrderMapper {
                 .post(dto.getPost())
                 .totalPrice(dto.getTotalPrice())
                 .time(LocalDateTime.now())
-                .status(LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "배송 중")
+                .status(LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "오늘 배송")
                 .build();
     }
 
