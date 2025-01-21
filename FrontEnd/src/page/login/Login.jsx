@@ -1,7 +1,5 @@
 import React, { useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-
 import Msg from "../../component/msg/Msg";
 import Alert from "../../component/alert/Alert";
 
@@ -13,7 +11,6 @@ import "./Login.css";
 const Login = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
-  const router = useNavigate();
 
   const loginFormFields = [
     {
@@ -90,7 +87,7 @@ const Login = () => {
           setIsLoading(false)
         );
       } else {
-        router("/");
+        window.location.reload();
       }
     } catch (error) {
       Alert("로그인에 실패했습니다.", "", "", () => setIsLoading(false));
