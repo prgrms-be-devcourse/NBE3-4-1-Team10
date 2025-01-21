@@ -14,11 +14,13 @@ public class OrderProductResponseDto {
 
     private Long orderProductId;
 
+    private Long productId;
+
     private String productName; // 상품 이름
 
-    private int quantity;       // 수량
+    private int quantity; // 수량
 
-    private int price;          // 상품 가격
+    private int price; // 상품 가격
 
     public static OrderProductResponseDto of(OrderProduct orderProduct) {
         return OrderProductResponseDto.builder()
@@ -26,6 +28,7 @@ public class OrderProductResponseDto {
                 .price(orderProduct.getPrice())
                 .productName(orderProduct.getProduct().getName())
                 .quantity(orderProduct.getCount())
+                .productId(orderProduct.getProduct().getId())
                 .build();
     }
 }
