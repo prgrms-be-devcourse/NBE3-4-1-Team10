@@ -24,6 +24,7 @@ public class OrderMapper {
 
     public static OrderResponseDto toDto(Orders orders, List<OrderProductResponseDto> orderProductResponseDtos) {
         return OrderResponseDto.builder()
+                .orderID(orders.getId())
                 .address(orders.getAddress())
                 .post(orders.getPost())
                 .status(orders.getStatus())
