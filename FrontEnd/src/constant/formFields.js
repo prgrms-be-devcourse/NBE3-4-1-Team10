@@ -15,18 +15,18 @@ const FORM_FIELD = ({
     <>
       <label className='label' htmlFor={id}>
         {label}
+        <input
+          id={id}
+          className='input'
+          name={name}
+          type={type}
+          value={value}
+          onChange={(e) => onChange(name, e.target.value)}
+          placeholder={placeholder}
+          disabled={isLoading}
+          ref={ref}
+        />
       </label>
-      <input
-        id={id}
-        className='input'
-        name={name}
-        type={type}
-        value={value}
-        onChange={(e) => onChange(name, e.target.value)}
-        placeholder={placeholder}
-        disabled={isLoading}
-        ref={ref}
-      />
     </>
   );
 };

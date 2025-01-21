@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Msg from "../../component/msg/Msg";
 import Alert from "../../component/alert/Alert";
@@ -43,10 +43,13 @@ const Login = () => {
     setBody((prev) => ({ ...prev, [name]: e }));
   };
 
-  // 경고 클래스 처리
   const handleWarn = (ref, timeout = 3000) => {
     ref.current.classList.add("warn");
-    setTimeout(() => ref.current.classList.remove("warn"), timeout);
+
+    setTimeout(() => {
+      setMessage("");
+      ref.current.classList.remove("warn");
+    }, timeout);
   };
   const validateFields = () => {
     if (!body.email) {
@@ -118,14 +121,18 @@ const Login = () => {
         ))}
 
         <Msg text={message} type='error' />
-        <button className='button' type='submit' disabled={isLoading}>
-          {isLoading ? "로그인 중..." : "로그인"}
-        </button>
+        <div style={{ marginTop: "-1rem" }}>
+          <button
+            className='button login-btn'
+            type='submit'
+            disabled={isLoading}>
+            {isLoading ? "로그인 중..." : "로그인"}
+          </button>
+          <button className='button login-btn' disabled={isLoading}>
+            회원가입
+          </button>
+        </div>
       </form>
-
-      <Link to='/join'>
-        <span>회원가입</span>
-      </Link>
     </section>
   );
 };

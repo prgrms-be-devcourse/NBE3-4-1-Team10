@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Msg from "../../component/msg/Msg";
+import Alert from "../../component/alert/Alert";
+
 import { FORM_FIELD } from "../../constant/formFields";
 import { UserService } from "../../service/UserService";
 
 import "./Join.css";
-import Alert from "../../component/alert/Alert";
-import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const emailRef = useRef(null);
@@ -73,9 +74,13 @@ const Join = () => {
       onClickJoin();
     }
   };
-  const handleWarn = (ref, timeout = 2000) => {
+  const handleWarn = (ref, timeout = 3000) => {
     ref.current.classList.add("warn");
-    setTimeout(() => ref.current.classList.remove("warn"), timeout);
+
+    setTimeout(() => {
+      setMessage("");
+      ref.current.classList.remove("warn");
+    }, timeout);
   };
 
   const validateFields = () => {
@@ -128,7 +133,7 @@ const Join = () => {
         password: body.pwd,
         nickname: body.nickname,
       });
-      if (res?.status === 200) {
+      if (res) {
         Alert(
           "회원가입 되셨습니다.",
           "",
@@ -148,7 +153,6 @@ const Join = () => {
     <section className='join-wrap'>
       <form className='join-form' onSubmit={onClickJoin}>
         <Msg type='title' text='Join' />
-
         {joinFormFields.map(({ id, label, name, type, placeholder, ref }) => (
           <div className='join-form-group'>
             <FORM_FIELD

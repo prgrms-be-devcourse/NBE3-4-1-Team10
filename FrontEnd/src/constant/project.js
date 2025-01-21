@@ -3,6 +3,7 @@ import { Cookies } from "react-cookie";
 const API_URL = "http://localhost:8080/api";
 const PROJECT_ID = "Cafe&";
 const TOKEN = `accessToken`;
+const REFRESH_TOKEN = `refreshToken`;
 const USER_SESSION = `ID_${PROJECT_ID}_SES`;
 const DOMAIN = "localhost:3000";
 
@@ -80,4 +81,5 @@ export {
   API_URL,
   PROJECT_ID,
   USER_SESSION,
+  REFRESH_TOKEN,
 };

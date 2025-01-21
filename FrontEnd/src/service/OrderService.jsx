@@ -27,7 +27,6 @@ const putOrderLists = async (body, id) => {
 };
 
 const deleteOrderLists = async (id) => {
-  console.log(id);
   try {
     const response = await axiosInstance.delete(`${API_URL}/order/${id}`);
 

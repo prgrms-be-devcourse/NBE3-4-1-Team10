@@ -8,9 +8,7 @@ const getProductLists = async () => {
     if (response?.data) {
       return response.data;
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 // 상품 추가

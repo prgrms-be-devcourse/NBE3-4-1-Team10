@@ -1,4 +1,6 @@
 .skeleton {
+  width: 100%;
+  max-width: 100%;
   background-color: #f4f4f4;
   border-radius: 10px;
   margin-bottom: 1rem;

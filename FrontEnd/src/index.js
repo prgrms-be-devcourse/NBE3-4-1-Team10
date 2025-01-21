@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./page/layout/Layout";
 import Home from "./page/home/Home";
-import reportWebVitals from "./reportWebVitals";
 import Admin from "./page/admin/Admin";
 import Login from "./page/login/Login";
 import Join from "./page/join/Join";
@@ -25,5 +24,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-reportWebVitals();

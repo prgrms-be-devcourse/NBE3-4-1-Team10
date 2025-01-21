@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-
+import { useLocation } from "react-router-dom";
 import Logo from "../logo/Logo";
 import Drawer from "../drawer/Drawer";
 import DrawerBtn from "./drawerBtn/DrawerBtn";
+import Alert from "../../alert/Alert";
+import { ProductService } from "../../../service/ProductService";
 
 import "./Header.css";
-import { ProductService } from "../../../service/ProductService";
-import Alert from "../../alert/Alert";
+import { getJwt } from "../../../constant/project";
 
 export default function Header() {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -48,7 +50,7 @@ export default function Header() {
   const onClickCreatePost = async () => {
     try {
       const res = await ProductService.postProductLists();
-      console.log(res);
+
       if (res?.status === 200) {
         Alert("상품이 \n 생성되었습니다.", "", "", () =>
           window.location.reload()
@@ -62,17 +64,13 @@ export default function Header() {
   return (
     <header id='header' className={isScrolled ? "scrolled" : ""}>
       <Logo />
-      <div
-        style={{
-          display: "flex",
-          gap: "2rem",
-          zIndex: "100000",
-        }}>
-        <button style={{ fontSize: "1rem" }} onClick={onClickCreatePost}>
-          생성하기
-        </button>
+      <div className='header-nav-create-btn'>
+        {location.pathname === "/" && getJwt() && (
+          <button onClick={onClickCreatePost}>상품 생성하기</button>
+        )}
         <DrawerBtn isOpen={isDrawerOpen} onClick={onChangeDrawerOpen} />
       </div>
+
       <Drawer isOpen={isDrawerOpen} close={onChangeDrawerOpen} />
     </header>
   );

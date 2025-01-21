@@ -22,7 +22,7 @@ const USER_LIST = [
   {
     id: 1,
     title: "Logout",
-    href: "/join",
+    href: "",
   },
 ];
 

@@ -3,6 +3,7 @@ import RenderOrder from "../../component/admin/renderOrder/RenderOrder";
 import { OrderService } from "../../service/OrderService";
 
 import "./Admin.css";
+import Alert from "../../component/alert/Alert";
 
 const Admin = () => {
   const [orders, setOrders] = useState({ tomorrow: [], today: [] });
@@ -26,6 +27,7 @@ const Admin = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
+
   const handleUpdateOrder = async (orderID, updatedOrder) => {
     try {
       setOrders((prevOrders) => {
@@ -59,7 +61,9 @@ const Admin = () => {
 
               const response = await OrderService.putOrderLists(body, orderID);
               if (response) {
-                console.log("주문이 성공적으로 수정되었습니다.");
+                Alert("주문이 수정되었습니다.", "", "", () =>
+                  window.location.reload()
+                );
               }
 
               return {
@@ -75,7 +79,7 @@ const Admin = () => {
         return updatedOrders;
       });
     } catch (error) {
-      console.error("주문 업데이트 중 오류 발생:", error);
+      return;
     }
   };
 
@@ -89,7 +93,7 @@ const Admin = () => {
 
   return (
     <div className='container'>
-      <h2 className='section-title'>오늘의 주문</h2>
+      <h2 className='section-title'>배송완료</h2>
       <div className='order-list'>
         {orders.today.length > 0 ? (
           orders.today.map((order) => (
@@ -104,7 +108,7 @@ const Admin = () => {
         )}
       </div>
 
-      <h2 className='section-title'>내일의 주문</h2>
+      <h2 className='section-title'>배송 전</h2>
       <div className='order-list'>
         {orders.tomorrow.length > 0 ? (
           orders.tomorrow.map((order) => (

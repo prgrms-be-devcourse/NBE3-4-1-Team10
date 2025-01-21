@@ -50,3 +50,9 @@
   transform: translateY(-10px);
   height: calc(var(--header-height) - 0.3rem);
 }
+
+.header-nav-create-btn {
+  display: flex;
+  gap: 2rem;
+  z-index: calc(var(--z-index) + 51);
+}

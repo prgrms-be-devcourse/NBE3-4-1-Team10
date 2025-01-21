@@ -4,8 +4,9 @@ import Product from "../../component/custom/product/Product";
 
 import { ProductService } from "../../service/ProductService";
 
-import "./Home.css";
 import SkeletonProduct from "../../component/custom/product/SkeletonProduct";
+
+import "./Home.css";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,6 @@ export default function Home() {
       setProducts(productData);
       setIsLoading(false);
     } catch (error) {
-      console.error("상품 목록 불러오기 오류:", error);
       setIsLoading(false);
     }
   };
@@ -50,8 +50,8 @@ export default function Home() {
   return (
     <div className='home-wrap'>
       {isLoading
-        ? Array.from({ length: 3 }).map((_) => (
-            <section className='product-wrap'>
+        ? Array?.from({ length: 3 })?.map((_, index) => (
+            <section className='product-wrap' key={index}>
               <SkeletonProduct />
             </section>
           ))

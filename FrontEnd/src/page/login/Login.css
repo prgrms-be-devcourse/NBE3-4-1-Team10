@@ -16,5 +16,8 @@
   flex-direction: column;
   justify-content: center;
   padding: var(--padding);
-  gap: 1rem;
+  gap: 2rem;
+}
+.login-btn {
+  margin-top: -0.2rem;
 }

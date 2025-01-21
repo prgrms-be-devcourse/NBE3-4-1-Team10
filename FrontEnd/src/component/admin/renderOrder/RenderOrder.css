@@ -132,17 +132,9 @@ button:hover {
   color: white;
 }
 
-.save-button:hover {
-  background-color: var(--text-primary-dark);
-}
-
 .cancel-button {
   background-color: var(--text-error);
   color: white;
-}
-
-.cancel-button:hover {
-  background-color: var(--text-error-dark);
 }
 
 /* 주문 상품 부분 */

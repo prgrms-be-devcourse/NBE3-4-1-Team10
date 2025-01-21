@@ -25,8 +25,6 @@ const Order = () => {
   const postRef = useRef(null);
   const router = useNavigate();
 
-  const TOKEN = getJwt();
-
   const orderFormFields = [
     {
       id: "address",
@@ -100,7 +98,11 @@ const Order = () => {
 
   const handleWarn = (ref, timeout = 3000) => {
     ref.current.classList.add("warn");
-    setTimeout(() => ref.current.classList.remove("warn"), timeout);
+
+    setTimeout(() => {
+      setMessage("");
+      ref.current.classList.remove("warn");
+    }, timeout);
   };
 
   const validateFields = () => {
@@ -151,7 +153,7 @@ const Order = () => {
         orderProductDto,
       });
 
-      if (res.status === 401) {
+      if (!res) {
         Alert(
           "로그인 후 \n 사용해주세요.",
           "",
@@ -159,7 +161,7 @@ const Order = () => {
           () => setIsLoading(false),
           router("/login")
         );
-      } else if (res.data) {
+      } else if (res) {
         Alert(
           "주문이 \n 완료되었습니다.",
           "",

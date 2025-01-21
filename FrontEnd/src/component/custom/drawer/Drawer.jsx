@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import DrawerContents from "./contents/DrawerContents";
+
 import { getJwt } from "../../../constant/project";
+import DrawerContents from "./contents/DrawerContents";
+
+import { UserService } from "../../../service/UserService";
 
 import "./Drawer.css";
 
@@ -10,12 +13,15 @@ const Drawer = ({ isOpen, close }) => {
 
   const router = useNavigate();
 
-  const goToPage = (id) => {
+  const goToPage = async (id) => {
     if (id) {
       router(id);
+      close();
     } else {
+      await UserService.logOut().then(() => {
+        window.location.reload();
+      });
     }
-    close();
   };
 
   return (

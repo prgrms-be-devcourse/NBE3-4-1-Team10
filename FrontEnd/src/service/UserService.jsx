@@ -1,5 +1,11 @@
 import axiosInstance from "../constant/axiosInstance";
-import { API_URL, setCookie } from "../constant/project";
+import {
+  API_URL,
+  getJwt,
+  REFRESH_TOKEN,
+  removeCookie,
+  setCookie,
+} from "../constant/project";
 
 // 회원가입
 const signUp = async (body) => {
@@ -31,9 +37,29 @@ const signIn = async (body) => {
   }
 };
 
+// 로그인
+const logOut = async () => {
+  const TOKEN = getJwt();
+  try {
+    const response = await axiosInstance.post(
+      `${API_URL}/user/logout?accessToken=${TOKEN}`
+    );
+    if (response) {
+      removeCookie("accessToken", TOKEN);
+      removeCookie("refreshToken", REFRESH_TOKEN);
+      return response;
+    } else {
+      return {};
+    }
+  } catch (error) {
+    throw new Error("로그아웃 중 오류가 발생했습니다.");
+  }
+};
+
 const UserService = {
   signUp,
   signIn,
+  logOut,
 };
 
 export { UserService };
