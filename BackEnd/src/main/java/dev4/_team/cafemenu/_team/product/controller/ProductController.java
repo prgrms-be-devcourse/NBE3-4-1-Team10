@@ -52,7 +52,7 @@ public class ProductController {
 
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
-  
+
     @DeleteMapping("/admin/product//{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
