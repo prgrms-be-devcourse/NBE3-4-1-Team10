@@ -1,6 +1,5 @@
 package dev4._team.cafemenu._team.product.controller;
 
-import dev4._team.cafemenu._team.rs.RsData;
 import dev4._team.cafemenu._team.product.dto.ProductDto;
 import dev4._team.cafemenu._team.product.form.ProductForm;
 import dev4._team.cafemenu._team.product.service.ProductService;
@@ -53,7 +52,7 @@ public class ProductController {
 
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
-  
+
     @DeleteMapping("/admin/product//{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
@@ -64,8 +63,4 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-
-
-
-
 }

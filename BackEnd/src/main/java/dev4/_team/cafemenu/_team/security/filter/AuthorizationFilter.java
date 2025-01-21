@@ -65,6 +65,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             // 토큰 검증
             CustomUserDetails customUserDetails = tokenProvider.verify(token);
             log.debug("토큰 검증 성공. 사용자 이름: {}", customUserDetails.getUsername());
+            log.debug("사용자 권한: {}", customUserDetails.getAuthorities());
 
             // 인증 객체 생성 및 SecurityContext 설정
             Authentication authentication = new UsernamePasswordAuthenticationToken(
@@ -72,9 +73,12 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             log.info("autehntication :{}, email :{}",authentication,authentication.getName());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             Authentication currentAuth = SecurityContextHolder.getContext().getAuthentication();
-            log.info("SecurityContext 인증 객체: {}, Principal: {}", currentAuth, currentAuth != null ? currentAuth.getPrincipal() : null);
-
-
+            if (currentAuth == null) {
+                log.warn("SecurityContext에 인증 객체가 없습니다.");
+            } else {
+                log.info("SecurityContext 인증 객체: {}", currentAuth);
+                log.info("SecurityContext 권한: {}", currentAuth.getAuthorities());
+            }
         } catch (Exception e) {
             log.error("토큰 검증 실패: {}", e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized

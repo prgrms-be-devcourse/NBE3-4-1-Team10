@@ -40,16 +40,23 @@ public class Orders extends BaseTimeEntity {
 
     private String status;
 
+    private int totalPrice;
+
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
-    public void updateOrder(String address, String post) {
+    public void updateOrder(String address, String post,int totalPrice) {
         this.address = address;
         this.post = post;
+        this.totalPrice = totalPrice;
         this.status = LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "배송 중";
     }
 
     public void updateDelivery() {
         this.status = "내일 배송";
+    }
+
+    public void updateTotalPrice(int totalPrice) {
+        this.totalPrice += totalPrice;
     }
 }
