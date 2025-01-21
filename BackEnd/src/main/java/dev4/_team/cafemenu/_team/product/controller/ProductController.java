@@ -14,19 +14,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/product")
+@RequestMapping("/api")
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping
+
+    @GetMapping("/product")
     public ResponseEntity<List<ProductDto>> showProducts() {
         List<ProductDto> products = productService.findDtoAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
-
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public ResponseEntity<ProductDto> showProduct(
             @PathVariable("id") Long id
     ) {
@@ -34,7 +34,7 @@ public class ProductController {
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/admin/product")
     public ResponseEntity<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
     ) {
@@ -43,7 +43,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/product/{id}")
     public ResponseEntity<ProductDto> updateProduct(
             @PathVariable("id") Long id,
             @RequestBody ProductForm productForm
@@ -53,8 +53,8 @@ public class ProductController {
 
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
-
-    @DeleteMapping("/{id}")
+  
+    @DeleteMapping("/admin/product//{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
     ) {
