@@ -99,6 +99,7 @@ const Admin = () => {
           orders.today.map((order) => (
             <RenderOrder
               key={order.orderID}
+              type='complete'
               order={order}
               onUpdateOrder={handleUpdateOrder}
             />

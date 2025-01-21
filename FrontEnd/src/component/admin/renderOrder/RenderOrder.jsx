@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { DeleteIcon, EditIcon } from "../../../constant/Icon"; // 아이콘 가져오기
-import OrderList from "../orderList/OrderList"; // 주문 상품 리스트
-import "./RenderOrder.css"; // 스타일 import
+import { DeleteIcon, EditIcon } from "../../../constant/Icon";
+import OrderList from "../orderList/OrderList";
+import "./RenderOrder.css";
 import { OrderService } from "../../../service/OrderService";
 import Alert from "../../alert/Alert";
 
-const RenderOrder = ({ order, onUpdateOrder }) => {
-  const [isEditing, setIsEditing] = useState(false); // 전체 수정 상태
+const RenderOrder = ({ order, onUpdateOrder, type }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const [updatedOrder, setUpdatedOrder] = useState({
     email: order.email,
     address: order.address,
@@ -57,30 +57,31 @@ const RenderOrder = ({ order, onUpdateOrder }) => {
         <h3>주문 ID: {order.orderID}</h3>
         <p>{order.status}</p>
 
-        {/* 수정 아이콘 또는 저장/취소 버튼 표시 */}
-        <div className='edit-buttons'>
-          {isEditing ? (
-            <div className='edit-actions'>
-              <button className='save-button' onClick={handleSaveClick}>
-                저장
-              </button>
-              <button className='cancel-button' onClick={handleCancelClick}>
-                취소
-              </button>
-            </div>
-          ) : (
-            <div className='edit-actions'>
-              <button className='edit-button' onClick={handleEditClick}>
-                <EditIcon />
-              </button>
-              <button
-                className='delete-button'
-                onClick={() => onClickDeleteOrderList(order.orderID)}>
-                <DeleteIcon />
-              </button>
-            </div>
-          )}
-        </div>
+        {type !== "complete" && (
+          <div className='edit-buttons'>
+            {isEditing ? (
+              <div className='edit-actions'>
+                <button className='save-button' onClick={handleSaveClick}>
+                  저장
+                </button>
+                <button className='cancel-button' onClick={handleCancelClick}>
+                  취소
+                </button>
+              </div>
+            ) : (
+              <div className='edit-actions'>
+                <button className='edit-button' onClick={handleEditClick}>
+                  <EditIcon />
+                </button>
+                <button
+                  className='delete-button'
+                  onClick={() => onClickDeleteOrderList(order.orderID)}>
+                  <DeleteIcon />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 수정 모드일 때 */}
