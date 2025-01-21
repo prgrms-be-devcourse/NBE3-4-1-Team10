@@ -20,6 +20,8 @@ import java.util.List;
 @Data
 public class OrderResponseDto {
 
+    private Long orderID;
+
     private String address;
 
     private String post;

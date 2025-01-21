@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OrderProductResponseDto {
+
+    private Long orderProductId;
+
     private String productName; // 상품 이름
 
     private int quantity;       // 수량
@@ -19,6 +22,7 @@ public class OrderProductResponseDto {
 
     public static OrderProductResponseDto of(OrderProduct orderProduct) {
         return OrderProductResponseDto.builder()
+                .orderProductId(orderProduct.getId())
                 .price(orderProduct.getPrice())
                 .productName(orderProduct.getProduct().getName())
                 .quantity(orderProduct.getCount())
