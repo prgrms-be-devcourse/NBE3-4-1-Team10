@@ -1,5 +1,7 @@
 package dev4._team.cafemenu._team.order.mapper;
 
+import dev4._team.cafemenu._team.global.exception.BusinessException;
+import dev4._team.cafemenu._team.global.exception.ErrorCode;
 import dev4._team.cafemenu._team.order.dto.OrderDto;
 import dev4._team.cafemenu._team.order.dto.OrderResponseDto;
 import dev4._team.cafemenu._team.order.entity.Orders;
@@ -61,15 +63,30 @@ public class OrderMapper {
     }
 
     public static Orders updateEntity(Orders existingOrder, OrderDto dto) {
-        // 기존 값은 그대로 유지하고, 필요한 필드만 수정
+        List<OrderProduct> updatedOrderProducts = new ArrayList<>();
+
+        for (OrderProductDto orderProductDto : dto.getOrderProductDto()) {
+            OrderProduct existingOrderProduct = existingOrder.getOrderProduct().stream()
+                    .filter(op -> op.getProduct().getId().equals(orderProductDto.getProductId()))
+                    .findFirst()
+                    .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_PRODUCT));
+
+            existingOrderProduct.updateCountAndPrice(orderProductDto.getCount());
+
+            updatedOrderProducts.add(existingOrderProduct);
+        }
+
+        // 수정된 주문을 반영하여 새로운 Orders 엔티티 생성
         return Orders.builder()
                 .id(existingOrder.getId())
                 .user(existingOrder.getUser())  // 기존 사용자 정보 유지
-                .orderProduct(existingOrder.getOrderProduct())  // 기존 상품 정보 유지
-                .address(dto.getAddress())  // 수정된 값
-                .post(dto.getPost())  // 수정된 값
-                .status(dto.getStatus())  // 수정된 값
+                .orderProduct(updatedOrderProducts)  // 수정된 상품 정보 반영
+                .address(dto.getAddress())  // 수정된 주소
+                .post(dto.getPost())  // 수정된 우편번호
+                .status(dto.getStatus())  // 수정된 상태
                 .time(existingOrder.getTime())  // 기존 시간 유지
                 .build();
     }
+
+
 }

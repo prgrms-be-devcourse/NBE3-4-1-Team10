@@ -31,4 +31,10 @@ public class OrderProduct extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orders_id", nullable = false)
     private Orders orders;
+
+    public void updateCountAndPrice(int newCount) {
+        this.count = newCount;
+        this.price = this.product.getPrice() * newCount;  // 가격을 새로 계산
+    }
+
 }
