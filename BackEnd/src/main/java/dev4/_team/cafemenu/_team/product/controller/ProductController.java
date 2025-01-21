@@ -5,6 +5,7 @@ import dev4._team.cafemenu._team.product.form.ProductForm;
 import dev4._team.cafemenu._team.product.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,24 +20,26 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductDto>> showProducts() {
+        List<ProductDto> products = productService.findDtoAll();
+        return new ResponseEntity<>(products, HttpStatus.OK);
 
-        return ResponseEntity.ok().body(productService.findDtoAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> showProduct(
             @PathVariable("id") Long id
     ) {
-        return ResponseEntity.ok().body(productService.findDtoById(id));
+        ProductDto productDto = productService.findDtoById(id);
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(
+    public ResponseEntity<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
     ) {
         productService.create(productForm);
 
-        return ResponseEntity.status(204).build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -47,7 +50,7 @@ public class ProductController {
 
         ProductDto productDto = productService.modify(id, productForm);
 
-        return ResponseEntity.ok().body(productDto);
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -57,7 +60,7 @@ public class ProductController {
 
         productService.delete(id);
 
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
