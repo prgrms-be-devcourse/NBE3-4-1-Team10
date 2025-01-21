@@ -1,4 +1,4 @@
-package dev4._team.cafemenu._team.delivery.service;
+package dev4._team.cafemenu._team.order.service;
 
 import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;

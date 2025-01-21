@@ -42,7 +42,7 @@ public class SignupDto {
                 .email(email)
                 .nickname(nickname)
                 .password(passwordEncoder.encode(password))
-                .role(UserRole.USER)
+                .role(UserRole.ROLE_USER)
                 .build();
     }
 }
