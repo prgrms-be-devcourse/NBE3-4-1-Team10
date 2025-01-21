@@ -15,17 +15,22 @@ const getProductLists = async () => {
 
 // 상품 추가
 const postProductLists = async () => {
+  const randomPrice = Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000;
+
+  const name = `테스트 상품`;
+
+  // body 생성
   const body = {
-    type: "딴거",
-    name: "테스트 글",
+    type: "커피콩",
+    name: name,
     imageUrl: "https://i.imgur.com/HKOFQYa.jpeg",
-    content: "테스트글입니다..",
-    price: 5000,
+    content: `${name} 설명글입니다.`,
+    price: randomPrice,
   };
 
   try {
     const response = await axiosInstance.post(`${API_URL}/admin/product`, body);
-    const res = response?.data?.value;
+    const res = response;
     if (res) {
       return res;
     }

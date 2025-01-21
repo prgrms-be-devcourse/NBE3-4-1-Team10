@@ -95,8 +95,8 @@ const EditIcon = () => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      width='24'
-      height='24'>
+      width='40'
+      height='40'>
       <path
         d='M14.06 2.94c-.39-.39-1.02-.39-1.41 0L4 10.59V15h4.41l8.65-8.65c.39-.39.39-1.02 0-1.41l-3.88-3.88c-.39-.39-1.02-.39-1.41 0z'
         fill='none'

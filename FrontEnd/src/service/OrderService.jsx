@@ -14,6 +14,31 @@ const postOrderLists = async (body) => {
   }
 };
 
+const putOrderLists = async (body, id) => {
+  try {
+    const response = await axiosInstance.put(`${API_URL}/order/${id}`, body);
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error("주문을 수정하는 중 오류가 발생했습니다.");
+  }
+};
+
+const deleteOrderLists = async (id) => {
+  console.log(id);
+  try {
+    const response = await axiosInstance.delete(`${API_URL}/order/${id}`);
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error("주문을 수정하는 중 오류가 발생했습니다.");
+  }
+};
+
 const getTodayOrderLists = async () => {
   try {
     const response = await axiosInstance.get(`${API_URL}/order/today-delivery`);
@@ -42,6 +67,8 @@ const getTommorowOrderLists = async () => {
 
 const OrderService = {
   postOrderLists,
+  putOrderLists,
+  deleteOrderLists,
   getTodayOrderLists,
   getTommorowOrderLists,
 };

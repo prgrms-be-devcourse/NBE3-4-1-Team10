@@ -26,40 +26,57 @@ const Admin = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
+  const handleUpdateOrder = async (orderID, updatedOrder) => {
+    try {
+      setOrders((prevOrders) => {
+        const updatedOrders = { ...prevOrders };
 
-  const handleUpdateOrder = (orderID, updatedOrder) => {
-    setOrders((prevOrders) => {
-      const updatedOrders = { ...prevOrders };
-      ["today", "tomorrow"].forEach((key) => {
-        updatedOrders[key] = updatedOrders[key].map((order) => {
-          if (order.orderID === orderID) {
-            return { ...order, ...updatedOrder };
-          }
-          return order;
-        });
-      });
-      return updatedOrders;
-    });
-  };
+        ["today", "tomorrow"].forEach((key) => {
+          updatedOrders[key] = updatedOrders[key].map(async (order) => {
+            if (order.orderID === orderID) {
+              const updatedFullOrder = {
+                ...order,
+                ...updatedOrder,
+              };
 
-  const handleUpdateProduct = (orderProductId, updatedProduct) => {
-    setOrders((prevOrders) => {
-      const updatedOrders = { ...prevOrders };
-      ["today", "tomorrow"].forEach((key) => {
-        updatedOrders[key] = updatedOrders[key].map((order) => {
-          if (order.orderProduct) {
-            order.orderProduct = order.orderProduct.map((product) => {
-              if (product.orderProductId === orderProductId) {
-                return { ...product, ...updatedProduct };
+              const updatedOrderProductDto = updatedFullOrder.orderProduct.map(
+                (product) => {
+                  const { quantity, productId } = product;
+
+                  return {
+                    productId,
+                    count: quantity,
+                  };
+                }
+              );
+
+              const body = {
+                address: updatedFullOrder.address,
+                post: updatedFullOrder.post,
+                totalPrice: updatedFullOrder.totalPrice,
+                orderProductDto: updatedOrderProductDto,
+              };
+
+              const response = await OrderService.putOrderLists(body, orderID);
+              if (response) {
+                console.log("주문이 성공적으로 수정되었습니다.");
               }
-              return product;
-            });
-          }
-          return order;
+
+              return {
+                ...updatedFullOrder,
+                orderProduct: updatedOrderProductDto,
+              };
+            }
+
+            return order;
+          });
         });
+
+        return updatedOrders;
       });
-      return updatedOrders;
-    });
+    } catch (error) {
+      console.error("주문 업데이트 중 오류 발생:", error);
+    }
   };
 
   if (isLoading) {
@@ -80,7 +97,6 @@ const Admin = () => {
               key={order.orderID}
               order={order}
               onUpdateOrder={handleUpdateOrder}
-              onUpdateProduct={handleUpdateProduct}
             />
           ))
         ) : (
@@ -96,7 +112,6 @@ const Admin = () => {
               key={order.orderID}
               order={order}
               onUpdateOrder={handleUpdateOrder}
-              onUpdateProduct={handleUpdateProduct}
             />
           ))
         ) : (

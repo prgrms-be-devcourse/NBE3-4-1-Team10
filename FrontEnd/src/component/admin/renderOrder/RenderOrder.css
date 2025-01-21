@@ -27,19 +27,41 @@
   margin: 0;
 }
 
-.edit-button {
+/* 버튼 공통 스타일 */
+button {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
 }
 
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+}
 .edit-button svg {
-  width: 20px;
-  height: 20px;
-  color: #007bff;
+  width: 30px;
+  height: 30px;
+  color: var(--text-primary);
 }
 
-/* 주문 정보 */
+.delete-button svg {
+  width: 25px;
+  height: 25px;
+  color: var(--text-error);
+}
+
+/* 주문 상품 정보 */
 .order-info {
   margin-top: 20px;
 }
@@ -61,68 +83,80 @@
   font-weight: bold;
 }
 
-.order-edit-form {
+/* 주문 편집 폼 */
+.order-edit-form,
+.order-edit-form-wrap {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.order-edit-form div {
+.order-edit-form div,
+.order-edit-form-wrap {
   margin-bottom: 12px;
 }
 
-.order-edit-form label {
-  display: block;
+.order-edit-form label,
+.order-edit-form-wrap label {
   font-size: 14px;
   font-weight: 500;
   color: #333;
   margin-bottom: 5px;
 }
 
-.order-edit-form input {
-  width: 100%;
+.order-edit-form input,
+.order-edit-form-wrap input {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin-top: 5px;
-  box-sizing: border-box;
 }
 
-.order-edit-form input:focus {
+.order-edit-form input:focus,
+.order-edit-form-wrap input:focus {
   outline: none;
   border-color: #007bff;
 }
+.edit-actions {
+  display: flex;
+}
+/* 주문 편집 액션 */
+.order-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-.order-edit-actions button {
-  padding: 10px 15px;
-  background-color: #007bff;
+.save-button {
+  background-color: var(--text-primary);
   color: white;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
 }
 
-.order-edit-actions button:hover {
-  background-color: #0056b3;
+.save-button:hover {
+  background-color: var(--text-primary-dark);
 }
 
-.order-edit-actions button:last-child {
-  background-color: #ccc;
+.cancel-button {
+  background-color: var(--text-error);
+  color: white;
 }
 
-.order-edit-actions button:last-child:hover {
-  background-color: #999;
+.cancel-button:hover {
+  background-color: var(--text-error-dark);
 }
 
 /* 주문 상품 부분 */
-.order-products {
-  margin-top: 30px;
-}
-
 .order-products h4 {
   font-size: 18px;
   font-weight: bold;
   margin: 2rem 0;
   color: #333;
+}
+
+.order-edit-form-wrap input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
