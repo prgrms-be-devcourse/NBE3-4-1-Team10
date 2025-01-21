@@ -1,4 +1,4 @@
-package dev4._team.cafemenu._team;
+package dev4._team.cafemenu._team.global;
 
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.entity.UserRole;
@@ -17,21 +17,12 @@ public class Dummy {
 
     @PostConstruct
     public void init() {
-        // 더미 유저 데이터가 이미 있다면 추가하지 않음
-        if (userRepository.count() > 0) {
-            return;
-        }
-
-        User normalUser = User.builder()
-                .email("user@naver.com")
-                .nickname("테스트")
-                .password(passwordEncoder.encode("Dbwjdlqslek12!"))
-                .role(UserRole.USER)
+        User adminUser = User.builder()
+                .email("admin@naver.com")
+                .nickname("관리자")
+                .password(passwordEncoder.encode("Rhksflwk12!"))
+                .role(UserRole.ADMIN)
                 .build();
-
-        // 데이터베이스에 저장
-        userRepository.save(normalUser);
-
-        System.out.println("더미 데이터가 초기화되었습니다.");
+        userRepository.save(adminUser);
     }
 }

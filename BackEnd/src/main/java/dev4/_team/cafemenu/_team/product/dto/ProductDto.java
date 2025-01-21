@@ -9,7 +9,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor
 public class ProductDto {
-
     private Long productId;
 
     private int price;

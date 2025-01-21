@@ -1,5 +1,6 @@
 package dev4._team.cafemenu._team.order.dto;
 
+import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
 import dev4._team.cafemenu._team.orderProduct.dto.OrderProductResponseDto;
 import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import jakarta.validation.constraints.NotBlank;
@@ -19,14 +20,12 @@ import java.util.List;
 @Data
 public class OrderResponseDto {
 
-    private Long userId;
-
     private String address;
 
     private String post;
 
     private String status;
 
-    private List<OrderProduct> orderProduct;
+    private List<OrderProductResponseDto> orderProduct;
 
 }
