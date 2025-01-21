@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Msg from "../../component/msg/Msg";
 import Alert from "../../component/alert/Alert";
 
@@ -11,6 +13,7 @@ import "./Login.css";
 const Login = () => {
   const emailRef = useRef(null);
   const pwdRef = useRef(null);
+  const router = useNavigate();
 
   const loginFormFields = [
     {
@@ -86,8 +89,14 @@ const Login = () => {
         Alert("아이디와 비밀번호를 \n 정확히 입력해 주세요.", "", "", () =>
           setIsLoading(false)
         );
-      } else {
-        window.location.reload();
+      } else if (res) {
+        Alert(
+          "로그인 성공!",
+          "",
+          "",
+          () => router("/"),
+          window.location.reload()
+        );
       }
     } catch (error) {
       Alert("로그인에 실패했습니다.", "", "", () => setIsLoading(false));

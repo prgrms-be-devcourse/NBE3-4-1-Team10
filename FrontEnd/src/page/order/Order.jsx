@@ -2,17 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Msg from "../../component/msg/Msg";
-import Alert from "../../component/alert/Alert";
 import OrderList from "../../component/orderList/OrderList";
 import { PRODUCTS } from "../../component/custom/product/Dummy";
 import SkeletonList from "../../component/orderList/SkeletonList";
-
 import { FORM_FIELD } from "../../constant/formFields";
 
 import { ProductService } from "../../service/ProductService";
-import { OrderService } from "../../service/OrderService";
 
 import "./Order.css";
+import { OrderService } from "../../service/OrderService";
+import Alert from "../../component/alert/Alert";
 
 const Order = () => {
   const [body, setBody] = useState({ address: "", post: "" });
@@ -50,17 +49,13 @@ const Order = () => {
 
   const handleQuantityChange = (productId, action) => {
     setQuantities((prevQuantities) => {
-      const currentQuantity = prevQuantities[productId]?.quantity || 1;
-
-      let newQuantity;
-      if (action === "increase") {
-        newQuantity = currentQuantity + 1;
-      } else if (action === "decrease") {
-        newQuantity =
-          selectedItems.includes(productId) && currentQuantity > 1
-            ? currentQuantity - 1
-            : 1;
-      }
+      const currentQuantity = prevQuantities[productId]?.quantity || 0;
+      const newQuantity =
+        action === "increase"
+          ? currentQuantity + 1
+          : currentQuantity > 1
+          ? currentQuantity - 1
+          : 1;
 
       return {
         ...prevQuantities,
@@ -81,7 +76,7 @@ const Order = () => {
       if (!newSelectedItems.includes(productId)) {
         setQuantities((prevQuantities) => ({
           ...prevQuantities,
-          [productId]: { ...prevQuantities[productId], quantity: 1 },
+          [productId]: { ...prevQuantities[productId], quantity: 0 },
         }));
       }
 
@@ -92,7 +87,7 @@ const Order = () => {
   const calculateTotalPrice = () => {
     return products.reduce((total, product) => {
       if (selectedItems.includes(product.productId)) {
-        const quantity = quantities[product.productId]?.quantity || 1;
+        const quantity = quantities[product.productId]?.quantity || 0;
         const price = product.price;
         return total + price * quantity;
       }
@@ -146,7 +141,7 @@ const Order = () => {
       .filter((productId) => quantities[productId]?.quantity > 0)
       .map((productId) => ({
         productId: parseInt(productId),
-        count: quantities[productId]?.quantity || 1,
+        count: quantities[productId]?.quantity || 0,
       }));
     try {
       const totalPrice = calculateTotalPrice();
@@ -188,7 +183,7 @@ const Order = () => {
       setProducts(productData);
       PRODUCTS.forEach((product) => {
         initialQuantities[product.productId] = {
-          quantity: 1,
+          quantity: 0,
           price: product.price,
         };
       });
@@ -215,7 +210,7 @@ const Order = () => {
             <OrderList
               key={item.productId}
               item={item}
-              quantity={quantities[item.productId]?.quantity || 1}
+              quantity={quantities[item.productId]?.quantity || 0}
               selected={selectedItems.includes(item.productId)}
               onQuantityChange={handleQuantityChange}
               onClick={onClickSelectOrder}

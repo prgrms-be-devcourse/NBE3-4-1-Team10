@@ -19,6 +19,7 @@ const Drawer = ({ isOpen, close }) => {
       close();
     } else {
       await UserService.logOut().then(() => {
+        router("/");
         window.location.reload();
       });
     }
