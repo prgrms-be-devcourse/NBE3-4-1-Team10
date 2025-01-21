@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,4 +40,16 @@ public class Orders extends BaseTimeEntity {
 
     private String status;
 
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderProduct> orderProducts = new ArrayList<>();
+
+    public void updateOrder(String address, String post) {
+        this.address = address;
+        this.post = post;
+        this.status = LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "배송 중";
+    }
+
+    public void updateDelivery() {
+        this.status = "내일 배송";
+    }
 }

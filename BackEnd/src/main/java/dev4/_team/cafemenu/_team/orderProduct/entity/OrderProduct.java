@@ -34,7 +34,6 @@ public class OrderProduct extends BaseTimeEntity {
 
     public void updateCountAndPrice(int newCount) {
         this.count = newCount;
-        this.price = this.product.getPrice() * newCount;  // 가격을 새로 계산
+        this.price = this.product.getPrice() * newCount;
     }
-
 }

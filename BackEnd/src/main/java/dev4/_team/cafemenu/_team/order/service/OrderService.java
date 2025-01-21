@@ -8,25 +8,24 @@ import dev4._team.cafemenu._team.order.entity.Orders;
 import dev4._team.cafemenu._team.order.mapper.OrderMapper;
 import dev4._team.cafemenu._team.order.repository.OrderRepository;
 import dev4._team.cafemenu._team.orderProduct.dto.OrderProductDto;
+import dev4._team.cafemenu._team.orderProduct.dto.OrderProductResponseDto;
+import dev4._team.cafemenu._team.orderProduct.entity.OrderProduct;
 import dev4._team.cafemenu._team.orderProduct.repository.OrderProductRepository;
 import dev4._team.cafemenu._team.product.entity.Product;
 import dev4._team.cafemenu._team.product.repository.ProductRepository;
 import dev4._team.cafemenu._team.user.entity.User;
 import dev4._team.cafemenu._team.user.repository.UserRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.hibernate.query.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -35,25 +34,13 @@ public class OrderService {
     private final OrderProductRepository orderProductRepository;
 
 
-    @Transactional
     public void createOrder(OrderDto orderDto, Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
-        log.info("회원 조회");
+
         Orders orders = OrderMapper.toEntity(orderDto, user);
         orderRepository.save(orders);
-        log.info("주문 저장");
         saveOrderProduct(orderDto, orders);
-        log.info("주문상품 저장");
-        LocalDateTime now = LocalDateTime.now();
-
-        if (now.getHour() >= 14) {
-            orderDto.setStatus("내일 배송");
-        } else {
-            orderDto.setStatus("배송 중");
-        }
-
-
     }
 
     private void saveOrderProduct(OrderDto orderDto, Orders orders) {
@@ -67,13 +54,8 @@ public class OrderService {
     }
 
     public List<OrderResponseDto> getOrdersByUserId(Long userId) {
-        List<Orders> orders = getByUserId(userId);
-
-        if (orders.isEmpty()) {
-            throw new BusinessException(ErrorCode.ORDER_NOT_FOUND);
-        }
-
-        return OrderMapper.toDtoList(orders);
+        List<Orders> ordersList = getByUserId(userId); // 유저 ID로 주문 조회
+        return OrderMapper.getOrderResponseDtos(ordersList);
     }
 
     public void delete(Long orderId, Long userId) {
@@ -95,7 +77,8 @@ public class OrderService {
         return orderRepository.findById(orderId);
     }
 
-    public Orders updateOrder(Long orderId, OrderDto orderDto, Long userId) {
+    @Transactional
+    public void updateOrder(Long orderId, OrderDto orderDto, Long userId) {
 
         List<Orders> orders = getByUserId(userId);
         if (orders.isEmpty()) {
@@ -106,14 +89,27 @@ public class OrderService {
                 .filter(order -> order.getId().equals(orderId))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND, "해당 주문은 존재하지 않습니다."));
+        findOrder.updateOrder(orderDto.getAddress(), orderDto.getPost());
+        // OrderProduct 업데이트
+        updateOrderProducts(findOrder, orderDto.getOrderProductDto());
+    }
 
-        Orders updatedOrder = OrderMapper.updateEntity(findOrder, orderDto);
+    private void updateOrderProducts(Orders existingOrder, List<OrderProductDto> orderProductDtos) {
+        List<OrderProduct> existingOrderProducts = existingOrder.getOrderProducts();
 
-        return orderRepository.save(updatedOrder);
+        for (OrderProductDto orderProductDto : orderProductDtos) {
+            Long productId = orderProductDto.getProductId();
+
+            OrderProduct existingOrderProduct = existingOrderProducts.stream()
+                    .filter(op -> op.getProduct().getId().equals(productId))
+                    .findFirst()
+                    .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_PRODUCT));
+            existingOrderProduct.updateCountAndPrice(orderProductDto.getCount());
+        }
     }
 
     public List<OrderResponseDto> getOrdersByStatus(String status) {
         List<Orders> orders = orderRepository.findByStatus(status);
-        return OrderMapper.toDtoList(orders);
+        return OrderMapper.getOrderResponseDtos(orders);
     }
 }
