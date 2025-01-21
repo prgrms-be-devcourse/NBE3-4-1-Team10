@@ -21,7 +21,7 @@ public class Dummy {
                 .email("admin@naver.com")
                 .nickname("관리자")
                 .password(passwordEncoder.encode("Rhksflwk12!"))
-                .role(UserRole.ADMIN)
+                .role(UserRole.ROLE_ADMIN)
                 .build();
         userRepository.save(adminUser);
     }

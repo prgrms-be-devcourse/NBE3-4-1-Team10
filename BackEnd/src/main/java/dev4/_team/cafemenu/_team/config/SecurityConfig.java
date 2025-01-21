@@ -78,7 +78,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.GET, "/api/product").permitAll()
                 .requestMatchers("/swagger-ui/**", "api-docs/**", "/v3/api-docs/**", "/api/user/signup", "/api/user/login").permitAll() // 회원가입 및 로그인 허용
-                .requestMatchers("/api/admin/**").hasRole(UserRole.ADMIN.name()) // 관리자 권한 필요
+                .requestMatchers("/api/admin/**").hasAuthority(UserRole.ROLE_USER.name()) // 관리자 권한 필요
                 .anyRequest().authenticated() // 나머지 요청은 인증 필요
         );
 
