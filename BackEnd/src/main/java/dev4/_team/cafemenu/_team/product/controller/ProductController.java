@@ -1,6 +1,5 @@
 package dev4._team.cafemenu._team.product.controller;
 
-import dev4._team.cafemenu._team.global.rs.RsData;
 import dev4._team.cafemenu._team.product.dto.ProductDto;
 import dev4._team.cafemenu._team.product.form.ProductForm;
 import dev4._team.cafemenu._team.product.service.ProductService;
@@ -14,19 +13,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
 
     private final ProductService productService;
 
-
-    @GetMapping("/product")
+    @GetMapping
     public ResponseEntity<List<ProductDto>> showProducts() {
         List<ProductDto> products = productService.findDtoAll();
         return new ResponseEntity<>(products, HttpStatus.OK);
+
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductDto> showProduct(
             @PathVariable("id") Long id
     ) {
@@ -34,7 +33,7 @@ public class ProductController {
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
-    @PostMapping("/admin/product")
+    @PostMapping
     public ResponseEntity<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
     ) {
@@ -43,7 +42,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/admin/product/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProductDto> updateProduct(
             @PathVariable("id") Long id,
             @RequestBody ProductForm productForm
@@ -53,8 +52,8 @@ public class ProductController {
 
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
-  
-    @DeleteMapping("/admin/product//{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
     ) {
@@ -64,8 +63,4 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-
-
-
-
 }
