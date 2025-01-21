@@ -17,6 +17,7 @@ public class OrderMapper {
                 .user(user)
                 .address(dto.getAddress())
                 .post(dto.getPost())
+                .totalPrice(dto.getTotalPrice())
                 .time(LocalDateTime.now())
                 .status(LocalDateTime.now().getHour() >= 14 ? "내일 배송" : "배송 중")
                 .build();
@@ -26,8 +27,10 @@ public class OrderMapper {
         return OrderResponseDto.builder()
                 .orderID(orders.getId())
                 .address(orders.getAddress())
+                .email(orders.getUser().getEmail())
                 .post(orders.getPost())
                 .status(orders.getStatus())
+                .totalPrice(orders.getTotalPrice())
                 .orderProduct(orderProductResponseDtos)
                 .build();
     }
@@ -38,7 +41,7 @@ public class OrderMapper {
                     List<OrderProductResponseDto> orderProductDtos = orders.getOrderProducts().stream()
                             .map(OrderProductResponseDto::of)
                             .collect(Collectors.toList());
-                    return OrderMapper.toDto(orders, orderProductDtos);
+                    return OrderMapper.toDto(orders,orderProductDtos);
                 })
                 .collect(Collectors.toList());
     }
