@@ -14,8 +14,6 @@ public class OrderProductResponseDto {
 
     private Long orderProductId;
 
-    private Long productId;
-
     private String productName; // 상품 이름
 
     private int quantity; // 수량
