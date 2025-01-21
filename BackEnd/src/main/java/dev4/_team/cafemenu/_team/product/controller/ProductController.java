@@ -6,6 +6,8 @@ import dev4._team.cafemenu._team.product.form.ProductForm;
 import dev4._team.cafemenu._team.product.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,67 +19,49 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("/product")
-    public RsData<List<ProductDto>> showProducts() {
 
-        return new RsData<>(
-                "200",
-                "상품리스트를 조회했습니다.",
-                productService.findDtoAll()
-        );
+    @GetMapping("/product")
+    public ResponseEntity<List<ProductDto>> showProducts() {
+        List<ProductDto> products = productService.findDtoAll();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/product/{id}")
-    public RsData<ProductDto> showProduct(
+    public ResponseEntity<ProductDto> showProduct(
             @PathVariable("id") Long id
     ) {
-        return new  RsData<>(
-                "200",
-                "상품을 조회했습니다.",
-                productService.findDtoById(id)
-        );
-
-
+        ProductDto productDto = productService.findDtoById(id);
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     @PostMapping("/admin/product")
-    public RsData<Void> createProduct(
+    public ResponseEntity<Void> createProduct(
             @RequestBody @Valid ProductForm productForm
     ) {
         productService.create(productForm);
 
-        return new RsData<>(
-                "204",
-                "상품이 생성되었습니다."
-        );
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/admin/product/{id}")
-    public RsData<ProductDto> updateProduct(
+    public ResponseEntity<ProductDto> updateProduct(
             @PathVariable("id") Long id,
             @RequestBody ProductForm productForm
     ) {
 
         ProductDto productDto = productService.modify(id, productForm);
 
-        return new RsData<>(
-                "200",
-                "상품이 수정되었습니다.",
-                productDto
-        );
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
-
+  
     @DeleteMapping("/admin/product//{id}")
-    public RsData<Void> deleteProduct(
+    public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
     ) {
 
         productService.delete(id);
 
-        return new RsData<>(
-                "200",
-                "상품이 삭제되었습니다."
-        );
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
