@@ -128,7 +128,10 @@ const Login = () => {
             disabled={isLoading}>
             {isLoading ? "로그인 중..." : "로그인"}
           </button>
-          <button className='button login-btn' disabled={isLoading}>
+          <button
+            className='button login-btn'
+            type='button'
+            disabled={isLoading}>
             회원가입
           </button>
         </div>
